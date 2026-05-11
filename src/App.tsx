@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { useLottie } from 'lottie-react'
 import scrollDownHintAnimation from './scrollDownHint.json'
@@ -1217,25 +1217,32 @@ function App() {
   const specsPages = isMobileViewport ? specificationMobilePages : specificationPages
   const faqPages = isMobileViewport ? faqPagesMobile : faqPagesDesktop
 
-  useEffect(() => {
-    const lastIndex = Math.max(0, specsPages.length - 1)
+  const syncResponsivePageState = useCallback((nextIsMobile: boolean) => {
+    const nextSpecsLastIndex = Math.max(
+      0,
+      (nextIsMobile ? specificationMobilePages.length : specificationPages.length) - 1,
+    )
+    const nextFaqLastIndex = Math.max(
+      0,
+      (nextIsMobile ? faqPagesMobile.length : faqPagesDesktop.length) - 1,
+    )
 
-    if (specsPageIndex > lastIndex) {
-      setSpecsPageIndex(lastIndex)
-    }
+    specsPageIndexRef.current = Math.min(specsPageIndexRef.current, nextSpecsLastIndex)
+    previousSpecsPageIndexRef.current = Math.min(previousSpecsPageIndexRef.current, nextSpecsLastIndex)
+    specsQueuedPageIndexRef.current =
+      specsQueuedPageIndexRef.current === null
+        ? null
+        : Math.min(specsQueuedPageIndexRef.current, nextSpecsLastIndex)
+    setSpecsPageIndex((current) => Math.min(current, nextSpecsLastIndex))
 
-    previousSpecsPageIndexRef.current = Math.min(previousSpecsPageIndexRef.current, lastIndex)
-  }, [specsPageIndex, specsPages.length])
-
-  useEffect(() => {
-    const lastIndex = Math.max(0, faqPages.length - 1)
-
-    if (faqPageIndex > lastIndex) {
-      setFaqPageIndex(lastIndex)
-    }
-
-    previousFaqPageIndexRef.current = Math.min(previousFaqPageIndexRef.current, lastIndex)
-  }, [faqPageIndex, faqPages.length])
+    faqPageIndexRef.current = Math.min(faqPageIndexRef.current, nextFaqLastIndex)
+    previousFaqPageIndexRef.current = Math.min(previousFaqPageIndexRef.current, nextFaqLastIndex)
+    faqQueuedPageIndexRef.current =
+      faqQueuedPageIndexRef.current === null
+        ? null
+        : Math.min(faqQueuedPageIndexRef.current, nextFaqLastIndex)
+    setFaqPageIndex((current) => Math.min(current, nextFaqLastIndex))
+  }, [])
 
   const syncBenefitsCards = (
     activeIndex: number,
@@ -1401,7 +1408,9 @@ function App() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileViewport(window.innerWidth < 768)
+      const nextIsMobileViewport = window.innerWidth < 768
+      setIsMobileViewport(nextIsMobileViewport)
+      syncResponsivePageState(nextIsMobileViewport)
 
       if (window.innerWidth >= 768) {
         setMenuOpen(false)
@@ -1411,7 +1420,7 @@ function App() {
     window.addEventListener('resize', handleResize)
 
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [syncResponsivePageState])
 
   useEffect(() => {
     heroSlideIndexRef.current = heroSlideIndex
@@ -1456,9 +1465,12 @@ function App() {
   useEffect(() => {
     document.body.dataset.surface = activeSurface
     activeSurfaceRef.current = activeSurface
-    setMenuOpen(false)
+    const closeMenuFrame = window.requestAnimationFrame(() => {
+      setMenuOpen(false)
+    })
 
     return () => {
+      window.cancelAnimationFrame(closeMenuFrame)
       delete document.body.dataset.surface
     }
   }, [activeSurface])
@@ -6363,8 +6375,9 @@ function App() {
     }
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const text = hero.querySelectorAll<HTMLElement>('.arch__left .arch__info')[heroSlideIndex]
-    const media = hero.querySelectorAll<HTMLElement>('.hero-story__media-slide')[heroSlideIndex]
+    const activeHeroSlideIndex = heroSlideIndexRef.current
+    const text = hero.querySelectorAll<HTMLElement>('.arch__left .arch__info')[activeHeroSlideIndex]
+    const media = hero.querySelectorAll<HTMLElement>('.hero-story__media-slide')[activeHeroSlideIndex]
     const shouldSlowHeroEntry = slowHeroEntryFromBurgerRef.current
 
     if (!text || !media || reduceMotion) {
@@ -6425,11 +6438,12 @@ function App() {
     }
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const panel = pain.querySelectorAll<HTMLElement>('.pain-story__content')[painSlideIndex]
-    const slide = pain.querySelectorAll<HTMLElement>('.pain-story__slide')[painSlideIndex]
+    const activePainSlideIndex = painSlideIndexRef.current
+    const panel = pain.querySelectorAll<HTMLElement>('.pain-story__content')[activePainSlideIndex]
+    const slide = pain.querySelectorAll<HTMLElement>('.pain-story__slide')[activePainSlideIndex]
     const video = slide?.querySelector<HTMLElement>('.pain-story__video') ?? null
     const backdrop = slide?.querySelector<HTMLElement>('.pain-story__backdrop') ?? null
-    const shouldSlowPainEntry = slowPainEntryFromBurgerRef.current && painSlideIndex === 0
+    const shouldSlowPainEntry = slowPainEntryFromBurgerRef.current && activePainSlideIndex === 0
 
     if (skipNextPainSurfaceIntroRef.current) {
       skipNextPainSurfaceIntroRef.current = false
@@ -6437,13 +6451,13 @@ function App() {
     }
 
     if (!panel || reduceMotion) {
-      gsap.set(track, { x: -painSlideIndex * window.innerWidth })
+      gsap.set(track, { x: -activePainSlideIndex * window.innerWidth })
       slowPainEntryFromBurgerRef.current = false
       return
     }
 
     gsap.killTweensOf([panel, video, backdrop])
-    gsap.set(track, { x: -painSlideIndex * window.innerWidth })
+    gsap.set(track, { x: -activePainSlideIndex * window.innerWidth })
     gsap.set(panel, {
       y: shouldSlowPainEntry ? 68 : 44,
       opacity: 0,
@@ -6522,15 +6536,15 @@ function App() {
       return
     }
 
-    syncBenefitsCards(benefitsSlideIndex, { animate: true, fromBottom: true })
+    syncBenefitsCards(benefitsSlideIndexRef.current, { animate: true, fromBottom: true })
   }, [activeSurface])
 
   useEffect(() => {
-    if (activeSurface !== 'benefits') {
+    if (activeSurfaceRef.current !== 'benefits') {
       return
     }
 
-    syncBenefitsCards(benefitsSlideIndex, { animate: true })
+    syncBenefitsCards(benefitsSlideIndexRef.current, { animate: true })
   }, [benefitsSlideIndex])
 
   useEffect(() => {
@@ -6892,7 +6906,7 @@ function App() {
     const media = specsVideoRef.current
     const copy = specsCopyRef.current
     const pagination = specsPaginationRef.current
-    const activePage = specsPageRefs.current.slice(0, specsPages.length)[specsPageIndex]
+    const activePage = specsPageRefs.current.slice(0, specsPages.length)[specsPageIndexRef.current]
     const buttons = pagination
       ? Array.from(pagination.querySelectorAll<HTMLElement>('.specs-story__pagination-button'))
       : []
@@ -7515,7 +7529,7 @@ function App() {
     const media = faqVideoRef.current
     const copy = faqCopyRef.current
     const pagination = faqPaginationRef.current
-    const activePage = faqPageRefs.current.slice(0, faqPages.length)[faqPageIndex]
+    const activePage = faqPageRefs.current.slice(0, faqPages.length)[faqPageIndexRef.current]
     const buttons = pagination
       ? Array.from(pagination.querySelectorAll<HTMLElement>('.faq-story__pagination-button'))
       : []
@@ -7657,12 +7671,6 @@ function App() {
   }, [isFinalCtaPopupOpen])
 
   useEffect(() => {
-    if (!isFinalCtaPopupOpen) {
-      setIsPromoCodeCopied(false)
-    }
-  }, [isFinalCtaPopupOpen])
-
-  useEffect(() => {
     return () => {
       if (promoCodeTimeoutRef.current !== null) {
         window.clearTimeout(promoCodeTimeoutRef.current)
@@ -7677,6 +7685,11 @@ function App() {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
+        if (promoCodeTimeoutRef.current !== null) {
+          window.clearTimeout(promoCodeTimeoutRef.current)
+          promoCodeTimeoutRef.current = null
+        }
+        setIsPromoCodeCopied(false)
         setIsFinalCtaPopupOpen(false)
       }
     }
@@ -7817,7 +7830,7 @@ function App() {
     return () => {
       timeline.kill()
     }
-  }, [activeSurface])
+  }, [activeSurface, finalCtaActiveCardIndex])
 
   const activeBlockNavIndex =
     activeSurface === 'final-cta'
@@ -7846,6 +7859,26 @@ function App() {
                           ? 1
                           : 0
   const activeBlockNavItem = blockNavItems[activeBlockNavIndex]
+  const clearPromoCodeTimeout = () => {
+    if (promoCodeTimeoutRef.current !== null) {
+      window.clearTimeout(promoCodeTimeoutRef.current)
+      promoCodeTimeoutRef.current = null
+    }
+  }
+
+  const closeFinalCtaPopup = () => {
+    clearPromoCodeTimeout()
+    setIsPromoCodeCopied(false)
+    setIsFinalCtaPopupOpen(false)
+  }
+
+  const openFinalCtaPopup = (cardIndex: number) => {
+    clearPromoCodeTimeout()
+    setIsPromoCodeCopied(false)
+    setFinalCtaActiveCardIndex(cardIndex)
+    setIsFinalCtaPopupOpen(true)
+  }
+
   const copyPromoCode = async () => {
     try {
       if (navigator.clipboard?.writeText) {
@@ -7863,10 +7896,7 @@ function App() {
       }
 
       setIsPromoCodeCopied(true)
-
-      if (promoCodeTimeoutRef.current !== null) {
-        window.clearTimeout(promoCodeTimeoutRef.current)
-      }
+      clearPromoCodeTimeout()
 
       promoCodeTimeoutRef.current = window.setTimeout(() => {
         setIsPromoCodeCopied(false)
@@ -8343,12 +8373,7 @@ function App() {
     faqPageTransitionLockRef.current = false
     faqQueuedPageIndexRef.current = null
     setFinalCtaActiveCardIndex(0)
-    setIsFinalCtaPopupOpen(false)
-    setIsPromoCodeCopied(false)
-    if (promoCodeTimeoutRef.current !== null) {
-      window.clearTimeout(promoCodeTimeoutRef.current)
-      promoCodeTimeoutRef.current = null
-    }
+    closeFinalCtaPopup()
 
     const previousSurface = activeSurfaceRef.current
 
@@ -9801,8 +9826,7 @@ function App() {
                             className="final-cta-story__gift-button"
                             onClick={(event) => {
                               event.stopPropagation()
-                              setFinalCtaActiveCardIndex(index)
-                              setIsFinalCtaPopupOpen(true)
+                              openFinalCtaPopup(index)
                             }}
                           >
                             Подарок
@@ -9823,7 +9847,7 @@ function App() {
         >
           <div
             className="final-cta-story__popup-backdrop"
-            onClick={() => setIsFinalCtaPopupOpen(false)}
+            onClick={closeFinalCtaPopup}
           />
           <div
             ref={finalCtaPopupRef}
@@ -9836,7 +9860,7 @@ function App() {
               type="button"
               className="final-cta-story__popup-close"
               aria-label="Закрыть окно с промокодом"
-              onClick={() => setIsFinalCtaPopupOpen(false)}
+              onClick={closeFinalCtaPopup}
             >
               ×
             </button>

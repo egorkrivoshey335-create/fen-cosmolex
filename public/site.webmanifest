@@ -1,0 +1,17 @@
+{
+  "name": "Cosmolex Super Air",
+  "short_name": "Cosmolex",
+  "description": "Фен-стайлер 5 в 1 с ионизацией, холодным обдувом и магнитными насадками.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08060d",
+  "theme_color": "#863bff",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

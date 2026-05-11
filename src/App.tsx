@@ -1121,14 +1121,6 @@ const contactsBlockContent = {
   address: 'г. Москва, улица Малахитовая, 27с1',
 } as const
 
-const contactsQuickLinks = [
-  { id: 'hero-story', label: 'Hero-блок' },
-  { id: 'attachments', label: 'Насадки' },
-  { id: 'package', label: 'Комплектация' },
-  { id: 'faq', label: 'FAQ' },
-  { id: 'final-cta', label: 'Финальный CTA' },
-] as const
-
 const contactsSocialLinks = [
   {
     id: 'vk',
@@ -10339,26 +10331,6 @@ function App() {
             </article>
 
             <div className="contacts-story__cards">
-              <article className="contacts-story__card">
-                <div className="contacts-story__card-title">Быстрые переходы</div>
-                <p className="contacts-story__card-copy">
-                  Важные блоки лендинга, к которым можно вернуться в один клик.
-                </p>
-
-                <div className="contacts-story__quick-links">
-                  {contactsQuickLinks.map((link) => (
-                    <button
-                      key={link.id}
-                      type="button"
-                      className="contacts-story__quick-link"
-                      onClick={() => handleBlockNavClick(link.id)}
-                    >
-                      {link.label}
-                    </button>
-                  ))}
-                </div>
-              </article>
-
               <article className="contacts-story__card">
                 <div className="contacts-story__card-title">Связаться напрямую</div>
 

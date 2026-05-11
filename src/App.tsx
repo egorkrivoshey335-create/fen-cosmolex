@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
-import { useLottie } from 'lottie-react'
-import scrollDownHintAnimation from './scrollDownHint.json'
 import './App.css'
+
+const ScrollHint = lazy(() => import('./ScrollHint'))
 
 type HeaderSlide = {
   id: string
@@ -1214,6 +1214,7 @@ function App() {
   const [isPromoCodeCopied, setIsPromoCodeCopied] = useState(false)
   const [activeSurface, setActiveSurface] = useState<ActiveSurface>('header')
   const [isMobileViewport, setIsMobileViewport] = useState(() => window.innerWidth < 768)
+  const [showScrollHint, setShowScrollHint] = useState(false)
   const specsPages = isMobileViewport ? specificationMobilePages : specificationPages
   const faqPages = isMobileViewport ? faqPagesMobile : faqPagesDesktop
 
@@ -1421,6 +1422,14 @@ function App() {
 
     return () => window.removeEventListener('resize', handleResize)
   }, [syncResponsivePageState])
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      setShowScrollHint(true)
+    }, 600)
+
+    return () => window.clearTimeout(timeoutId)
+  }, [])
 
   useEffect(() => {
     heroSlideIndexRef.current = heroSlideIndex
@@ -7970,18 +7979,6 @@ function App() {
       </div>
     </div>
   )
-  const { View: scrollHintView } = useLottie(
-    {
-      animationData: scrollDownHintAnimation,
-      loop: true,
-      autoplay: true,
-    },
-    {
-      width: '100%',
-      height: '100%',
-    },
-  )
-
   const handleBlockNavClick = (blockId: (typeof blockNavItems)[number]['id']) => {
     setMenuOpen(false)
 
@@ -9918,7 +9915,13 @@ function App() {
       </section>
 
       <div className="scroll-hint" aria-hidden="true">
-        <div className="scroll-hint__animation">{scrollHintView}</div>
+        <div className="scroll-hint__animation">
+          {showScrollHint ? (
+            <Suspense fallback={null}>
+              <ScrollHint />
+            </Suspense>
+          ) : null}
+        </div>
       </div>
     </div>
   )

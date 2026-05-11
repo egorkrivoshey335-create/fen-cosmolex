@@ -8287,29 +8287,31 @@ function App() {
       </div>
 
       <div className="landing-topbar__menu" role="menu" aria-label={ariaLabel}>
-        {blockNavItems.map((item, index) => {
-          const isImplemented = index < blockNavItems.length
-          const isActive = activeBlockNavItem.id === item.id
+        <div className="landing-topbar__menu-scroll">
+          {blockNavItems.map((item, index) => {
+            const isImplemented = index < blockNavItems.length
+            const isActive = activeBlockNavItem.id === item.id
 
-          return (
-            <button
-              key={item.id}
-              type="button"
-              role="menuitem"
-              className={`landing-topbar__menu-item${isActive ? ' is-active' : ''}`}
-              aria-label={`Перейти к блоку ${item.number}: ${item.label}`}
-              aria-disabled={!isImplemented}
-              disabled={!isImplemented}
-              onClick={() => {
-                setMenuOpen(false)
-                handleBlockNavClick(item.id)
-              }}
-            >
-              <span className="landing-topbar__menu-number">{item.number}</span>
-              <span className="landing-topbar__menu-label">{item.label}</span>
-            </button>
-          )
-        })}
+            return (
+              <button
+                key={item.id}
+                type="button"
+                role="menuitem"
+                className={`landing-topbar__menu-item${isActive ? ' is-active' : ''}`}
+                aria-label={`Перейти к блоку ${item.number}: ${item.label}`}
+                aria-disabled={!isImplemented}
+                disabled={!isImplemented}
+                onClick={() => {
+                  setMenuOpen(false)
+                  handleBlockNavClick(item.id)
+                }}
+              >
+                <span className="landing-topbar__menu-number">{item.number}</span>
+                <span className="landing-topbar__menu-label">{item.label}</span>
+              </button>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

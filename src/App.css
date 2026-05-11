@@ -313,14 +313,10 @@ nav {
   position: absolute;
   top: calc(100% + 12px);
   right: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   width: min(360px, calc(100vw - 20px));
   max-height: 0;
   padding: 0 18px;
   overflow: hidden;
-  overflow-y: auto;
   opacity: 0;
   transform: translateY(-12px) scale(0.98);
   transform-origin: top right;
@@ -342,9 +338,6 @@ nav {
     background-color 0.22s ease,
     box-shadow 0.22s ease,
     backdrop-filter 0.22s ease;
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
 }
 
 .menu-open .landing-topbar__menu {
@@ -360,7 +353,24 @@ nav {
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+}
+
+.landing-topbar__menu-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   touch-action: pan-y;
+}
+
+.menu-open .landing-topbar__menu-scroll {
+  max-height: calc(min(760px, 100dvh - 132px) - 36px);
 }
 
 .landing-topbar__menu-item {
@@ -445,17 +455,10 @@ nav {
   transition-delay: 0.44s;
 }
 
-.landing-topbar__menu::-webkit-scrollbar {
-  width: 8px;
-}
-
-.landing-topbar__menu::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.landing-topbar__menu::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.18);
+.landing-topbar__menu-scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .landing-topbar__menu-item.is-active {
@@ -4529,8 +4532,8 @@ span.contacts-story__meta-value {
   }
 
   .contacts-story__title {
-    max-width: 12ch;
-    font-size: clamp(32px, 9vw, 56px);
+    max-width: 15ch;
+    font-size: 30px;
   }
 
   .contacts-story__description {

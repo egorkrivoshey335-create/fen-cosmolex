@@ -1566,6 +1566,38 @@ function App() {
   }, [activeSurface, isMobileViewport, menuOpen, showScrollHint])
 
   useEffect(() => {
+    const menuFrames = Array.from(document.querySelectorAll<HTMLElement>('.landing-topbar__frame'))
+
+    if (menuFrames.length === 0) {
+      return
+    }
+
+    const stopMenuSurfaceEvents = (event: Event) => {
+      if (!menuOpen) {
+        return
+      }
+
+      event.stopPropagation()
+    }
+
+    menuFrames.forEach((frame) => {
+      frame.addEventListener('wheel', stopMenuSurfaceEvents)
+      frame.addEventListener('touchstart', stopMenuSurfaceEvents)
+      frame.addEventListener('touchmove', stopMenuSurfaceEvents)
+      frame.addEventListener('touchend', stopMenuSurfaceEvents)
+    })
+
+    return () => {
+      menuFrames.forEach((frame) => {
+        frame.removeEventListener('wheel', stopMenuSurfaceEvents)
+        frame.removeEventListener('touchstart', stopMenuSurfaceEvents)
+        frame.removeEventListener('touchmove', stopMenuSurfaceEvents)
+        frame.removeEventListener('touchend', stopMenuSurfaceEvents)
+      })
+    }
+  }, [menuOpen])
+
+  useEffect(() => {
     const root = rootRef.current
 
     if (!root) {

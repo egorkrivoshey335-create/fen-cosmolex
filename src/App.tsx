@@ -1276,6 +1276,7 @@ function App() {
   const [giftSlideIndex, setGiftSlideIndex] = useState(0)
   const [faqPageIndex, setFaqPageIndex] = useState(0)
   const [finalCtaActiveCardIndex, setFinalCtaActiveCardIndex] = useState(0)
+  const [contactsActiveCardIndex, setContactsActiveCardIndex] = useState(0)
   const [isFinalCtaPopupOpen, setIsFinalCtaPopupOpen] = useState(false)
   const [isPromoCodeCopied, setIsPromoCodeCopied] = useState(false)
   const [activeSurface, setActiveSurface] = useState<ActiveSurface>('header')
@@ -8723,6 +8724,7 @@ function App() {
     faqPageTransitionLockRef.current = false
     faqQueuedPageIndexRef.current = null
     setFinalCtaActiveCardIndex(0)
+    setContactsActiveCardIndex(0)
     setIsFinalCtaPopupOpen(false)
     setIsPromoCodeCopied(false)
     if (promoCodeTimeoutRef.current !== null) {
@@ -10331,70 +10333,97 @@ function App() {
             </article>
 
             <div className="contacts-story__cards">
-              <article className="contacts-story__card">
-                <div className="contacts-story__card-title">Связаться напрямую</div>
+              <article
+                className={`contacts-story__card contacts-story__card--direct ${
+                  !isMobileViewport || contactsActiveCardIndex === 0 ? 'is-active' : ''
+                }`}
+                onClick={() => {
+                  if (isMobileViewport) {
+                    setContactsActiveCardIndex(0)
+                  }
+                }}
+              >
+                <div className="contacts-story__card-header">
+                  <div className="contacts-story__card-title">Связаться напрямую</div>
+                </div>
 
-                <div className="contacts-story__meta-list">
-                  <div className="contacts-story__meta-row">
-                    <span className="contacts-story__meta-label">Сайт</span>
-                    <a
-                      className="contacts-story__meta-value"
-                      href={contactsBlockContent.website}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      cosmolex.ru
-                    </a>
-                  </div>
+                <div className="contacts-story__card-content">
+                  <div className="contacts-story__meta-list">
+                    <div className="contacts-story__meta-row">
+                      <span className="contacts-story__meta-label">Сайт</span>
+                      <a
+                        className="contacts-story__meta-value"
+                        href={contactsBlockContent.website}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        cosmolex.ru
+                      </a>
+                    </div>
 
-                  <div className="contacts-story__meta-row">
-                    <span className="contacts-story__meta-label">Телефон</span>
-                    <a
-                      className="contacts-story__meta-value"
-                      href={contactsBlockContent.phoneHref}
-                    >
-                      {contactsBlockContent.phone}
-                    </a>
-                  </div>
+                    <div className="contacts-story__meta-row">
+                      <span className="contacts-story__meta-label">Телефон</span>
+                      <a
+                        className="contacts-story__meta-value"
+                        href={contactsBlockContent.phoneHref}
+                      >
+                        {contactsBlockContent.phone}
+                      </a>
+                    </div>
 
-                  <div className="contacts-story__meta-row">
-                    <span className="contacts-story__meta-label">Почта</span>
-                    <a
-                      className="contacts-story__meta-value"
-                      href={contactsBlockContent.emailHref}
-                    >
-                      {contactsBlockContent.email}
-                    </a>
-                  </div>
+                    <div className="contacts-story__meta-row">
+                      <span className="contacts-story__meta-label">Почта</span>
+                      <a
+                        className="contacts-story__meta-value"
+                        href={contactsBlockContent.emailHref}
+                      >
+                        {contactsBlockContent.email}
+                      </a>
+                    </div>
 
-                  <div className="contacts-story__meta-row">
-                    <span className="contacts-story__meta-label">Адрес</span>
-                    <span className="contacts-story__meta-value">
-                      {contactsBlockContent.address}
-                    </span>
+                    <div className="contacts-story__meta-row">
+                      <span className="contacts-story__meta-label">Адрес</span>
+                      <span className="contacts-story__meta-value">
+                        {contactsBlockContent.address}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </article>
 
-              <article className="contacts-story__card">
-                <div className="contacts-story__card-title">Соцсети и мессенджеры</div>
-                <p className="contacts-story__card-copy">
-                  Следите за новостями бренда и пишите там, где вам удобнее.
-                </p>
+              <article
+                className={`contacts-story__card contacts-story__card--socials ${
+                  !isMobileViewport || contactsActiveCardIndex === 1 ? 'is-active' : ''
+                }`}
+                onClick={() => {
+                  if (isMobileViewport) {
+                    setContactsActiveCardIndex(1)
+                  }
+                }}
+              >
+                <div className="contacts-story__card-header">
+                  <div className="contacts-story__card-title">Соцсети и мессенджеры</div>
+                </div>
 
-                <div className="contacts-story__socials">
-                  {contactsSocialLinks.map((item) => (
-                    <a
-                      key={item.id}
-                      className="contacts-story__social-link"
-                      href={item.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={item.label}
-                    >
-                      <img src={item.icon} alt="" loading="lazy" decoding="async" />
-                    </a>
-                  ))}
+                <div className="contacts-story__card-content">
+                  <p className="contacts-story__card-copy">
+                    Следите за новостями бренда и пишите там, где вам удобнее.
+                  </p>
+
+                  <div className="contacts-story__socials">
+                    {contactsSocialLinks.map((item) => (
+                      <a
+                        key={item.id}
+                        className="contacts-story__social-link"
+                        href={item.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={item.label}
+                      >
+                        <img src={item.icon} alt="" loading="lazy" decoding="async" />
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </article>
             </div>

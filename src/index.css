@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap');
+
+:root {
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Oswald', sans-serif;
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: rgba(255, 255, 255, 0.92);
+  background: #1a1a1a;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #1a1a1a;
+}
+
+body,
+button,
+a,
+input,
+textarea,
+select {
+  font-family: var(--font-sans);
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}

@@ -172,10 +172,15 @@
   height: 48px;
   margin-left: 16px;
   padding: 4px 32px;
-  border: 1px solid #fff;
+  border: 1px solid rgba(241, 195, 95, 0.54);
   border-radius: 99px;
-  background-color: transparent;
-  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(241, 195, 95, 0.18) 0%, rgba(236, 173, 41, 0.08) 100%),
+    rgba(10, 10, 10, 0.22);
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  color: #fff0ca;
   font-size: 14px;
   text-transform: uppercase;
   text-decoration: none;
@@ -4484,6 +4489,28 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   text-decoration: none;
 }
 
+a.contacts-story__meta-value {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  padding: 4px 10px;
+  border-radius: 999px;
+  transition:
+    transform 0.32s ease,
+    color 0.32s ease,
+    background 0.32s ease,
+    box-shadow 0.32s ease;
+}
+
+a.contacts-story__meta-value:hover,
+a.contacts-story__meta-value:focus-visible {
+  background: linear-gradient(135deg, #f1c35f 0%, #ecad29 100%);
+  box-shadow: 0 14px 28px rgba(236, 173, 41, 0.24);
+  color: #0b0b0b;
+  transform: translateX(4px);
+}
+
 span.contacts-story__meta-value {
   color: rgba(255, 255, 255, 0.88);
   font-weight: 500;
@@ -4521,6 +4548,178 @@ span.contacts-story__meta-value {
   width: 32px;
   height: 32px;
   object-fit: contain;
+  transition:
+    transform 0.32s ease,
+    filter 0.32s ease;
+}
+
+@keyframes cta-button-shimmer {
+  0%,
+  72%,
+  100% {
+    transform: translateX(-240%) skewX(-24deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.04;
+  }
+
+  22% {
+    transform: translateX(320%) skewX(-24deg);
+    opacity: 0.82;
+  }
+
+  30% {
+    opacity: 0;
+  }
+}
+
+@keyframes cta-button-wave {
+  0% {
+    opacity: 0.52;
+    transform: scale(1);
+  }
+
+  75% {
+    opacity: 0;
+    transform: scale(1.14);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+}
+
+.details > .cta > .discover,
+.final-cta-story__buy-button,
+.final-cta-story__gift-button,
+.contacts-story__primary,
+.contacts-story__secondary,
+.contacts-story__social-link {
+  --cta-wave-color: rgba(241, 195, 95, 0.42);
+  --cta-hover-shadow:
+    0 20px 44px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 235, 191, 0.12),
+    0 0 34px rgba(241, 195, 95, 0.22);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition:
+    transform 0.34s ease,
+    box-shadow 0.34s ease,
+    background 0.34s ease,
+    border-color 0.34s ease,
+    color 0.34s ease,
+    filter 0.34s ease;
+}
+
+.details > .cta > .discover::before,
+.final-cta-story__buy-button::before,
+.final-cta-story__gift-button::before,
+.contacts-story__primary::before,
+.contacts-story__secondary::before,
+.contacts-story__social-link::before {
+  content: '';
+  position: absolute;
+  top: -42%;
+  bottom: -42%;
+  left: -72%;
+  width: 42%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.02) 18%,
+    rgba(255, 255, 255, 0.42) 50%,
+    rgba(255, 255, 255, 0.08) 82%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transform: translateX(-240%) skewX(-24deg);
+  animation: cta-button-shimmer 5.8s ease-in-out infinite;
+}
+
+.details > .cta > .discover::after,
+.final-cta-story__buy-button::after,
+.final-cta-story__gift-button::after,
+.contacts-story__primary::after,
+.contacts-story__secondary::after,
+.contacts-story__social-link::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border: 1px solid var(--cta-wave-color);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.details > .cta > .discover:hover,
+.details > .cta > .discover:focus-visible,
+.final-cta-story__buy-button:hover,
+.final-cta-story__buy-button:focus-visible,
+.final-cta-story__gift-button:hover,
+.final-cta-story__gift-button:focus-visible,
+.contacts-story__primary:hover,
+.contacts-story__primary:focus-visible,
+.contacts-story__secondary:hover,
+.contacts-story__secondary:focus-visible,
+.contacts-story__social-link:hover,
+.contacts-story__social-link:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--cta-hover-shadow);
+  filter: saturate(1.04);
+}
+
+.details > .cta > .discover:hover::after,
+.details > .cta > .discover:focus-visible::after,
+.final-cta-story__buy-button:hover::after,
+.final-cta-story__buy-button:focus-visible::after,
+.final-cta-story__gift-button:hover::after,
+.final-cta-story__gift-button:focus-visible::after,
+.contacts-story__primary:hover::after,
+.contacts-story__primary:focus-visible::after,
+.contacts-story__secondary:hover::after,
+.contacts-story__secondary:focus-visible::after,
+.contacts-story__social-link:hover::after,
+.contacts-story__social-link:focus-visible::after {
+  animation: cta-button-wave 1.45s ease-out infinite;
+}
+
+.contacts-story__social-link:hover img,
+.contacts-story__social-link:focus-visible img {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 10px rgba(241, 195, 95, 0.26));
+}
+
+.final-cta-story__buy-button,
+.contacts-story__primary {
+  --cta-hover-shadow:
+    0 20px 44px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 242, 210, 0.24),
+    0 0 40px rgba(241, 195, 95, 0.3);
+}
+
+.details > .cta > .discover,
+.final-cta-story__gift-button,
+.contacts-story__secondary,
+.contacts-story__social-link {
+  --cta-wave-color: rgba(241, 195, 95, 0.32);
+}
+
+.final-cta-story__gift-button,
+.contacts-story__secondary {
+  background:
+    linear-gradient(135deg, rgba(241, 195, 95, 0.16) 0%, rgba(236, 173, 41, 0.08) 100%),
+    rgba(8, 8, 8, 0.18);
+}
+
+.contacts-story__social-link {
+  border: 1px solid rgba(236, 173, 41, 0.18);
 }
 
 @media (max-width: 900px) {

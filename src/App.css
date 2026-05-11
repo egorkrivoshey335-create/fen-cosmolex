@@ -4532,7 +4532,22 @@ span.contacts-story__meta-value {
   }
 
   .contacts-story__hero {
+    min-height: auto;
+    width: 100%;
     max-width: 100%;
+    padding: 24px 22px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 24px;
+    background: rgba(8, 8, 8, 0.36);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .contacts-story__eyebrow {
+    margin-bottom: 12px;
+    padding: 6px 10px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
   }
 
   .contacts-story__title {
@@ -4541,8 +4556,14 @@ span.contacts-story__meta-value {
   }
 
   .contacts-story__description {
+    margin-top: 14px;
     max-width: 42ch;
     font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .contacts-story__actions {
+    margin-top: 18px;
   }
 
   .contacts-story__cards {

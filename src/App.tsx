@@ -489,19 +489,19 @@ const hairProfileSlides: HairProfileSlide[] = [
 ]
 
 const blockNavItems = [
-  { id: 'header', number: '1', label: 'Анонс' },
-  { id: 'hero-story', number: '2', label: 'Hero-блок' },
-  { id: 'pain', number: '3', label: 'Блок боли' },
+  { id: 'header', number: '1', label: 'Главная' },
+  { id: 'hero-story', number: '2', label: 'О фене' },
+  { id: 'pain', number: '3', label: 'Почему это важно' },
   { id: 'benefits', number: '4', label: 'Преимущества' },
   { id: 'attachments', number: '5', label: 'Насадки' },
-  { id: 'hair-types', number: '6', label: 'Типы волос' },
-  { id: 'comfort', number: '7', label: 'Комфорт' },
+  { id: 'hair-types', number: '6', label: 'Для разных волос' },
+  { id: 'comfort', number: '7', label: 'Удобство' },
   { id: 'comparison', number: '8', label: 'Сравнение' },
-  { id: 'package', number: '9', label: 'Комплектация' },
+  { id: 'package', number: '9', label: 'Что в комплекте' },
   { id: 'specs', number: '10', label: 'Характеристики' },
-  { id: 'gift', number: '11', label: 'Подарок' },
-  { id: 'faq', number: '12', label: 'FAQ' },
-  { id: 'final-cta', number: '13', label: 'Финал' },
+  { id: 'gift', number: '11', label: 'Идея подарка' },
+  { id: 'faq', number: '12', label: 'Вопросы и ответы' },
+  { id: 'final-cta', number: '13', label: 'Заказать' },
   { id: 'contacts', number: '14', label: 'Контакты' },
 ] as const
 
@@ -862,8 +862,8 @@ const specsMobileVideoUrl = benefitsMobileVideoUrl
 const giftSlides: GiftSlide[] = [
   {
     id: 'intro',
-    navLabel: 'Подарочный блок',
-    eyebrow: '01 / Подарочный блок',
+    navLabel: 'Идея подарка',
+    eyebrow: '01 / Идея подарка',
     title: 'Подарок, который не будет лежать без дела',
     description:
       'Фен для волос - вещь, которой пользуются постоянно. А красивый фен-стайлер с насадками выглядит полезно, современно и не требует угадывать размер, стиль одежды или любимый аромат.',
@@ -876,7 +876,7 @@ const giftSlides: GiftSlide[] = [
   {
     id: 'girlfriend-wife',
     navLabel: 'Девушке и жене',
-    eyebrow: '02 / Подарочный блок',
+    eyebrow: '02 / Идея подарка',
     title: 'Подарок девушке, жене, подруге или коллеге',
     description:
       'Красивый фен-стайлер выглядит как продуманный подарок, но остаётся не декоративной покупкой, а техникой на каждый день.',
@@ -890,7 +890,7 @@ const giftSlides: GiftSlide[] = [
   {
     id: 'mother-sister',
     navLabel: 'Маме и сестре',
-    eyebrow: '03 / Подарочный блок',
+    eyebrow: '03 / Идея подарка',
     title: 'Подарок маме или сестре',
     description:
       'Это понятный и практичный вариант, когда хочется выбрать что-то современное, полезное и действительно нужное в обычной жизни.',
@@ -904,7 +904,7 @@ const giftSlides: GiftSlide[] = [
   {
     id: 'march-8',
     navLabel: '8 Марта',
-    eyebrow: '04 / Подарочный блок',
+    eyebrow: '04 / Идея подарка',
     title: 'Подарок на 8 Марта',
     description:
       'Праздничный beauty-tech сценарий, который выглядит уместно и ощущается полезным не только в день вручения, но и после него.',
@@ -918,7 +918,7 @@ const giftSlides: GiftSlide[] = [
   {
     id: 'feb-14',
     navLabel: '14 февраля',
-    eyebrow: '05 / Подарочный блок',
+    eyebrow: '05 / Идея подарка',
     title: 'Подарок на 14 февраля',
     description:
       'Когда хочется выбрать знак внимания с ощущением заботы, а не просто ещё один формальный сувенир.',
@@ -932,7 +932,7 @@ const giftSlides: GiftSlide[] = [
   {
     id: 'new-year',
     navLabel: 'Новый год',
-    eyebrow: '06 / Подарочный блок',
+    eyebrow: '06 / Идея подарка',
     title: 'Подарок на Новый год',
     description:
       'Подходит для большого зимнего подарка, который выглядит солидно, красиво упаковывается и не теряет смысл после праздников.',
@@ -946,7 +946,7 @@ const giftSlides: GiftSlide[] = [
   {
     id: 'birthday',
     navLabel: 'День рождения',
-    eyebrow: '07 / Подарочный блок',
+    eyebrow: '07 / Идея подарка',
     title: 'Подарок на день рождения',
     description:
       'Универсальный сценарий, когда хочется подарить что-то красивое, современное и по-настоящему применимое в ежедневном уходе.',
@@ -962,8 +962,8 @@ const giftSlides: GiftSlide[] = [
 ]
 
 const faqBlockContent = {
-  navLabel: 'FAQ',
-  eyebrow: '01 / FAQ',
+  navLabel: 'Вопросы и ответы',
+  eyebrow: '01 / Вопросы и ответы',
   title: 'Частые вопросы',
   description:
     'Коротко и по делу: собрали основные вопросы о Cosmolex Super Air, чтобы перед покупкой было проще понять, подойдёт ли он вам для ежедневной сушки и укладки.',
@@ -1039,8 +1039,8 @@ const faqDesktopVideoUrl = specsDesktopVideoUrl
 const faqMobileVideoUrl = specsMobileVideoUrl
 
 const finalCtaContent = {
-  navLabel: 'Финальный CTA',
-  eyebrow: '01 / Финальный CTA',
+  navLabel: 'Заказать',
+  eyebrow: '01 / Заказать',
   title: 'Cosmolex Super Air — когда в разы проще',
   subtitle:
     'Фен-стайлер 5 в 1 с ионизацией, холодным обдувом, 4 режимами и 5 магнитными насадками. Для быстрой сушки, гладкости, объёма, локонов и аккуратной укладки дома.',
@@ -9815,7 +9815,7 @@ function App() {
         ref={giftSectionRef}
         className={`gift-story ${activeSurface === 'gift' ? 'is-active' : ''}`}
         id="gift"
-        aria-label="Подарочный блок Cosmolex Super Air"
+        aria-label="Идеи подарка с Cosmolex Super Air"
       >
         <div className="hero-story__indicator" />
         <header
@@ -10025,7 +10025,7 @@ function App() {
               <div
                 ref={faqPaginationRef}
                 className="faq-story__pagination"
-                aria-label="Переключение страниц FAQ"
+                aria-label="Переключение страниц вопросов и ответов"
               >
                 {faqPages.map((_, pageIndex) => (
                   <button
@@ -10034,7 +10034,7 @@ function App() {
                     className={`faq-story__pagination-button${
                       faqPageIndex === pageIndex ? ' is-active' : ''
                     }`}
-                    aria-label={`Показать страницу FAQ ${pageIndex + 1}`}
+                    aria-label={`Показать страницу вопросов и ответов ${pageIndex + 1}`}
                     onClick={() => {
                       const resolvedTargetIndex =
                         faqQueuedPageIndexRef.current ?? faqPageIndexRef.current

@@ -12,12 +12,13 @@
   position: fixed;
   top: 104px;
   left: 22px;
-  z-index: 88;
+  z-index: 220;
   width: 54px;
   height: 54px;
   opacity: 0;
   pointer-events: none;
   filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.2));
+  will-change: transform, opacity;
 }
 
 .scroll-hint__animation {
@@ -1744,7 +1745,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
 .specs-story.is-active .hero-story__topbar,
 .gift-story.is-active .hero-story__topbar,
 .faq-story.is-active .hero-story__topbar,
-.final-cta-story.is-active .hero-story__topbar {
+.final-cta-story.is-active .hero-story__topbar,
+.contacts-story.is-active .hero-story__topbar {
   opacity: 1;
   pointer-events: auto;
 }

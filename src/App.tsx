@@ -1547,6 +1547,25 @@ function App() {
   }, [activeSurface])
 
   useEffect(() => {
+    const scrollHint = document.querySelector<HTMLElement>('.scroll-hint')
+
+    if (!scrollHint) {
+      return
+    }
+
+    const shouldShow = showScrollHint && activeSurface !== 'contacts' && !menuOpen
+    const targetOpacity = isMobileViewport ? 0.9 : 0.94
+
+    gsap.killTweensOf(scrollHint)
+    gsap.to(scrollHint, {
+      opacity: shouldShow ? targetOpacity : 0,
+      y: shouldShow ? 0 : -18,
+      duration: 0.28,
+      ease: 'power2.out',
+    })
+  }, [activeSurface, isMobileViewport, menuOpen, showScrollHint])
+
+  useEffect(() => {
     const root = rootRef.current
 
     if (!root) {

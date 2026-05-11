@@ -4636,6 +4636,15 @@ span.contacts-story__meta-value {
     pointer-events: auto;
   }
 
+  .contacts-story__card--direct.is-active .contacts-story__card-content {
+    top: 50px;
+    bottom: auto;
+  }
+
+  .contacts-story__card--direct.is-active .contacts-story__meta-list {
+    margin-top: 0;
+  }
+
   .contacts-story__card-content .contacts-story__card-copy,
   .contacts-story__card-content .contacts-story__meta-list,
   .contacts-story__card-content .contacts-story__socials {

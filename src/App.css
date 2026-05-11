@@ -43,12 +43,23 @@
   position: absolute;
   left: 0;
   top: 0;
-  background-position: center;
-  background-size: cover;
+  overflow: hidden;
+  background-color: #060606;
   box-shadow: 6px 6px 10px 2px rgba(0, 0, 0, 0.6);
   border-radius: 0;
   isolation: isolate;
   backface-visibility: hidden;
+}
+
+.card__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  background: #060606;
 }
 
 .card::after {

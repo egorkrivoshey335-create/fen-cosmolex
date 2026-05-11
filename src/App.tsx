@@ -10,7 +10,8 @@ type HeaderSlide = {
   title: string
   title2: string
   description: string
-  image: string
+  videoDesktop: string
+  videoMobile: string
   buyUrl: string
   accent: string
 }
@@ -159,6 +160,12 @@ type ActiveSurface =
   | 'faq'
   | 'final-cta'
   | 'contacts'
+const headerDesktopVideoUrl =
+  'https://static.insales-cdn.com/files/1/5169/124187697/original/14571370_1920_1080_60fps.mp4'
+
+const headerMobileVideoUrl =
+  'https://static.insales-cdn.com/files/1/1865/124331849/original/0_Field_Wheat_720x1280.mp4'
+
 const headerSlides: HeaderSlide[] = [
   {
     id: 'black',
@@ -167,7 +174,8 @@ const headerSlides: HeaderSlide[] = [
     title2: 'EDITION',
     description:
       'Глубокий чёрный Cosmolex Super Air — фен-стайлер 5 в 1 с магнитными насадками, ионизацией и холодным обдувом для быстрой сушки, гладкости и аккуратной укладки дома.',
-    image: 'https://assets.codepen.io/3685267/timed-cards-1.jpg',
+    videoDesktop: headerDesktopVideoUrl,
+    videoMobile: headerMobileVideoUrl,
     buyUrl: 'https://cosmolex.ru/product/fen-dlya-volos-professionalnyy-stayler-s-nasadkami',
     accent: '#242426',
   },
@@ -178,7 +186,8 @@ const headerSlides: HeaderSlide[] = [
     title2: 'EDITION',
     description:
       'Розовый Cosmolex Super Air для мягкого beauty-образа каждый день. Фен для волос с ионизацией помогает уменьшить пушение, сделать волосы более гладкими, послушными и ухоженными после сушки.',
-    image: 'https://assets.codepen.io/3685267/timed-cards-2.jpg',
+    videoDesktop: headerDesktopVideoUrl,
+    videoMobile: headerMobileVideoUrl,
     buyUrl: 'https://cosmolex.ru/product/fen-dlya-volos-professionalnyy-stayler-s-nasadkami-2',
     accent: '#efcdba',
   },
@@ -189,7 +198,8 @@ const headerSlides: HeaderSlide[] = [
     title2: 'EDITION',
     description:
       'Фиолетовая версия Cosmolex Super Air для тех, кто любит заметные детали. 5 насадок, 4 режима работы и холодный обдув помогают сушить, укладывать и фиксировать форму.',
-    image: 'https://assets.codepen.io/3685267/timed-cards-3.jpg',
+    videoDesktop: headerDesktopVideoUrl,
+    videoMobile: headerMobileVideoUrl,
     buyUrl: 'https://cosmolex.ru/product/fen-dlya-volos-professionalnyy-stayler-s-nasadkami-fioletovyy',
     accent: '#c3b8ef',
   },
@@ -200,7 +210,8 @@ const headerSlides: HeaderSlide[] = [
     title2: 'EDITION',
     description:
       'Cosmolex Super Air в оттенке тиффани — свежий акцент в коллекции. Один компактный фен-стайлер для сушки, прикорневого объёма, гладкости, локонов и повседневной укладки.',
-    image: 'https://assets.codepen.io/3685267/timed-cards-4.jpg',
+    videoDesktop: headerDesktopVideoUrl,
+    videoMobile: headerMobileVideoUrl,
     buyUrl: 'https://cosmolex.ru/product/fen-dlya-volos-professionalnyy-stayler-s-nasadkami-zelyonyy',
     accent: '#9ee8de',
   },
@@ -209,11 +220,9 @@ const headerSlides: HeaderSlide[] = [
 const logoUrl =
   'https://static.insales-cdn.com/files/1/5753/124204665/original/%D0%9D%D0%BE%D0%B2%D1%8B%D0%B9_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82__4___1_.webp'
 
-const heroStoryVideoUrl =
-  'https://static.insales-cdn.com/files/1/5169/124187697/original/14571370_1920_1080_60fps.mp4'
+const heroStoryVideoUrl = headerDesktopVideoUrl
 
-const heroStoryMobileVideoUrl =
-  'https://static.insales-cdn.com/files/1/1865/124331849/original/0_Field_Wheat_720x1280.mp4'
+const heroStoryMobileVideoUrl = headerMobileVideoUrl
 
 const benefitsDesktopVideoUrl =
   'https://static.insales-cdn.com/files/1/5169/124187697/original/14571370_1920_1080_60fps.mp4'
@@ -1185,6 +1194,7 @@ function App() {
   const benefitsCardRefs = useRef<Array<HTMLDivElement | null>>([])
   const painVideoRefs = useRef<Array<HTMLVideoElement | null>>([])
   const benefitsVideoRefs = useRef<Array<HTMLVideoElement | null>>([])
+  const headerVideoRefs = useRef<Array<HTMLVideoElement | null>>([])
   const heroVideoRefs = useRef<Array<HTMLVideoElement | null>>([])
   const attachmentsVideoRefs = useRef<Array<HTMLVideoElement | null>>([])
   const hairTypesVideoRefs = useRef<Array<HTMLVideoElement | null>>([])
@@ -1232,6 +1242,7 @@ function App() {
   const hairTypesGalleryTrackRefs = useRef<Array<Array<HTMLDivElement | null>>>([])
   const hairTypesGalleryTweenRefs = useRef<Array<Array<gsap.core.Tween | null>>>([])
   const heroSlideIndexRef = useRef(0)
+  const headerActiveSlideIndexRef = useRef(0)
   const painSlideIndexRef = useRef(0)
   const benefitsSlideIndexRef = useRef(0)
   const attachmentsSlideIndexRef = useRef(0)
@@ -1284,6 +1295,47 @@ function App() {
   const [showScrollHint, setShowScrollHint] = useState(false)
   const specsPages = isMobileViewport ? specificationMobilePages : specificationPages
   const faqPages = isMobileViewport ? faqPagesMobile : faqPagesDesktop
+
+  const syncHeaderVideos = (activeIndex: number) => {
+    headerActiveSlideIndexRef.current = activeIndex
+
+    headerVideoRefs.current.forEach((video, index) => {
+      if (!video) {
+        return
+      }
+
+      const ensurePreviewFrame = () => {
+        try {
+          video.currentTime = 0.01
+        } catch {
+          // Ignore seek errors until enough data is buffered.
+        }
+      }
+
+      const preparePreviewFrame = () => {
+        if (video.readyState >= 2) {
+          ensurePreviewFrame()
+          return
+        }
+
+        const handleLoadedData = () => {
+          ensurePreviewFrame()
+          video.removeEventListener('loadeddata', handleLoadedData)
+        }
+
+        video.addEventListener('loadeddata', handleLoadedData)
+        video.load()
+      }
+
+      if (activeSurfaceRef.current === 'header' && index === activeIndex) {
+        video.play().catch(() => {})
+        return
+      }
+
+      video.pause()
+      preparePreviewFrame()
+    })
+  }
 
   useEffect(() => {
     const lastIndex = Math.max(0, specsPages.length - 1)
@@ -1711,6 +1763,8 @@ function App() {
         })
       }
 
+      syncHeaderVideos(active)
+
       setDetailContent('#details-even', active)
       setDetailContent('#details-odd', active)
 
@@ -1812,6 +1866,8 @@ function App() {
       if (nav) {
         gsap.set(nav, { y: -200, opacity: 0 })
       }
+
+      syncHeaderVideos(active)
 
       gsap.set(getCard(active), {
         x: 0,
@@ -2118,6 +2174,7 @@ function App() {
         const previousActive = rest[rest.length - 1]
         const progress = qs<HTMLElement>('.progress-sub-foreground')
 
+        syncHeaderVideos(active)
         setDetailContent(detailsActive, active)
 
         gsap.set(detailsActive, { zIndex: 22 })
@@ -2285,6 +2342,7 @@ function App() {
         const previousActive = rest[0]
         const progress = qs<HTMLElement>('.progress-sub-foreground')
 
+        syncHeaderVideos(active)
         setDetailContent(detailsActive, active)
 
         gsap.set(detailsActive, { zIndex: 22 })
@@ -5108,6 +5166,10 @@ function App() {
       contactsSection.removeEventListener('touchend', handleTouchEnd)
     }
   }, [])
+
+  useEffect(() => {
+    syncHeaderVideos(headerActiveSlideIndexRef.current)
+  }, [activeSurface, isMobileViewport])
 
   useEffect(() => {
     heroVideoRefs.current.forEach((video, index) => {
@@ -8776,11 +8838,24 @@ function App() {
         <div id="demo">
           {headerSlides.map((slide, index) => (
             <div key={slide.id}>
-              <div
-                className="card"
-                id={`card${index}`}
-                style={{ backgroundImage: `url(${slide.image})` }}
-              />
+              <div className="card" id={`card${index}`}>
+                <video
+                  key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}`}
+                  ref={(node) => {
+                    headerVideoRefs.current[index] = node
+                  }}
+                  className="card__video"
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                >
+                  <source
+                    src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
               <div className="card-content" id={`card-content-${index}`}>
                 <div className="content-start" />
                 <div className="content-place">{slide.place}</div>

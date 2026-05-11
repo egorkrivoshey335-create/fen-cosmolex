@@ -158,6 +158,7 @@ type ActiveSurface =
   | 'gift'
   | 'faq'
   | 'final-cta'
+  | 'contacts'
 const headerSlides: HeaderSlide[] = [
   {
     id: 'black',
@@ -501,6 +502,7 @@ const blockNavItems = [
   { id: 'gift', number: '11', label: 'Подарок' },
   { id: 'faq', number: '12', label: 'FAQ' },
   { id: 'final-cta', number: '13', label: 'Финал' },
+  { id: 'contacts', number: '14', label: 'Контакты' },
 ] as const
 
 const HAIR_TYPES_STAR_CLIP =
@@ -1102,6 +1104,76 @@ const finalCtaCards: FinalCtaCard[] = [
   },
 ]
 
+const contactsDesktopVideoUrl = comfortIntroDesktopVideoUrl
+const contactsMobileVideoUrl = comfortIntroMobileVideoUrl
+
+const contactsBlockContent = {
+  navLabel: 'Контакты',
+  eyebrow: '01 / Контакты',
+  title: 'Остались вопросы? Свяжитесь с Cosmolex удобным способом',
+  description:
+    'Если хотите уточнить детали по Cosmolex Super Air, доставке, гарантии или подобрать подходящий сценарий использования, команда бренда на связи. Можно перейти на сайт, написать в соцсети или сразу позвонить.',
+  website: 'https://cosmolex.ru/',
+  phone: '+7 (800) 101-42-13',
+  phoneHref: 'tel:+78001014213',
+  email: 'lexicosm@lexicosm.ru',
+  emailHref: 'mailto:lexicosm@lexicosm.ru',
+  address: 'г. Москва, улица Малахитовая, 27с1',
+} as const
+
+const contactsQuickLinks = [
+  { id: 'hero-story', label: 'Hero-блок' },
+  { id: 'attachments', label: 'Насадки' },
+  { id: 'package', label: 'Комплектация' },
+  { id: 'faq', label: 'FAQ' },
+  { id: 'final-cta', label: 'Финальный CTA' },
+] as const
+
+const contactsSocialLinks = [
+  {
+    id: 'vk',
+    label: 'VK',
+    href: 'https://vk.com/cosmolex',
+    icon:
+      'https://static.insales-cdn.com/files/1/790/39535382/original/vk_icon-icons.com_66102.png',
+  },
+  {
+    id: 'telegram',
+    label: 'Telegram',
+    href: 'https://t.me/cosmolexs',
+    icon:
+      'https://static.insales-cdn.com/files/1/6274/30046338/original/telegram_143a0bc0ac09856667e3ab117fbe5462.svg',
+  },
+  {
+    id: 'whatsapp',
+    label: 'WhatsApp',
+    href: 'https://wa.me/78001014213',
+    icon:
+      'https://static.insales-cdn.com/files/1/6267/30046331/original/whatsapp_simple_72ba99a34b26c94a974ece69abddcc1a.svg',
+  },
+  {
+    id: 'youtube',
+    label: 'YouTube',
+    href: 'https://www.youtube.com/@Cosmolexs',
+    icon:
+      'https://static.insales-cdn.com/files/1/6294/31185046/original/pngtree-youtube-social-media-round-icon-png-image_6315993.png',
+  },
+  {
+    id: 'tiktok',
+    label: 'TikTok',
+    href: 'https://www.tiktok.com/@cosmolex?_t=8poH90KKxVu&_r=1',
+    icon:
+      'https://static.insales-cdn.com/files/1/2433/97192321/original/tiktok_logo_icon_1862896.png',
+  },
+  {
+    id: 'instagram',
+    label: 'Instagram',
+    href: 'https://www.instagram.com/cosmolexs',
+    icon:
+      'https://static.insales-cdn.com/files/1/2193/117385361/original/instagram_logo_icon_186894.webp',
+  },
+] as const
+
 function App() {
   const rootRef = useRef<HTMLDivElement | null>(null)
   const heroSectionRef = useRef<HTMLElement | null>(null)
@@ -1116,6 +1188,7 @@ function App() {
   const giftSectionRef = useRef<HTMLElement | null>(null)
   const faqSectionRef = useRef<HTMLElement | null>(null)
   const finalCtaSectionRef = useRef<HTMLElement | null>(null)
+  const contactsSectionRef = useRef<HTMLElement | null>(null)
   const painTrackRef = useRef<HTMLDivElement | null>(null)
   const benefitsCardRefs = useRef<Array<HTMLDivElement | null>>([])
   const painVideoRefs = useRef<Array<HTMLVideoElement | null>>([])
@@ -1152,6 +1225,7 @@ function App() {
   const finalCtaPanelRefs = useRef<Array<HTMLDivElement | null>>([])
   const finalCtaVideoRefs = useRef<Array<HTMLVideoElement | null>>([])
   const finalCtaPopupRef = useRef<HTMLDivElement | null>(null)
+  const contactsVideoRef = useRef<HTMLVideoElement | null>(null)
   const isFinalCtaPopupOpenRef = useRef(false)
   const promoCodeTimeoutRef = useRef<number | null>(null)
   const giftVideoRefs = useRef<Array<HTMLVideoElement | null>>([])
@@ -4809,6 +4883,19 @@ function App() {
       })()
     }
 
+    const moveToContactsStory = () => {
+      if (isLocked || activeSurfaceRef.current !== 'final-cta') {
+        return
+      }
+
+      isLocked = true
+      void (async () => {
+        await sweepFinalCtaIndicator()
+        setActiveSurface('contacts')
+        releaseLock(reduceMotion ? 0 : 420)
+      })()
+    }
+
     const handleWheel = (event: WheelEvent) => {
       if (activeSurfaceRef.current !== 'final-cta') {
         return
@@ -4827,6 +4914,8 @@ function App() {
 
       if (event.deltaY < 0) {
         moveToFaqStory()
+      } else if (event.deltaY > 0) {
+        moveToContactsStory()
       }
     }
 
@@ -4855,6 +4944,8 @@ function App() {
 
       if (endY - touchStartY > 30) {
         moveToFaqStory()
+      } else if (touchStartY - endY > 30) {
+        moveToContactsStory()
       }
     }
 
@@ -4866,6 +4957,111 @@ function App() {
       finalCtaSection.removeEventListener('wheel', handleWheel)
       finalCtaSection.removeEventListener('touchstart', handleTouchStart)
       finalCtaSection.removeEventListener('touchend', handleTouchEnd)
+    }
+  }, [])
+
+  useEffect(() => {
+    const contactsSection = contactsSectionRef.current
+
+    if (!contactsSection) {
+      return
+    }
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const contactsIndicator = contactsSection.querySelector<HTMLElement>('.hero-story__indicator')
+    let isLocked = false
+    let touchStartY = 0
+
+    const animateIndicator = (
+      target: gsap.TweenTarget,
+      duration: number,
+      properties: gsap.TweenVars,
+    ) =>
+      new Promise<void>((resolve) => {
+        gsap.to(target, {
+          duration,
+          ...properties,
+          onComplete: () => resolve(),
+        })
+      })
+
+    const sweepContactsIndicator = async () => {
+      if (!contactsIndicator || reduceMotion) {
+        return
+      }
+
+      await animateIndicator(contactsIndicator, 1.32, { x: 0, ease: 'sine.inOut' })
+      await animateIndicator(contactsIndicator, 0.56, {
+        x: window.innerWidth,
+        delay: 0.18,
+        ease: 'sine.inOut',
+      })
+      gsap.set(contactsIndicator, { x: -window.innerWidth })
+    }
+
+    const releaseLock = (delay: number) => {
+      window.setTimeout(() => {
+        isLocked = false
+      }, delay)
+    }
+
+    const moveToFinalCtaStory = () => {
+      if (isLocked || activeSurfaceRef.current !== 'contacts') {
+        return
+      }
+
+      isLocked = true
+      void (async () => {
+        await sweepContactsIndicator()
+        setActiveSurface('final-cta')
+        releaseLock(reduceMotion ? 0 : 420)
+      })()
+    }
+
+    const handleWheel = (event: WheelEvent) => {
+      if (activeSurfaceRef.current !== 'contacts') {
+        return
+      }
+
+      if (Math.abs(event.deltaY) < 12) {
+        return
+      }
+
+      event.preventDefault()
+
+      if (event.deltaY < 0) {
+        moveToFinalCtaStory()
+      }
+    }
+
+    const handleTouchStart = (event: TouchEvent) => {
+      if (activeSurfaceRef.current !== 'contacts') {
+        return
+      }
+
+      touchStartY = event.touches[0]?.clientY ?? 0
+    }
+
+    const handleTouchEnd = (event: TouchEvent) => {
+      if (activeSurfaceRef.current !== 'contacts') {
+        return
+      }
+
+      const endY = event.changedTouches[0]?.clientY ?? 0
+
+      if (endY - touchStartY > 30) {
+        moveToFinalCtaStory()
+      }
+    }
+
+    contactsSection.addEventListener('wheel', handleWheel, { passive: false })
+    contactsSection.addEventListener('touchstart', handleTouchStart, { passive: true })
+    contactsSection.addEventListener('touchend', handleTouchEnd, { passive: true })
+
+    return () => {
+      contactsSection.removeEventListener('wheel', handleWheel)
+      contactsSection.removeEventListener('touchstart', handleTouchStart)
+      contactsSection.removeEventListener('touchend', handleTouchEnd)
     }
   }, [])
 
@@ -7733,6 +7929,20 @@ function App() {
   }, [activeSurface, finalCtaActiveCardIndex, isMobileViewport])
 
   useEffect(() => {
+    const video = contactsVideoRef.current
+
+    if (!video) {
+      return
+    }
+
+    if (activeSurface === 'contacts') {
+      video.play().catch(() => {})
+    } else {
+      video.pause()
+    }
+  }, [activeSurface, isMobileViewport])
+
+  useEffect(() => {
     if (activeSurface !== 'final-cta') {
       return
     }
@@ -7827,33 +8037,136 @@ function App() {
       timeline.kill()
     }
   }, [activeSurface])
+  useEffect(() => {
+    if (activeSurface !== 'contacts') {
+      return
+    }
 
-  const activeBlockNavIndex =
-    activeSurface === 'final-cta'
-      ? 12
-      : activeSurface === 'faq'
-        ? 11
-        : activeSurface === 'gift'
-          ? 10
-        : activeSurface === 'specs'
-          ? 9
-          : activeSurface === 'package'
-            ? 8
-            : activeSurface === 'comparison'
-              ? 7
-              : activeSurface === 'comfort'
-                ? 6
-                : activeSurface === 'hair-types'
-                  ? 5
-                  : activeSurface === 'attachments'
-                    ? 4
-                    : activeSurface === 'benefits'
-                      ? 3
-                      : activeSurface === 'pain'
-                        ? 2
-                        : activeSurface === 'hero-story'
-                          ? 1
-                          : 0
+    const contactsSection = contactsSectionRef.current
+
+    if (!contactsSection) {
+      return
+    }
+
+    const media = contactsSection.querySelector<HTMLElement>('.contacts-story__media-slide')
+    const hero = contactsSection.querySelector<HTMLElement>('.contacts-story__hero')
+    const cards = Array.from(contactsSection.querySelectorAll<HTMLElement>('.contacts-story__card'))
+    const metaRows = Array.from(contactsSection.querySelectorAll<HTMLElement>('.contacts-story__meta-row'))
+    const quickLinks = Array.from(
+      contactsSection.querySelectorAll<HTMLElement>(
+        '.contacts-story__quick-link, .contacts-story__social-link',
+      ),
+    )
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (!media || !hero || cards.length === 0) {
+      return
+    }
+
+    gsap.killTweensOf([media, hero, ...cards, ...metaRows, ...quickLinks])
+
+    if (reduceMotion) {
+      gsap.set(media, { opacity: 1, scale: 1, filter: 'blur(0px)' })
+      gsap.set(hero, { opacity: 1, x: 0, filter: 'blur(0px)' })
+      cards.forEach((card) => gsap.set(card, { opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }))
+      metaRows.forEach((row) => gsap.set(row, { opacity: 1, x: 0, filter: 'blur(0px)' }))
+      quickLinks.forEach((link) => gsap.set(link, { opacity: 1, y: 0, scale: 1 }))
+      return
+    }
+
+    gsap.set(media, {
+      opacity: 0,
+      scale: 1.08,
+      filter: 'blur(14px)',
+      transformOrigin: 'center center',
+    })
+    gsap.set(hero, { opacity: 0, x: -84, filter: 'blur(14px)' })
+    cards.forEach((card, index) =>
+      gsap.set(card, {
+        opacity: 0,
+        x: index % 2 === 0 ? -56 : 56,
+        y: 24,
+        filter: 'blur(12px)',
+      }),
+    )
+    metaRows.forEach((row) => gsap.set(row, { opacity: 0, x: 26, filter: 'blur(8px)' }))
+    quickLinks.forEach((link) => gsap.set(link, { opacity: 0, y: 16, scale: 0.94 }))
+
+    const timeline = gsap.timeline({
+      defaults: { ease: 'power2.out' },
+      onComplete: () => {
+        gsap.set(media, { opacity: 1, scale: 1, filter: 'blur(0px)' })
+        gsap.set(hero, { opacity: 1, x: 0, filter: 'blur(0px)' })
+        cards.forEach((card) => gsap.set(card, { opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }))
+        metaRows.forEach((row) => gsap.set(row, { opacity: 1, x: 0, filter: 'blur(0px)' }))
+        quickLinks.forEach((link) => gsap.set(link, { opacity: 1, y: 0, scale: 1 }))
+      },
+    })
+
+    timeline.to(
+      media,
+      {
+        opacity: 1,
+        scale: 1,
+        filter: 'blur(0px)',
+        duration: 2.34,
+      },
+      0,
+    )
+    timeline.to(
+      hero,
+      {
+        opacity: 1,
+        x: 0,
+        filter: 'blur(0px)',
+        duration: 1.72,
+      },
+      0.18,
+    )
+    cards.forEach((card, index) => {
+      timeline.to(
+        card,
+        {
+          opacity: 1,
+          x: 0,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 1.04,
+        },
+        0.42 + index * 0.18,
+      )
+    })
+    metaRows.forEach((row, index) => {
+      timeline.to(
+        row,
+        {
+          opacity: 1,
+          x: 0,
+          filter: 'blur(0px)',
+          duration: 0.82,
+        },
+        0.88 + index * 0.06,
+      )
+    })
+    quickLinks.forEach((link, index) => {
+      timeline.to(
+        link,
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.72,
+        },
+        1.02 + index * 0.04,
+      )
+    })
+
+    return () => {
+      timeline.kill()
+    }
+  }, [activeSurface])
+
+  const activeBlockNavIndex = Math.max(0, blockNavItems.findIndex((item) => item.id === activeSurface))
   const activeBlockNavItem = blockNavItems[activeBlockNavIndex]
   const copyPromoCode = async () => {
     try {
@@ -7965,7 +8278,8 @@ function App() {
       blockId !== 'specs' &&
       blockId !== 'gift' &&
       blockId !== 'faq' &&
-      blockId !== 'final-cta'
+      blockId !== 'final-cta' &&
+      blockId !== 'contacts'
     ) {
       return
     }
@@ -7983,6 +8297,7 @@ function App() {
     const giftSection = giftSectionRef.current
     const faqSection = faqSectionRef.current
     const finalCtaSection = finalCtaSectionRef.current
+    const contactsSection = contactsSectionRef.current
 
     const heroMediaSlides = hero
       ? Array.from(hero.querySelectorAll<HTMLElement>('.hero-story__media-slide'))
@@ -8068,6 +8383,13 @@ function App() {
       ? Array.from(
           finalCtaSection.querySelectorAll<HTMLElement>(
             '.final-cta-story__bg-slide, .final-cta-story__intro, .final-cta-story__options, .final-cta-story__option, .final-cta-story__shadow, .final-cta-story__popup',
+          ),
+        )
+      : []
+    const contactsContents = contactsSection
+      ? Array.from(
+          contactsSection.querySelectorAll<HTMLElement>(
+            '.contacts-story__media-slide, .contacts-story__hero, .contacts-story__card, .contacts-story__meta-row, .contacts-story__quick-link, .contacts-story__social-link',
           ),
         )
       : []
@@ -8286,6 +8608,21 @@ function App() {
       }
     }
 
+    if (contactsSection) {
+      gsap.killTweensOf([contactsSection, ...contactsContents])
+      gsap.set(contactsSection, { clearProps: 'x,y,zIndex' })
+      contactsContents.forEach((content) =>
+        gsap.set(content, { clearProps: 'x,y,opacity,scale,filter,clipPath,pointerEvents' }),
+      )
+
+      if (blockId !== 'contacts') {
+        hideEl(contactsSection)
+      } else {
+        contactsSection.style.transition = ''
+        gsap.set(contactsSection, { clearProps: 'opacity,visibility,pointerEvents' })
+      }
+    }
+
     const restoreInlineHiddenStyles = () => {
       ;[
         hero,
@@ -8300,6 +8637,7 @@ function App() {
         giftSection,
         faqSection,
         finalCtaSection,
+        contactsSection,
       ].forEach((el) => {
         if (!el) {
           return
@@ -9887,6 +10225,160 @@ function App() {
         <div className="hero-story__footer final-cta-story__footer">
           <span>01 / 01</span>
           <p>{finalCtaContent.navLabel}</p>
+        </div>
+      </section>
+
+      <section
+        ref={contactsSectionRef}
+        className={`contacts-story ${activeSurface === 'contacts' ? 'is-active' : ''}`}
+        id="contacts"
+        aria-label="Контакты Cosmolex"
+      >
+        <div className="hero-story__indicator" />
+        <header
+          className={`hero-story__topbar ${menuOpen ? 'menu-open' : ''}`}
+          aria-label="Навигация по блокам лендинга"
+        >
+          {renderTopbarNavigation('Навигация по блокам лендинга')}
+        </header>
+
+        <div className="contacts-story__media-layer" aria-hidden="true">
+          <div className="contacts-story__media-slide">
+            <video
+              key={`contacts-${isMobileViewport ? 'mobile' : 'desktop'}`}
+              ref={contactsVideoRef}
+              className="contacts-story__video"
+              muted
+              loop
+              playsInline
+              preload="metadata"
+            >
+              <source
+                src={isMobileViewport ? contactsMobileVideoUrl : contactsDesktopVideoUrl}
+                type="video/mp4"
+              />
+            </video>
+          </div>
+        </div>
+
+        <div className="contacts-story__backdrop" />
+
+        <div className="contacts-story__viewport">
+          <div className="contacts-story__layout">
+            <article className="contacts-story__hero">
+              <div className="contacts-story__eyebrow">{contactsBlockContent.eyebrow}</div>
+              <h2 className="contacts-story__title">{contactsBlockContent.title}</h2>
+              <p className="contacts-story__description">{contactsBlockContent.description}</p>
+
+              <div className="contacts-story__actions">
+                <a
+                  className="contacts-story__primary"
+                  href={contactsBlockContent.website}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Открыть сайт бренда
+                </a>
+                <a className="contacts-story__secondary" href={contactsBlockContent.phoneHref}>
+                  Позвонить
+                </a>
+              </div>
+            </article>
+
+            <div className="contacts-story__cards">
+              <article className="contacts-story__card">
+                <div className="contacts-story__card-title">Быстрые переходы</div>
+                <p className="contacts-story__card-copy">
+                  Важные блоки лендинга, к которым можно вернуться в один клик.
+                </p>
+
+                <div className="contacts-story__quick-links">
+                  {contactsQuickLinks.map((link) => (
+                    <button
+                      key={link.id}
+                      type="button"
+                      className="contacts-story__quick-link"
+                      onClick={() => handleBlockNavClick(link.id)}
+                    >
+                      {link.label}
+                    </button>
+                  ))}
+                </div>
+              </article>
+
+              <article className="contacts-story__card">
+                <div className="contacts-story__card-title">Связаться напрямую</div>
+
+                <div className="contacts-story__meta-list">
+                  <div className="contacts-story__meta-row">
+                    <span className="contacts-story__meta-label">Сайт</span>
+                    <a
+                      className="contacts-story__meta-value"
+                      href={contactsBlockContent.website}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      cosmolex.ru
+                    </a>
+                  </div>
+
+                  <div className="contacts-story__meta-row">
+                    <span className="contacts-story__meta-label">Телефон</span>
+                    <a
+                      className="contacts-story__meta-value"
+                      href={contactsBlockContent.phoneHref}
+                    >
+                      {contactsBlockContent.phone}
+                    </a>
+                  </div>
+
+                  <div className="contacts-story__meta-row">
+                    <span className="contacts-story__meta-label">Почта</span>
+                    <a
+                      className="contacts-story__meta-value"
+                      href={contactsBlockContent.emailHref}
+                    >
+                      {contactsBlockContent.email}
+                    </a>
+                  </div>
+
+                  <div className="contacts-story__meta-row">
+                    <span className="contacts-story__meta-label">Адрес</span>
+                    <span className="contacts-story__meta-value">
+                      {contactsBlockContent.address}
+                    </span>
+                  </div>
+                </div>
+              </article>
+
+              <article className="contacts-story__card">
+                <div className="contacts-story__card-title">Соцсети и мессенджеры</div>
+                <p className="contacts-story__card-copy">
+                  Следите за новостями бренда и пишите там, где вам удобнее.
+                </p>
+
+                <div className="contacts-story__socials">
+                  {contactsSocialLinks.map((item) => (
+                    <a
+                      key={item.id}
+                      className="contacts-story__social-link"
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={item.label}
+                    >
+                      <img src={item.icon} alt="" loading="lazy" decoding="async" />
+                    </a>
+                  ))}
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div className="hero-story__footer contacts-story__footer">
+          <span>01 / 01</span>
+          <p>{contactsBlockContent.navLabel}</p>
         </div>
       </section>
 

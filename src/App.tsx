@@ -1376,6 +1376,19 @@ function App() {
 
     return Math.abs(index - activeSurfaceOrderIndex) <= radius
   }
+  const heroNear = isSurfaceNear('hero-story')
+  const painNear = isSurfaceNear('pain')
+  const benefitsNear = isSurfaceNear('benefits')
+  const attachmentsNear = isSurfaceNear('attachments')
+  const hairTypesNear = isSurfaceNear('hair-types')
+  const comfortNear = isSurfaceNear('comfort')
+  const comparisonNear = isSurfaceNear('comparison')
+  const packageNear = isSurfaceNear('package')
+  const specsNear = isSurfaceNear('specs')
+  const giftNear = isSurfaceNear('gift')
+  const faqNear = isSurfaceNear('faq')
+  const finalCtaNear = isSurfaceNear('final-cta')
+  const contactsNear = isSurfaceNear('contacts')
   const [showScrollHint, setShowScrollHint] = useState(false)
   const specsPages = isMobileViewport ? specificationMobilePages : specificationPages
   const faqPages = isMobileViewport ? faqPagesMobile : faqPagesDesktop
@@ -6511,57 +6524,81 @@ function App() {
   }, [activeSurface, hairTypesSlideIndex, isMobileViewport])
 
   useEffect(() => {
+    if (!hairTypesNear) {
+      return
+    }
+
     const tweens: gsap.core.Tween[] = []
+    let rafId = 0
+    let attempts = 0
 
-    hairTypesGalleryTrackRefs.current.forEach((slideTracks, slideIndex) => {
-      hairTypesGalleryTweenRefs.current[slideIndex] = []
+    const buildTweens = () => {
+      tweens.forEach((tween) => tween.kill())
+      tweens.length = 0
 
-      slideTracks.forEach((track, columnIndex) => {
-        if (!track) {
-          return
-        }
+      let measuredAny = false
 
-        const items = Array.from(track.children) as HTMLElement[]
+      hairTypesGalleryTrackRefs.current.forEach((slideTracks, slideIndex) => {
+        hairTypesGalleryTweenRefs.current[slideIndex] = []
 
-        gsap.killTweensOf(track)
-        gsap.killTweensOf(items)
-        gsap.set(track, { clearProps: 'transform' })
+        slideTracks.forEach((track, columnIndex) => {
+          if (!track) {
+            return
+          }
 
-        const columnHeight = track.clientHeight
-        const travel = columnHeight * 0.5
-        const direction = columnIndex % 2 !== 0 ? '+=' : '-='
+          const items = Array.from(track.children) as HTMLElement[]
 
-        if (!travel || items.length === 0) {
-          return
-        }
+          gsap.killTweensOf(track)
+          gsap.killTweensOf(items)
+          gsap.set(track, { clearProps: 'transform' })
 
-        items.forEach((item) => {
-          gsap.set(item, { y: 0 })
+          const columnHeight = track.clientHeight
+          const travel = columnHeight * 0.5
+          const direction = columnIndex % 2 !== 0 ? '+=' : '-='
 
-          const tween = gsap.to(item, {
-            y: `${direction}${travel}`,
-            duration: isMobileViewport ? 12 : 16,
-            ease: 'none',
-            repeat: -1,
-            modifiers: {
-              y: gsap.utils.unitize((value) => {
-                const numeric = Number.parseFloat(value)
+          if (!travel || items.length === 0) {
+            return
+          }
 
-                return direction === '+=' ? numeric % travel : numeric % -travel
-              }),
-            },
+          measuredAny = true
+
+          items.forEach((item) => {
+            gsap.set(item, { y: 0 })
+
+            const tween = gsap.to(item, {
+              y: `${direction}${travel}`,
+              duration: isMobileViewport ? 12 : 16,
+              ease: 'none',
+              repeat: -1,
+              modifiers: {
+                y: gsap.utils.unitize((value) => {
+                  const numeric = Number.parseFloat(value)
+
+                  return direction === '+=' ? numeric % travel : numeric % -travel
+                }),
+              },
+            })
+
+            hairTypesGalleryTweenRefs.current[slideIndex].push(tween)
+            tweens.push(tween)
           })
-
-          hairTypesGalleryTweenRefs.current[slideIndex].push(tween)
-          tweens.push(tween)
         })
       })
-    })
+
+      // Images may not be laid out yet right after mounting; retry until tracks have height.
+      if (!measuredAny && attempts < 30) {
+        attempts += 1
+        rafId = window.requestAnimationFrame(buildTweens)
+      }
+    }
+
+    rafId = window.requestAnimationFrame(buildTweens)
 
     return () => {
+      window.cancelAnimationFrame(rafId)
       tweens.forEach((tween) => tween.kill())
     }
-  }, [isMobileViewport, hairTypesSlideIndex])
+  }, [isMobileViewport, hairTypesNear])
 
   useEffect(() => {
     if (
@@ -8941,14 +8978,6 @@ function App() {
     applySurface()
   }
 
-  const heroNear = isSurfaceNear('hero-story')
-  const painNear = isSurfaceNear('pain')
-  const benefitsNear = isSurfaceNear('benefits')
-  const attachmentsNear = isSurfaceNear('attachments')
-  const comfortNear = isSurfaceNear('comfort')
-  const comparisonNear = isSurfaceNear('comparison')
-  const giftNear = isSurfaceNear('gift')
-
   return (
     <div className="landing-stage">
       <div ref={rootRef} className="header-root" id="header">
@@ -9405,8 +9434,6 @@ function App() {
         <div className="hair-types-story__media-layer" aria-hidden="true">
           {hairProfileSlides.map((slide, index) => {
             const galleryColumns = getHairGalleryColumns(slide.galleryImages)
-            const shouldMountImages =
-              Math.abs(index - hairTypesSlideIndex) <= (isMobileViewport ? 0 : 1)
 
             return (
               <div
@@ -9436,7 +9463,7 @@ function App() {
                         }}
                         className="hair-types-story__gallery-track"
                       >
-                        {shouldMountImages
+                        {hairTypesNear
                           ? [...column, ...column].map((imageSrc, imageIndex) => (
                               <div
                                 key={`${slide.id}-image-${columnIndex}-${imageIndex}`}
@@ -9544,9 +9571,9 @@ function App() {
                 <div
                   className="comfort-story__bg-image"
                   style={{
-                    backgroundImage: `url(${
-                      isMobileViewport ? slide.backgroundMobile : slide.backgroundDesktop
-                    })`,
+                    backgroundImage: comfortNear
+                      ? `url(${isMobileViewport ? slide.backgroundMobile : slide.backgroundDesktop})`
+                      : 'none',
                   }}
                 />
               )}
@@ -9668,9 +9695,9 @@ function App() {
                 <div
                   className="comparison-story__intro-image"
                   style={{
-                    backgroundImage: `url(${
-                      isMobileViewport ? slide.backgroundMobile : slide.backgroundDesktop
-                    })`,
+                    backgroundImage: comparisonNear
+                      ? `url(${isMobileViewport ? slide.backgroundMobile : slide.backgroundDesktop})`
+                      : 'none',
                   }}
                 />
               ) : (
@@ -9832,7 +9859,7 @@ function App() {
             className="package-story__media-slide"
           >
             <video
-              key={`package-${isMobileViewport ? 'mobile' : 'desktop'}`}
+              key={`package-${isMobileViewport ? 'mobile' : 'desktop'}-${packageNear}`}
               ref={packageVideoRef}
               className="package-story__video"
               muted
@@ -9840,10 +9867,12 @@ function App() {
               playsInline
               preload="metadata"
             >
-              <source
-                src={isMobileViewport ? packageMobileVideo : packageDesktopVideo}
-                type="video/mp4"
-              />
+              {packageNear ? (
+                <source
+                  src={isMobileViewport ? packageMobileVideo : packageDesktopVideo}
+                  type="video/mp4"
+                />
+              ) : null}
             </video>
           </div>
         </div>
@@ -9944,7 +9973,7 @@ function App() {
         <div className="specs-story__media-layer" aria-hidden="true">
           <div className="specs-story__media-slide">
             <video
-              key={`specs-${isMobileViewport ? 'mobile' : 'desktop'}`}
+              key={`specs-${isMobileViewport ? 'mobile' : 'desktop'}-${specsNear}`}
               ref={specsVideoRef}
               className="specs-story__video"
               muted
@@ -9952,10 +9981,12 @@ function App() {
               playsInline
               preload="metadata"
             >
-              <source
-                src={isMobileViewport ? specsMobileVideoUrl : specsDesktopVideoUrl}
-                type="video/mp4"
-              />
+              {specsNear ? (
+                <source
+                  src={isMobileViewport ? specsMobileVideoUrl : specsDesktopVideoUrl}
+                  type="video/mp4"
+                />
+              ) : null}
             </video>
           </div>
         </div>
@@ -10086,9 +10117,9 @@ function App() {
                 <div
                   className="gift-story__bg-image"
                   style={{
-                    backgroundImage: `url(${
-                      isMobileViewport ? slide.backgroundMobile : slide.backgroundDesktop
-                    })`,
+                    backgroundImage: giftNear
+                      ? `url(${isMobileViewport ? slide.backgroundMobile : slide.backgroundDesktop})`
+                      : 'none',
                   }}
                 />
               )}
@@ -10200,7 +10231,7 @@ function App() {
         <div className="faq-story__media-layer" aria-hidden="true">
           <div className="faq-story__media-slide">
             <video
-              key={`faq-${isMobileViewport ? 'mobile' : 'desktop'}`}
+              key={`faq-${isMobileViewport ? 'mobile' : 'desktop'}-${faqNear}`}
               ref={faqVideoRef}
               className="faq-story__video"
               muted
@@ -10208,10 +10239,12 @@ function App() {
               playsInline
               preload="metadata"
             >
-              <source
-                src={isMobileViewport ? faqMobileVideoUrl : faqDesktopVideoUrl}
-                type="video/mp4"
-              />
+              {faqNear ? (
+                <source
+                  src={isMobileViewport ? faqMobileVideoUrl : faqDesktopVideoUrl}
+                  type="video/mp4"
+                />
+              ) : null}
             </video>
           </div>
         </div>
@@ -10319,9 +10352,9 @@ function App() {
               <div
                 className="final-cta-story__bg-image"
                 style={{
-                  backgroundImage: `url(${
-                    isMobileViewport ? card.backgroundMobile : card.backgroundDesktop
-                  })`,
+                  backgroundImage: finalCtaNear
+                    ? `url(${isMobileViewport ? card.backgroundMobile : card.backgroundDesktop})`
+                    : 'none',
                 }}
               />
             </div>
@@ -10365,7 +10398,7 @@ function App() {
                       className="final-cta-story__shadow"
                     >
                       <video
-                        key={`${card.id}-${isMobileViewport ? 'mobile' : 'desktop'}`}
+                        key={`${card.id}-${isMobileViewport ? 'mobile' : 'desktop'}-${finalCtaNear}`}
                         ref={(node) => {
                           finalCtaVideoRefs.current[index] = node
                         }}
@@ -10375,10 +10408,12 @@ function App() {
                         playsInline
                         preload="auto"
                       >
-                        <source
-                          src={isMobileViewport ? card.videoMobile : card.videoDesktop}
-                          type="video/mp4"
-                        />
+                        {finalCtaNear ? (
+                          <source
+                            src={isMobileViewport ? card.videoMobile : card.videoDesktop}
+                            type="video/mp4"
+                          />
+                        ) : null}
                       </video>
 
                       <div className="final-cta-story__option-label">
@@ -10523,7 +10558,7 @@ function App() {
         <div className="contacts-story__media-layer" aria-hidden="true">
           <div className="contacts-story__media-slide">
             <video
-              key={`contacts-${isMobileViewport ? 'mobile' : 'desktop'}`}
+              key={`contacts-${isMobileViewport ? 'mobile' : 'desktop'}-${contactsNear}`}
               ref={contactsVideoRef}
               className="contacts-story__video"
               muted
@@ -10531,10 +10566,12 @@ function App() {
               playsInline
               preload="metadata"
             >
-              <source
-                src={isMobileViewport ? contactsMobileVideoUrl : contactsDesktopVideoUrl}
-                type="video/mp4"
-              />
+              {contactsNear ? (
+                <source
+                  src={isMobileViewport ? contactsMobileVideoUrl : contactsDesktopVideoUrl}
+                  type="video/mp4"
+                />
+              ) : null}
             </video>
           </div>
         </div>

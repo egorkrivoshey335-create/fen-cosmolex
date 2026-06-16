@@ -6526,7 +6526,7 @@ function App() {
     return () => {
       tweens.forEach((tween) => tween.kill())
     }
-  }, [isMobileViewport])
+  }, [isMobileViewport, hairTypesSlideIndex, activeSurface])
 
   useEffect(() => {
     if (
@@ -9354,6 +9354,11 @@ function App() {
         <div className="hair-types-story__media-layer" aria-hidden="true">
           {hairProfileSlides.map((slide, index) => {
             const galleryColumns = getHairGalleryColumns(slide.galleryImages)
+            // Only mount images for the active slide and the immediate next one.
+            // iOS Safari kills the tab if all 5 galleries (90 decoded images) are
+            // kept in memory at once; this keeps the mounted image count small.
+            const shouldRenderImages =
+              index === hairTypesSlideIndex || index === hairTypesSlideIndex + 1
 
             return (
               <div
@@ -9383,19 +9388,21 @@ function App() {
                         }}
                         className="hair-types-story__gallery-track"
                       >
-                        {[...column, ...column].map((imageSrc, imageIndex) => (
-                          <div
-                            key={`${slide.id}-image-${columnIndex}-${imageIndex}`}
-                            className="hair-types-story__gallery-image"
-                          >
-                            <img
-                              src={imageSrc}
-                              alt={slide.title}
-                              loading={index === 0 && imageIndex < 3 ? 'eager' : 'lazy'}
-                              decoding="async"
-                            />
-                          </div>
-                        ))}
+                        {shouldRenderImages
+                          ? [...column, ...column].map((imageSrc, imageIndex) => (
+                              <div
+                                key={`${slide.id}-image-${columnIndex}-${imageIndex}`}
+                                className="hair-types-story__gallery-image"
+                              >
+                                <img
+                                  src={imageSrc}
+                                  alt={slide.title}
+                                  loading={index === 0 && imageIndex < 3 ? 'eager' : 'lazy'}
+                                  decoding="async"
+                                />
+                              </div>
+                            ))
+                          : null}
                       </div>
                     </div>
                   ))}

@@ -6598,7 +6598,7 @@ function App() {
       window.cancelAnimationFrame(rafId)
       tweens.forEach((tween) => tween.kill())
     }
-  }, [isMobileViewport, hairTypesNear])
+  }, [isMobileViewport, hairTypesNear, hairTypesSlideIndex])
 
   useEffect(() => {
     if (
@@ -9434,6 +9434,9 @@ function App() {
         <div className="hair-types-story__media-layer" aria-hidden="true">
           {hairProfileSlides.map((slide, index) => {
             const galleryColumns = getHairGalleryColumns(slide.galleryImages)
+            const shouldMountImages =
+              hairTypesNear &&
+              (isMobileViewport ? index === hairTypesSlideIndex : true)
 
             return (
               <div
@@ -9463,7 +9466,7 @@ function App() {
                         }}
                         className="hair-types-story__gallery-track"
                       >
-                        {hairTypesNear
+                        {shouldMountImages
                           ? [...column, ...column].map((imageSrc, imageIndex) => (
                               <div
                                 key={`${slide.id}-image-${columnIndex}-${imageIndex}`}

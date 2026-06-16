@@ -3,15 +3,15 @@
 .landing-stage {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: var(--app-height);
   overflow: hidden;
   isolation: isolate;
 }
 
 .scroll-hint {
   position: fixed;
-  top: 104px;
-  left: 22px;
+  top: calc(104px + var(--app-safe-top));
+  left: calc(22px + var(--app-safe-left));
   z-index: 220;
   width: 54px;
   height: 54px;
@@ -30,7 +30,7 @@
   position: relative;
   z-index: 1;
   width: 100vw;
-  height: 100vh;
+  height: var(--app-height);
   overflow: hidden;
   background-color: #1a1a1a;
   color: rgba(255, 255, 255, 0.87);
@@ -200,10 +200,10 @@
 
 nav {
   position: fixed;
-  top: 18px;
+  top: calc(18px + var(--app-safe-top));
   left: 50%;
   z-index: 90;
-  width: min(calc(100% - 32px), 1100px);
+  width: min(calc(100% - 32px - var(--app-safe-left) - var(--app-safe-right)), 1100px);
   transform: translateX(-50%);
   padding: 0;
 }
@@ -682,8 +682,8 @@ nav {
   }
 
   nav {
-    top: 10px;
-    width: calc(100% - 20px);
+    top: calc(10px + var(--app-safe-top));
+    width: calc(100% - 20px - var(--app-safe-left) - var(--app-safe-right));
   }
 
   .landing-topbar__shell {
@@ -1613,6 +1613,23 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   transform: translateY(0);
 }
 
+.hero-story,
+.pain-story,
+.benefits-story,
+.attachments-story,
+.hair-types-story,
+.comfort-story,
+.comparison-story,
+.package-story,
+.specs-story,
+.gift-story,
+.faq-story,
+.final-cta-story,
+.contacts-story {
+  height: var(--app-height);
+  min-height: var(--app-height);
+}
+
 .package-story.is-active .package-story__copy-shell,
 .package-story.is-active .package-story__timeline-shell,
 .package-story.is-active .package-story__item,
@@ -1765,10 +1782,10 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
 
 .hero-story__topbar {
   position: fixed;
-  top: 18px;
+  top: calc(18px + var(--app-safe-top));
   left: 50%;
   z-index: 90;
-  width: min(calc(100% - 32px), 1100px);
+  width: min(calc(100% - 32px - var(--app-safe-left) - var(--app-safe-right)), 1100px);
   transform: translateX(-50%);
   opacity: 0;
   pointer-events: none;
@@ -3779,7 +3796,7 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   width: min(100%, 1500px);
   height: 100%;
   margin-inline: auto;
-  padding: 104px 24px 88px;
+  padding: calc(104px + var(--app-safe-top)) 24px calc(88px + var(--app-safe-bottom));
 }
 
 .final-cta-story__intro {
@@ -4323,7 +4340,7 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   width: min(100%, 1500px);
   height: 100%;
   margin-inline: auto;
-  padding: 104px 24px 88px;
+  padding: calc(104px + var(--app-safe-top)) 24px calc(88px + var(--app-safe-bottom));
 }
 
 .contacts-story__hero {
@@ -4740,7 +4757,7 @@ span.contacts-story__meta-value {
     grid-template-columns: 1fr;
     gap: 18px;
     align-items: end;
-    padding: 96px 16px 84px;
+    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
   }
 
   .contacts-story__hero {
@@ -4857,7 +4874,7 @@ span.contacts-story__meta-value {
 
 @media (max-width: 767px) {
   .contacts-story__layout {
-    padding: 92px 16px 80px;
+    padding: calc(92px + var(--app-safe-top)) 16px calc(80px + var(--app-safe-bottom));
   }
 
   .contacts-story__card {
@@ -5229,6 +5246,10 @@ span.contacts-story__meta-value {
 }
 
 @media (max-width: 900px) {
+  .contacts-story__layout {
+    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
+  }
+
   .hero-story .arch {
     gap: 30px;
   }
@@ -5257,8 +5278,8 @@ span.contacts-story__meta-value {
 
 @media (max-width: 768px) {
   .scroll-hint {
-    top: 84px;
-    left: 12px;
+    top: calc(84px + var(--app-safe-top));
+    left: calc(12px + var(--app-safe-left));
     width: 42px;
     height: 42px;
     opacity: 0.9;
@@ -5271,14 +5292,18 @@ span.contacts-story__meta-value {
   .attachments-story__footer,
   .hair-types-story__footer,
   .comfort-story__footer,
+  .comparison-story__footer,
+  .package-story__footer,
+  .specs-story__footer,
   .gift-story__footer,
   .faq-story__footer,
-  .final-cta-story__footer {
-    width: calc(100% - 20px);
+  .final-cta-story__footer,
+  .contacts-story__footer {
+    width: calc(100% - 20px - var(--app-safe-left) - var(--app-safe-right));
   }
 
   .hero-story__topbar {
-    top: 10px;
+    top: calc(10px + var(--app-safe-top));
   }
 
   .hero-story__container {
@@ -6346,13 +6371,13 @@ span.contacts-story__meta-value {
 
   .benefits-story__stage {
     width: 100vw;
-    height: 100vh;
+    height: var(--app-height);
     overflow: hidden;
   }
 
   .benefits-story__card-contents {
     width: calc(100vw - 16px);
-    height: calc(100vh - 18px);
+    height: calc(var(--app-height) - 18px);
     border-radius: 18px;
     box-shadow:
       rgba(0, 0, 0, 0.28) 0 22px 56px,
@@ -6414,6 +6439,74 @@ span.contacts-story__meta-value {
     font-size: 11px;
   }
 
+  .hero-story__container {
+    padding: calc(92px + var(--app-safe-top)) 1.25rem calc(84px + var(--app-safe-bottom));
+  }
+
+  .hero-story .arch__left .content {
+    padding-bottom: calc(118px + var(--app-safe-bottom));
+  }
+
+  .pain-story__slide {
+    padding: calc(92px + var(--app-safe-top)) 1.25rem calc(88px + var(--app-safe-bottom));
+  }
+
+  .attachments-story__viewport {
+    padding: calc(92px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
+  }
+
+  .hair-types-story__copy {
+    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
+  }
+
+  .comfort-story__panel {
+    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
+  }
+
+  .gift-story__panel {
+    padding: calc(165px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
+  }
+
+  .faq-story__layout {
+    padding: calc(92px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
+  }
+
+  .final-cta-story__layout {
+    padding: calc(92px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
+  }
+
+  .comparison-story__panel {
+    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
+  }
+
+  .package-story__layout {
+    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
+  }
+
+  .specs-story__layout {
+    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
+  }
+
+  .contacts-story__layout {
+    padding: calc(92px + var(--app-safe-top)) 16px calc(80px + var(--app-safe-bottom));
+  }
+
+  .hero-story__footer,
+  .pain-story__footer,
+  .benefits-story__footer,
+  .attachments-story__footer,
+  .hair-types-story__footer,
+  .comfort-story__footer,
+  .comparison-story__footer,
+  .package-story__footer,
+  .specs-story__footer,
+  .gift-story__footer,
+  .faq-story__footer,
+  .final-cta-story__footer,
+  .contacts-story__footer {
+    bottom: calc(10px + var(--app-safe-bottom));
+  }
+
   .hero-story__media-slide::after {
     background:
       linear-gradient(180deg, rgba(8, 8, 8, 0.16) 0%, rgba(8, 8, 8, 0.38) 38%, rgba(8, 8, 8, 0.82) 100%),
@@ -6423,7 +6516,7 @@ span.contacts-story__meta-value {
 
 @media (max-width: 560px) {
   .hero-story__container {
-    padding: 88px 10px 82px;
+    padding: calc(88px + var(--app-safe-top)) 10px calc(82px + var(--app-safe-bottom));
   }
 
   .hero-story .arch__left {
@@ -6442,7 +6535,7 @@ span.contacts-story__meta-value {
   }
 
   .hero-story .arch__left .content {
-    padding-bottom: 108px;
+    padding-bottom: calc(108px + var(--app-safe-bottom));
   }
 
   .hero-story__footer > p {
@@ -6450,7 +6543,7 @@ span.contacts-story__meta-value {
   }
 
   .pain-story__slide {
-    padding: 88px 10px 84px;
+    padding: calc(88px + var(--app-safe-top)) 10px calc(84px + var(--app-safe-bottom));
   }
 
   .pain-story__content {
@@ -6477,7 +6570,7 @@ span.contacts-story__meta-value {
   }
 
   .attachments-story__viewport {
-    padding: 88px 10px 82px;
+    padding: calc(88px + var(--app-safe-top)) 10px calc(82px + var(--app-safe-bottom));
   }
 
   .attachments-story__layout {
@@ -6527,7 +6620,7 @@ span.contacts-story__meta-value {
   }
 
   .hair-types-story__copy {
-    padding: 90px 0 82px;
+    padding: calc(90px + var(--app-safe-top)) 0 calc(82px + var(--app-safe-bottom));
   }
 
   .hair-types-story__gallery-grid {
@@ -6573,7 +6666,7 @@ span.contacts-story__meta-value {
   }
 
   .comparison-story__panel {
-    padding: 88px 10px 82px;
+    padding: calc(88px + var(--app-safe-top)) 10px calc(82px + var(--app-safe-bottom));
   }
 
   .comparison-story__copy-shell {
@@ -6609,7 +6702,7 @@ span.contacts-story__meta-value {
   }
 
   .package-story__layout {
-    padding: 88px 10px 82px;
+    padding: calc(88px + var(--app-safe-top)) 10px calc(82px + var(--app-safe-bottom));
   }
 
   .package-story__copy-shell {
@@ -6648,9 +6741,13 @@ span.contacts-story__meta-value {
     padding: 0;
   }
 
+  .benefits-story__stage {
+    height: var(--app-height);
+  }
+
   .benefits-story__card-contents {
     width: calc(100vw - 12px);
-    height: calc(100vh - 14px);
+    height: calc(var(--app-height) - 14px);
     border-radius: 16px;
   }
 

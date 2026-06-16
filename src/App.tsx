@@ -484,7 +484,7 @@ const attachmentSlides: AttachmentSlide[] = [
 
 const getHairTypeGalleryImages = (folder: string) =>
   Array.from(
-    { length: 9 },
+    { length: 3 },
     (_, index) => `/creatives/block-06-hair-types/${folder}/${index + 1}.webp`,
   ) as readonly string[]
 
@@ -565,12 +565,16 @@ const HAIR_TYPES_STAR_CLIP =
 const HAIR_TYPES_RECT_CLIP =
   'polygon(0% 0%, 12.5% 0%, 25% 0%, 37.5% 0%, 50% 0%, 62.5% 0%, 75% 0%, 87.5% 0%, 100% 0%, 100% 12.5%, 100% 25%, 100% 37.5%, 100% 50%, 100% 62.5%, 100% 75%, 100% 87.5%, 100% 100%, 87.5% 100%, 75% 100%, 62.5% 100%, 50% 100%, 37.5% 100%, 25% 100%, 12.5% 100%)'
 
-const getHairGalleryColumns = (images: readonly string[]) =>
-  [
-    images.slice(0, 3),
-    images.slice(3, 6),
-    images.slice(6, 9),
+const getHairGalleryColumns = (images: readonly string[]) => {
+  // Reuse the same 3 images across all columns: 1-2-3 / 3-2-1 / 1-2-3.
+  const [first, second, third] = images
+
+  return [
+    [first, second, third],
+    [third, second, first],
+    [first, second, third],
   ] as const
+}
 
 const comfortLocalIntroDesktopVideoUrl = '/creatives/block-07-comfort/01-intro/desktop/desktop.mp4'
 const comfortLocalIntroMobileVideoUrl = '/creatives/block-07-comfort/01-intro/mobile/mobile.mp4'
@@ -6526,7 +6530,7 @@ function App() {
     return () => {
       tweens.forEach((tween) => tween.kill())
     }
-  }, [isMobileViewport, hairTypesSlideIndex, activeSurface])
+  }, [isMobileViewport])
 
   useEffect(() => {
     if (
@@ -9354,11 +9358,6 @@ function App() {
         <div className="hair-types-story__media-layer" aria-hidden="true">
           {hairProfileSlides.map((slide, index) => {
             const galleryColumns = getHairGalleryColumns(slide.galleryImages)
-            // Only mount images for the active slide and the immediate next one.
-            // iOS Safari kills the tab if all 5 galleries (90 decoded images) are
-            // kept in memory at once; this keeps the mounted image count small.
-            const shouldRenderImages =
-              index === hairTypesSlideIndex || index === hairTypesSlideIndex + 1
 
             return (
               <div
@@ -9388,21 +9387,19 @@ function App() {
                         }}
                         className="hair-types-story__gallery-track"
                       >
-                        {shouldRenderImages
-                          ? [...column, ...column].map((imageSrc, imageIndex) => (
-                              <div
-                                key={`${slide.id}-image-${columnIndex}-${imageIndex}`}
-                                className="hair-types-story__gallery-image"
-                              >
-                                <img
-                                  src={imageSrc}
-                                  alt={slide.title}
-                                  loading={index === 0 && imageIndex < 3 ? 'eager' : 'lazy'}
-                                  decoding="async"
-                                />
-                              </div>
-                            ))
-                          : null}
+                        {[...column, ...column].map((imageSrc, imageIndex) => (
+                          <div
+                            key={`${slide.id}-image-${columnIndex}-${imageIndex}`}
+                            className="hair-types-story__gallery-image"
+                          >
+                            <img
+                              src={imageSrc}
+                              alt={slide.title}
+                              loading={index === 0 && imageIndex < 3 ? 'eager' : 'lazy'}
+                              decoding="async"
+                            />
+                          </div>
+                        ))}
                       </div>
                     </div>
                   ))}

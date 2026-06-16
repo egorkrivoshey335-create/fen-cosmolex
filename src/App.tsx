@@ -1569,7 +1569,17 @@ function App() {
   }
 
   useEffect(() => {
+    const applyStageHeight = () => {
+      // iOS Safari resolves 100vh/100% against the tall layout viewport, which
+      // pushes bottom-anchored UI under the URL bar. Measure the real visible
+      // height and expose it as a CSS variable for the full-screen containers.
+      const visual = window.visualViewport?.height
+      const height = Math.round(visual ?? window.innerHeight)
+      document.documentElement.style.setProperty('--stage-height', `${height}px`)
+    }
+
     const handleResize = () => {
+      applyStageHeight()
       setIsMobileViewport(window.innerWidth < 768)
 
       if (window.innerWidth >= 768) {
@@ -1577,9 +1587,16 @@ function App() {
       }
     }
 
+    applyStageHeight()
     window.addEventListener('resize', handleResize)
+    window.visualViewport?.addEventListener('resize', applyStageHeight)
+    window.addEventListener('orientationchange', applyStageHeight)
 
-    return () => window.removeEventListener('resize', handleResize)
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      window.visualViewport?.removeEventListener('resize', applyStageHeight)
+      window.removeEventListener('orientationchange', applyStageHeight)
+    }
   }, [])
 
   useEffect(() => {

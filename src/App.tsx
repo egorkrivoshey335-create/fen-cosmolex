@@ -1171,7 +1171,7 @@ const contactsMobileVideoUrl = '/creatives/block-14-contacts/mobile.mp4'
 const contactsBlockContent = {
   navLabel: 'Контакты',
   eyebrow: '01 / Контакты',
-  title: 'Остались вопросы? Свяжитесь с Cosmolex удобным способом',
+  title: 'Остались вопросы? Свяжитесь с нами',
   description:
     'Если хотите уточнить детали по Cosmolex Super Air, доставке, гарантии или подобрать подходящий сценарий использования, команда бренда на связи. Можно перейти на сайт, написать в соцсети или сразу позвонить.',
   website: 'https://cosmolex.ru/',

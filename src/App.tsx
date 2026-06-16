@@ -23,6 +23,8 @@ type HeroStorySlide = {
   description: string
   note: string
   seoTerms: string[]
+  videoDesktop: string
+  videoMobile: string
 }
 
 type PainSlide = {
@@ -31,6 +33,8 @@ type PainSlide = {
   title: string
   description: string
   background: string
+  videoDesktop: string
+  videoMobile: string
 }
 
 type BenefitsSlide = {
@@ -42,6 +46,8 @@ type BenefitsSlide = {
   tags: string[]
   rotation: number
   note?: string
+  videoDesktop: string
+  videoMobile: string
 }
 
 type AttachmentSlide = {
@@ -52,6 +58,8 @@ type AttachmentSlide = {
   description: string
   fit: string
   note?: string
+  videoDesktop: string
+  videoMobile: string
 }
 
 type HairProfileSlide = {
@@ -61,7 +69,7 @@ type HairProfileSlide = {
   description: string
   detail: string
   note?: string
-  galleryOffset: number
+  galleryImages: readonly string[]
 }
 
 type ComfortSlide = {
@@ -239,6 +247,8 @@ const heroStorySlides: HeroStorySlide[] = [
       'Cosmolex Super Air — мощный фен для волос 1600 Вт с ионизацией, холодным обдувом и 5 магнитными насадками. Он быстро сушит, бережно укладывает, помогает уменьшить пушение и сохранить гладкость волос без ощущения пересушенной длины.',
     note: 'Быстро. Бережно. Под контролем.',
     seoTerms: ['фен-стайлер', 'фен стайлер', 'мощный фен 1600 Вт', 'фен для укладки волос'],
+    videoDesktop: '/creatives/block-02-hero-story/desktop/01-intro.mp4',
+    videoMobile: '/creatives/block-02-hero-story/mobile/01-intro.mp4',
   },
   {
     id: 'attachments',
@@ -248,6 +258,8 @@ const heroStorySlides: HeroStorySlide[] = [
       'Пять магнитных насадок помогают сушить волосы, вытягивать пряди, оформлять локоны, создавать прикорневой объём и работать с непослушной длиной. Не нужно держать дома отдельный набор приборов для каждой укладки.',
     note: 'Один прибор вместо нескольких устройств для волос.',
     seoTerms: ['фен с насадками', 'фен для волос', 'профессиональный фен', 'фен для объёма волос'],
+    videoDesktop: '/creatives/block-02-hero-story/desktop/02-attachments.mp4',
+    videoMobile: '/creatives/block-02-hero-story/mobile/02-attachments.mp4',
   },
   {
     id: 'ionization',
@@ -257,6 +269,8 @@ const heroStorySlides: HeroStorySlide[] = [
       'Функция ионизации помогает уменьшить статическое электричество, снизить пушение и сделать ежедневную укладку комфортнее. Особенно заметно на пористых, сухих, окрашенных и непослушных волосах.',
     note: 'Меньше электризации, больше гладкости и естественного блеска.',
     seoTerms: ['фен с ионизацией', 'гладкость волос', 'антистатический эффект', 'меньше пушения'],
+    videoDesktop: '/creatives/block-02-hero-story/desktop/03-ionization.mp4',
+    videoMobile: '/creatives/block-02-hero-story/mobile/03-ionization.mp4',
   },
   {
     id: 'modes',
@@ -266,6 +280,8 @@ const heroStorySlides: HeroStorySlide[] = [
       'Четыре режима работы и холодный обдув помогают выбрать комфортный сценарий: быстрая сушка после мытья, более деликатная работа с длиной или финальная фиксация укладки холодным воздухом.',
     note: 'Подходит для ежедневной бережной укладки и фиксации формы.',
     seoTerms: ['фен с холодным обдувом', '4 режима работы', 'бережная сушка волос', 'фен с регулировкой температуры'],
+    videoDesktop: '/creatives/block-02-hero-story/desktop/04-modes.mp4',
+    videoMobile: '/creatives/block-02-hero-story/mobile/04-modes.mp4',
   },
   {
     id: 'lifestyle',
@@ -275,6 +291,8 @@ const heroStorySlides: HeroStorySlide[] = [
       'Cosmolex Super Air подходит для ежедневной укладки дома, поездок и подарочного сценария. А 4 стильных цвета помогают выбрать не просто фен для волос, а красивый beauty-tech прибор под свой вкус.',
     note: 'Чёрный, розовый, фиолетовый и тиффани — одна модель в четырёх оттенках.',
     seoTerms: ['компактный фен', 'фен для дома', 'фен в подарок женщине', 'фен для путешествий'],
+    videoDesktop: '/creatives/block-02-hero-story/desktop/05-lifestyle.mp4',
+    videoMobile: '/creatives/block-02-hero-story/mobile/05-lifestyle.mp4',
   },
 ]
 
@@ -287,6 +305,8 @@ const painSlides: PainSlide[] = [
       'Обычный фен часто приходится терпеть: он шумит, пересушивает длину, поднимает пушение и превращает быструю укладку в утренний марафон. Особенно если волосы густые, окрашенные, пористые, кудрявые или просто не хотят лежать так, как нужно.',
     background:
       'https://images.pexels.com/photos/2249527/pexels-photo-2249527.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    videoDesktop: '/creatives/block-03-pain/desktop/01-intro.mp4',
+    videoMobile: '/creatives/block-03-pain/mobile/01-intro.mp4',
   },
   {
     id: 'dryness',
@@ -296,6 +316,8 @@ const painSlides: PainSlide[] = [
       'После обычной сушки кончики могут казаться жёсткими, сухими и уставшими. Волосы теряют мягкость, хуже расчёсываются и требуют больше ухода после укладки.',
     background:
       'https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    videoDesktop: '/creatives/block-03-pain/desktop/02-dryness.mp4',
+    videoMobile: '/creatives/block-03-pain/mobile/02-dryness.mp4',
   },
   {
     id: 'frizz',
@@ -305,6 +327,8 @@ const painSlides: PainSlide[] = [
       'Вроде бы высушили волосы аккуратно, но через несколько минут пряди начинают торчать, электризоваться и выбиваться из формы. Особенно это заметно на пористых и окрашенных волосах.',
     background:
       'https://images.pexels.com/photos/1517076/pexels-photo-1517076.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    videoDesktop: '/creatives/block-03-pain/desktop/03-frizz.mp4',
+    videoMobile: '/creatives/block-03-pain/mobile/03-frizz.mp4',
   },
   {
     id: 'devices',
@@ -314,6 +338,8 @@ const painSlides: PainSlide[] = [
       'Один фен — для сушки, брашинг — для объёма, утюжок — для гладкости, отдельный стайлер — для волн. В итоге укладка занимает больше времени, а полка в ванной забита техникой.',
     background:
       'https://images.pexels.com/photos/1037996/pexels-photo-1037996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    videoDesktop: '/creatives/block-03-pain/desktop/04-devices.mp4',
+    videoMobile: '/creatives/block-03-pain/mobile/04-devices.mp4',
   },
   {
     id: 'morning',
@@ -323,6 +349,8 @@ const painSlides: PainSlide[] = [
       'Когда нужно быстро собраться, важна не только мощность фена, но и удобство: подходящий режим, насадка под задачу и возможность быстро зафиксировать результат холодным воздухом.',
     background:
       'https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    videoDesktop: '/creatives/block-03-pain/desktop/05-morning.mp4',
+    videoMobile: '/creatives/block-03-pain/mobile/05-morning.mp4',
   },
 ]
 
@@ -336,6 +364,8 @@ const benefitsSlides: BenefitsSlide[] = [
       'Cosmolex Super Air создан для тех, кто хочет не "как получится", а аккуратную домашнюю укладку без лишних приборов, сложных движений и ощущения пересушенных волос.',
     tags: ['1600 Вт', '5 насадок', 'Без лишних приборов'],
     rotation: -1,
+    videoDesktop: '/creatives/block-04-benefits/desktop/01-intro.mp4',
+    videoMobile: '/creatives/block-04-benefits/mobile/01-intro.mp4',
   },
   {
     id: 'drying',
@@ -346,6 +376,8 @@ const benefitsSlides: BenefitsSlide[] = [
       'Мощность 1600 Вт помогает быстрее убрать влагу после мытья и перейти к укладке. Это особенно удобно для густых, длинных и плотных волос.',
     tags: ['1600 Вт', 'После мытья', 'Для густых волос'],
     rotation: 1,
+    videoDesktop: '/creatives/block-04-benefits/desktop/02-drying.mp4',
+    videoMobile: '/creatives/block-04-benefits/mobile/02-drying.mp4',
   },
   {
     id: 'modes',
@@ -356,6 +388,8 @@ const benefitsSlides: BenefitsSlide[] = [
       'Не нужно сушить тонкие, окрашенные и густые волосы одинаково. Можно выбрать мягкий сценарий для длины или более интенсивный поток, когда нужно быстрее собраться.',
     tags: ['4 режима', '2 скорости', 'Под разный тип волос'],
     rotation: 0,
+    videoDesktop: '/creatives/block-04-benefits/desktop/03-modes.mp4',
+    videoMobile: '/creatives/block-04-benefits/mobile/03-modes.mp4',
   },
   {
     id: 'smooth',
@@ -366,6 +400,8 @@ const benefitsSlides: BenefitsSlide[] = [
       'Фен с ионизацией помогает уменьшить статическое электричество и визуальное пушение. После сушки волосы выглядят более спокойными, мягкими и послушными.',
     tags: ['Ионизация', 'Меньше пушения', 'Больше послушности'],
     rotation: 1,
+    videoDesktop: '/creatives/block-04-benefits/desktop/04-smooth.mp4',
+    videoMobile: '/creatives/block-04-benefits/mobile/04-smooth.mp4',
   },
   {
     id: 'cool-shot',
@@ -378,6 +414,8 @@ const benefitsSlides: BenefitsSlide[] = [
     rotation: -1,
     note:
       'Это не про сложную салонную технику. Это про нормальный фен-стайлер для волос, которым удобно пользоваться дома каждый день.',
+    videoDesktop: '/creatives/block-04-benefits/desktop/05-cool-shot.mp4',
+    videoMobile: '/creatives/block-04-benefits/mobile/05-cool-shot.mp4',
   },
 ]
 
@@ -392,6 +430,8 @@ const attachmentSlides: AttachmentSlide[] = [
     fit: 'Подходит для: повседневной сушки, смены сценариев укладки и быстрого старта без лишних аксессуаров.',
     note:
       'Магнитное крепление позволяет менять насадки быстро и без усилий — особенно удобно утром, когда каждая минута на счету.',
+    videoDesktop: '/creatives/block-05-attachments/desktop/01-overview.mp4',
+    videoMobile: '/creatives/block-05-attachments/mobile/01-overview.mp4',
   },
   {
     id: 'concentrator',
@@ -401,6 +441,8 @@ const attachmentSlides: AttachmentSlide[] = [
     description:
       'Помогает вытягивать пряди на брашинг, аккуратно прорабатывать кончики и делать волосы визуально более гладкими.',
     fit: 'Подходит для: гладкой укладки, каре, длинных волос, укладки с расчёской.',
+    videoDesktop: '/creatives/block-05-attachments/desktop/02-concentrator.mp4',
+    videoMobile: '/creatives/block-05-attachments/mobile/02-concentrator.mp4',
   },
   {
     id: 'diffuser',
@@ -410,6 +452,8 @@ const attachmentSlides: AttachmentSlide[] = [
     description:
       'Распределяет воздух мягче, помогает сушить завиток аккуратнее и не разбивать форму локонов.',
     fit: 'Подходит для: кудрей, волн, естественного объёма, бережной сушки.',
+    videoDesktop: '/creatives/block-05-attachments/desktop/03-diffuser.mp4',
+    videoMobile: '/creatives/block-05-attachments/mobile/03-diffuser.mp4',
   },
   {
     id: 'gentle-dry',
@@ -419,6 +463,8 @@ const attachmentSlides: AttachmentSlide[] = [
     description:
       'Хороший вариант, когда волосы тонкие, сухие, окрашенные или чувствительные к горячему воздуху.',
     fit: 'Подходит для: тонких, окрашенных, сухих и ослабленных волос.',
+    videoDesktop: '/creatives/block-05-attachments/desktop/04-gentle-dry.mp4',
+    videoMobile: '/creatives/block-05-attachments/mobile/04-gentle-dry.mp4',
   },
   {
     id: 'smooth',
@@ -428,6 +474,8 @@ const attachmentSlides: AttachmentSlide[] = [
     description:
       'Делает волосы более аккуратными после сушки и помогает быстрее собрать спокойную, собранную форму.',
     fit: 'Подходит для: пористых, пушащихся и непослушных волос.',
+    videoDesktop: '/creatives/block-05-attachments/desktop/05-smooth.mp4',
+    videoMobile: '/creatives/block-05-attachments/mobile/05-smooth.mp4',
   },
   {
     id: 'volume',
@@ -439,8 +487,16 @@ const attachmentSlides: AttachmentSlide[] = [
     fit: 'Подходит для: прикорневого объёма, лёгкой текстуры и укладки на каждый день.',
     note:
       'Магнитное крепление позволяет менять насадки быстро и без усилий — особенно удобно утром, когда каждая минута на счету.',
+    videoDesktop: '/creatives/block-05-attachments/desktop/06-volume.mp4',
+    videoMobile: '/creatives/block-05-attachments/mobile/06-volume.mp4',
   },
 ]
+
+const getHairTypeGalleryImages = (folder: string) =>
+  Array.from(
+    { length: 9 },
+    (_, index) => `/creatives/block-06-hair-types/${folder}/${index + 1}.webp`,
+  ) as readonly string[]
 
 const hairProfileSlides: HairProfileSlide[] = [
   {
@@ -451,7 +507,7 @@ const hairProfileSlides: HairProfileSlide[] = [
       'Волосы у всех разные: кому-то нужна быстрая сушка, кому-то — гладкость, кому-то — объём, а кому-то важно не пересушить окрашенную длину. Cosmolex Super Air можно настроить под свой сценарий.',
     detail:
       'Это хороший фен для волос на каждый день: не только для "особого случая", а для обычной жизни, когда хочется выглядеть ухоженно без лишней возни.',
-    galleryOffset: 0,
+    galleryImages: getHairTypeGalleryImages('01-intro'),
   },
   {
     id: 'thick',
@@ -461,7 +517,7 @@ const hairProfileSlides: HairProfileSlide[] = [
       'Мощность 1600 Вт и направленный поток помогают быстрее справляться с плотной длиной. Не нужно стоять у зеркала бесконечно долго после каждого мытья головы.',
     detail:
       'Подходит, когда хочется сократить время сушки и быстрее перейти к укладке без ощущения бесконечного процесса.',
-    galleryOffset: 3,
+    galleryImages: getHairTypeGalleryImages('02-thick'),
   },
   {
     id: 'thin-colored',
@@ -471,7 +527,7 @@ const hairProfileSlides: HairProfileSlide[] = [
       'Можно выбрать более деликатный режим и сушить волосы мягче. Это важно, если длина быстро теряет гладкость, кончики становятся сухими, а волосы чувствительны к высокой температуре.',
     detail:
       'Комфортный вариант для более бережной сушки, когда важно сохранить ощущение мягкости и не перегреть длину.',
-    galleryOffset: 6,
+    galleryImages: getHairTypeGalleryImages('03-thin-colored'),
   },
   {
     id: 'curly',
@@ -481,7 +537,7 @@ const hairProfileSlides: HairProfileSlide[] = [
       'Диффузор помогает сушить завиток аккуратнее, сохранить форму локонов и уменьшить пушение. Хороший вариант для волнистых, кудрявых и пористых волос.',
     detail:
       'Подходит для сценариев, где важно не разбить завиток и получить более собранную, спокойную текстуру.',
-    galleryOffset: 9,
+    galleryImages: getHairTypeGalleryImages('04-curly'),
   },
   {
     id: 'daily',
@@ -493,7 +549,7 @@ const hairProfileSlides: HairProfileSlide[] = [
       'Это хороший фен для волос на каждый день: не только для "особого случая", а для обычной жизни, когда хочется выглядеть ухоженно без лишней возни.',
     note:
       'Один прибор под разные сценарии: быстрая сушка, объём, гладкость, бережный режим и аккуратная укладка без лишней техники.',
-    galleryOffset: 12,
+    galleryImages: getHairTypeGalleryImages('05-daily'),
   },
 ]
 
@@ -537,17 +593,25 @@ const hairGalleryImages = [
   'https://images.pexels.com/photos/3825572/pexels-photo-3825572.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
 ] as const
 
-const getHairGalleryColumns = (offset: number) =>
+const getHairGalleryColumns = (images: readonly string[]) =>
   [
-    [0, 1, 2].map((index) => hairGalleryImages[(offset + index) % hairGalleryImages.length]),
-    [3, 4, 5].map((index) => hairGalleryImages[(offset + index) % hairGalleryImages.length]),
-    [6, 7, 8].map((index) => hairGalleryImages[(offset + index) % hairGalleryImages.length]),
+    images.slice(0, 3),
+    images.slice(3, 6),
+    images.slice(6, 9),
   ] as const
 
 const comfortIntroDesktopVideoUrl = 'https://www.yudiz.com/codepen/studio-r/bg-video.mp4'
 const comfortIntroMobileVideoUrl = heroStoryMobileVideoUrl
 const comfortFeatureDesktopVideoUrl = 'https://www.yudiz.com/codepen/studio-r/bg-video.mp4'
 const comfortFeatureMobileVideoUrl = heroStoryMobileVideoUrl
+
+const comfortLocalIntroDesktopVideoUrl = '/creatives/block-07-comfort/01-intro/desktop/desktop.mp4'
+const comfortLocalIntroMobileVideoUrl = '/creatives/block-07-comfort/01-intro/mobile/mobile.mp4'
+const getComfortLocalBackgroundDesktop = (folder: string) =>
+  `/creatives/block-07-comfort/${folder}/background-desktop.webp`
+const getComfortLocalBackgroundMobile = (folder: string) =>
+  `/creatives/block-07-comfort/${folder}/background-mobile.webp`
+const getComfortLocalVideoUrl = (folder: string) => `/creatives/block-07-comfort/${folder}/video.mp4`
 
 const comfortSlides: ComfortSlide[] = [
   {
@@ -560,8 +624,8 @@ const comfortSlides: ComfortSlide[] = [
     detail:
       'Фен удобно держать у зеркала, менять насадки по ходу укладки и выбирать режим под ситуацию. Кабель 170 см даёт больше свободы движения, а компактный корпус проще хранить дома и брать с собой в поездку.',
     intro: true,
-    videoDesktop: comfortIntroDesktopVideoUrl,
-    videoMobile: comfortIntroMobileVideoUrl,
+    videoDesktop: comfortLocalIntroDesktopVideoUrl,
+    videoMobile: comfortLocalIntroMobileVideoUrl,
   },
   {
     id: 'magnetic',
@@ -571,10 +635,10 @@ const comfortSlides: ComfortSlide[] = [
     description:
       'Переключаться между сценариями укладки можно быстро и без лишних усилий. Насадка встаёт на место чётко, поэтому не приходится тратить время на лишние манипуляции перед зеркалом.',
     detail: 'Удобно, когда утром хочется быстрее перейти от сушки к форме и не выпадать из ритма.',
-    backgroundDesktop: 'https://www.yudiz.com/codepen/studio-r/bg-living.jpg',
-    backgroundMobile: hairGalleryImages[1],
-    videoDesktop: comfortFeatureDesktopVideoUrl,
-    videoMobile: comfortFeatureMobileVideoUrl,
+    backgroundDesktop: getComfortLocalBackgroundDesktop('02-magnetic'),
+    backgroundMobile: getComfortLocalBackgroundMobile('02-magnetic'),
+    videoDesktop: getComfortLocalVideoUrl('02-magnetic'),
+    videoMobile: getComfortLocalVideoUrl('02-magnetic'),
   },
   {
     id: 'cable',
@@ -584,10 +648,10 @@ const comfortSlides: ComfortSlide[] = [
     description:
       'Есть больше свободы движения, когда нужно повернуть фен, сменить руку или подойти ближе к зеркалу. Это особенно заметно в небольших ванных и спальнях, где каждые лишние сантиметры важны.',
     detail: 'Меньше ощущения, что прибор тянет назад или заставляет подстраиваться под розетку.',
-    backgroundDesktop: 'https://www.yudiz.com/codepen/studio-r/bg-kitchen.jpg',
-    backgroundMobile: hairGalleryImages[2],
-    videoDesktop: heroStoryVideoUrl,
-    videoMobile: heroStoryMobileVideoUrl,
+    backgroundDesktop: getComfortLocalBackgroundDesktop('03-cable'),
+    backgroundMobile: getComfortLocalBackgroundMobile('03-cable'),
+    videoDesktop: getComfortLocalVideoUrl('03-cable'),
+    videoMobile: getComfortLocalVideoUrl('03-cable'),
   },
   {
     id: 'compact',
@@ -597,10 +661,10 @@ const comfortSlides: ComfortSlide[] = [
     description:
       'Фен проще убрать в шкаф, ящик или на полку, не выделяя под него отдельное большое место. Он не перегружает пространство и легче вписывается в повседневный быт.',
     detail: 'Удобное решение, когда дома не хочется держать громоздкую технику на виду.',
-    backgroundDesktop: 'https://www.yudiz.com/codepen/studio-r/bg-badroom.jpg',
-    backgroundMobile: hairGalleryImages[3],
-    videoDesktop: comfortFeatureDesktopVideoUrl,
-    videoMobile: comfortFeatureMobileVideoUrl,
+    backgroundDesktop: getComfortLocalBackgroundDesktop('04-compact'),
+    backgroundMobile: getComfortLocalBackgroundMobile('04-compact'),
+    videoDesktop: getComfortLocalVideoUrl('04-compact'),
+    videoMobile: getComfortLocalVideoUrl('04-compact'),
   },
   {
     id: 'travel',
@@ -610,10 +674,10 @@ const comfortSlides: ComfortSlide[] = [
     description:
       'Компактный корпус и понятный формат делают фен удобным спутником в дороге. Его проще взять с собой, чем несколько отдельных приборов под разные укладки.',
     detail: 'Когда хочется выглядеть аккуратно не только дома, но и в поездке, без лишнего объёма в багаже.',
-    backgroundDesktop: 'https://www.yudiz.com/codepen/studio-r/bg-office.jpg',
-    backgroundMobile: hairGalleryImages[4],
-    videoDesktop: heroStoryVideoUrl,
-    videoMobile: heroStoryMobileVideoUrl,
+    backgroundDesktop: getComfortLocalBackgroundDesktop('05-travel'),
+    backgroundMobile: getComfortLocalBackgroundMobile('05-travel'),
+    videoDesktop: getComfortLocalVideoUrl('05-travel'),
+    videoMobile: getComfortLocalVideoUrl('05-travel'),
   },
   {
     id: 'controls',
@@ -623,10 +687,10 @@ const comfortSlides: ComfortSlide[] = [
     description:
       'Режимы переключаются интуитивно, поэтому не нужно каждый раз заново вспоминать, что и где включается. Пользоваться феном проще даже в спешке.',
     detail: 'Хорошо работает в повседневном сценарии, когда важно быстро начать сушку и укладку без лишних пауз.',
-    backgroundDesktop: hairGalleryImages[5],
-    backgroundMobile: hairGalleryImages[6],
-    videoDesktop: comfortFeatureDesktopVideoUrl,
-    videoMobile: comfortFeatureMobileVideoUrl,
+    backgroundDesktop: getComfortLocalBackgroundDesktop('06-controls'),
+    backgroundMobile: getComfortLocalBackgroundMobile('06-controls'),
+    videoDesktop: getComfortLocalVideoUrl('06-controls'),
+    videoMobile: getComfortLocalVideoUrl('06-controls'),
   },
   {
     id: 'design',
@@ -636,10 +700,10 @@ const comfortSlides: ComfortSlide[] = [
     description:
       'Прибор выглядит аккуратно и современно, поэтому его приятно держать на виду и брать в руки каждый день. Визуально он воспринимается как beauty-tech, а не как случайный бытовой компромисс.',
     detail: 'Это тот случай, когда функциональность не спорит с эстетикой в повседневном использовании.',
-    backgroundDesktop: hairGalleryImages[7],
-    backgroundMobile: hairGalleryImages[8],
-    videoDesktop: heroStoryVideoUrl,
-    videoMobile: heroStoryMobileVideoUrl,
+    backgroundDesktop: getComfortLocalBackgroundDesktop('07-design'),
+    backgroundMobile: getComfortLocalBackgroundMobile('07-design'),
+    videoDesktop: getComfortLocalVideoUrl('07-design'),
+    videoMobile: getComfortLocalVideoUrl('07-design'),
   },
   {
     id: 'quiet',
@@ -649,10 +713,10 @@ const comfortSlides: ComfortSlide[] = [
     description:
       'Сушить волосы комфортнее, когда устройство не давит шумом. Это делает повседневную укладку спокойнее и приятнее утром, вечером и в доме, где рядом есть другие люди.',
     detail: 'Меньше акустического раздражения в тех моментах, когда феном пользуются часто.',
-    backgroundDesktop: hairGalleryImages[9],
-    backgroundMobile: hairGalleryImages[10],
-    videoDesktop: comfortFeatureDesktopVideoUrl,
-    videoMobile: comfortFeatureMobileVideoUrl,
+    backgroundDesktop: getComfortLocalBackgroundDesktop('08-quiet'),
+    backgroundMobile: getComfortLocalBackgroundMobile('08-quiet'),
+    videoDesktop: getComfortLocalVideoUrl('08-quiet'),
+    videoMobile: getComfortLocalVideoUrl('08-quiet'),
   },
   {
     id: 'velvet',
@@ -662,10 +726,10 @@ const comfortSlides: ComfortSlide[] = [
     description:
       'Корпус воспринимается более мягким и тактильно приятным, поэтому фен комфортнее держать во время всей укладки. Это как раз та мелочь, которая со временем начинает цениться сильнее всего.',
     detail: 'Когда прибор часто находится в руках, фактура корпуса влияет на общее ощущение сильнее, чем кажется по описанию.',
-    backgroundDesktop: hairGalleryImages[10],
-    backgroundMobile: hairGalleryImages[11],
-    videoDesktop: heroStoryVideoUrl,
-    videoMobile: heroStoryMobileVideoUrl,
+    backgroundDesktop: getComfortLocalBackgroundDesktop('09-velvet'),
+    backgroundMobile: getComfortLocalBackgroundMobile('09-velvet'),
+    videoDesktop: getComfortLocalVideoUrl('09-velvet'),
+    videoMobile: getComfortLocalVideoUrl('09-velvet'),
   },
   {
     id: 'memory',
@@ -675,10 +739,10 @@ const comfortSlides: ComfortSlide[] = [
     description:
       'Фен запоминает привычные настройки, чтобы не приходилось каждый раз вручную возвращаться к нужной комбинации температуры и скорости. Это делает использование более предсказуемым.',
     detail: 'Полезно, когда у вас уже есть свой привычный сценарий укладки и не хочется заново настраивать прибор.',
-    backgroundDesktop: hairGalleryImages[11],
-    backgroundMobile: hairGalleryImages[12],
-    videoDesktop: comfortFeatureDesktopVideoUrl,
-    videoMobile: comfortFeatureMobileVideoUrl,
+    backgroundDesktop: getComfortLocalBackgroundDesktop('10-memory'),
+    backgroundMobile: getComfortLocalBackgroundMobile('10-memory'),
+    videoDesktop: getComfortLocalVideoUrl('10-memory'),
+    videoMobile: getComfortLocalVideoUrl('10-memory'),
   },
   {
     id: 'self-cleaning',
@@ -688,10 +752,10 @@ const comfortSlides: ComfortSlide[] = [
     description:
       'Уход за прибором становится проще, а значит им комфортнее пользоваться в долгую. Это полезная повседневная деталь, о которой обычно вспоминают уже после покупки.',
     detail: 'Меньше бытовой возни вокруг обслуживания техники и больше ощущения аккуратного ухода.',
-    backgroundDesktop: hairGalleryImages[12],
-    backgroundMobile: hairGalleryImages[13],
-    videoDesktop: heroStoryVideoUrl,
-    videoMobile: heroStoryMobileVideoUrl,
+    backgroundDesktop: getComfortLocalBackgroundDesktop('11-self-cleaning'),
+    backgroundMobile: getComfortLocalBackgroundMobile('11-self-cleaning'),
+    videoDesktop: getComfortLocalVideoUrl('11-self-cleaning'),
+    videoMobile: getComfortLocalVideoUrl('11-self-cleaning'),
   },
   {
     id: 'storage-bag',
@@ -701,10 +765,10 @@ const comfortSlides: ComfortSlide[] = [
     description:
       'Фен и аксессуары проще собрать в одном месте, не разбрасывая насадки по ящикам и полкам. Это удобно и дома, и в дороге, когда хочется быстро всё убрать после укладки.',
     detail: 'Хранение становится аккуратнее, а сборы в поездку занимают меньше лишних действий.',
-    backgroundDesktop: hairGalleryImages[13],
-    backgroundMobile: hairGalleryImages[14],
-    videoDesktop: comfortFeatureDesktopVideoUrl,
-    videoMobile: comfortFeatureMobileVideoUrl,
+    backgroundDesktop: getComfortLocalBackgroundDesktop('12-storage-bag'),
+    backgroundMobile: getComfortLocalBackgroundMobile('12-storage-bag'),
+    videoDesktop: getComfortLocalVideoUrl('12-storage-bag'),
+    videoMobile: getComfortLocalVideoUrl('12-storage-bag'),
   },
 ]
 
@@ -743,12 +807,14 @@ const comparisonPairs: ComparisonPair[] = [
   },
 ]
 
-const comparisonIntroDesktopImage = hairGalleryImages[0]
-const comparisonIntroMobileImage = hairGalleryImages[1]
-const comparisonOrdinaryDesktopVideo = benefitsDesktopVideoUrl
-const comparisonOrdinaryMobileVideo = benefitsMobileVideoUrl
-const comparisonCosmolexDesktopVideo = heroStoryVideoUrl
-const comparisonCosmolexMobileVideo = heroStoryMobileVideoUrl
+const comparisonIntroDesktopImage =
+  '/creatives/block-08-comparison/01-intro/background-desktop.webp'
+const comparisonIntroMobileImage =
+  '/creatives/block-08-comparison/01-intro/background-mobile.webp'
+const comparisonOrdinaryDesktopVideo = '/creatives/block-08-comparison/02-ordinary/desktop.mp4'
+const comparisonOrdinaryMobileVideo = '/creatives/block-08-comparison/02-ordinary/mobile.mp4'
+const comparisonCosmolexDesktopVideo = '/creatives/block-08-comparison/03-cosmolex/desktop.mp4'
+const comparisonCosmolexMobileVideo = '/creatives/block-08-comparison/03-cosmolex/mobile.mp4'
 
 const comparisonSlides: ComparisonSlide[] = [
   {
@@ -790,8 +856,8 @@ const comparisonSlides: ComparisonSlide[] = [
   },
 ]
 
-const packageDesktopImage = hairGalleryImages[10]
-const packageMobileImage = hairGalleryImages[11]
+const packageDesktopVideo = '/creatives/block-09-package/desktop.mp4'
+const packageMobileVideo = '/creatives/block-09-package/mobile.mp4'
 
 const packageBlockContent = {
   navLabel: 'Комплектация',
@@ -1210,6 +1276,7 @@ function App() {
   const comparisonRowRefs = useRef<Array<Array<HTMLDivElement | null>>>([])
   const packageBgRef = useRef<HTMLDivElement | null>(null)
   const packageMediaRef = useRef<HTMLDivElement | null>(null)
+  const packageVideoRef = useRef<HTMLVideoElement | null>(null)
   const packageCopyRef = useRef<HTMLElement | null>(null)
   const packageTimelineRef = useRef<HTMLDivElement | null>(null)
   const packageRowRefs = useRef<Array<HTMLDivElement | null>>([])
@@ -6829,6 +6896,20 @@ function App() {
   }, [activeSurface])
 
   useEffect(() => {
+    const video = packageVideoRef.current
+
+    if (!video) {
+      return
+    }
+
+    if (activeSurface === 'package') {
+      video.play().catch(() => {})
+    } else {
+      video.pause()
+    }
+  }, [activeSurface, isMobileViewport])
+
+  useEffect(() => {
     if (activeSurface !== 'benefits') {
       return
     }
@@ -8967,7 +9048,7 @@ function App() {
                 preload="metadata"
               >
                 <source
-                  src={isMobileViewport ? heroStoryMobileVideoUrl : heroStoryVideoUrl}
+                    src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
                   type="video/mp4"
                 />
               </video>
@@ -9052,7 +9133,7 @@ function App() {
                     preload="metadata"
                   >
                     <source
-                      src={isMobileViewport ? benefitsMobileVideoUrl : benefitsDesktopVideoUrl}
+                      src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
                       type="video/mp4"
                     />
                   </video>
@@ -9120,7 +9201,7 @@ function App() {
                       preload="metadata"
                     >
                       <source
-                        src={isMobileViewport ? benefitsMobileVideoUrl : benefitsDesktopVideoUrl}
+                        src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
                         type="video/mp4"
                       />
                     </video>
@@ -9194,7 +9275,7 @@ function App() {
                 preload="metadata"
               >
                 <source
-                  src={isMobileViewport ? heroStoryMobileVideoUrl : heroStoryVideoUrl}
+                  src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
                   type="video/mp4"
                 />
               </video>
@@ -9270,7 +9351,7 @@ function App() {
 
         <div className="hair-types-story__media-layer" aria-hidden="true">
           {hairProfileSlides.map((slide, index) => {
-            const galleryColumns = getHairGalleryColumns(slide.galleryOffset)
+            const galleryColumns = getHairGalleryColumns(slide.galleryImages)
 
             return (
               <div
@@ -9687,12 +9768,20 @@ function App() {
             ref={packageMediaRef}
             className="package-story__media-slide"
           >
-            <div
-              className="package-story__image"
-              style={{
-                backgroundImage: `url(${isMobileViewport ? packageMobileImage : packageDesktopImage})`,
-              }}
-            />
+            <video
+              key={`package-${isMobileViewport ? 'mobile' : 'desktop'}`}
+              ref={packageVideoRef}
+              className="package-story__video"
+              muted
+              loop
+              playsInline
+              preload="metadata"
+            >
+              <source
+                src={isMobileViewport ? packageMobileVideo : packageDesktopVideo}
+                type="video/mp4"
+              />
+            </video>
           </div>
         </div>
 

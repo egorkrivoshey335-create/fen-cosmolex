@@ -3045,12 +3045,14 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   will-change: transform, opacity, filter;
 }
 
-.package-story__image {
+.package-story__video {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background: #080808;
 }
 
 .package-story__backdrop {

@@ -5343,7 +5343,7 @@ span.contacts-story__meta-value {
     width: 100%;
     max-width: 100%;
     align-self: end;
-    padding-bottom: 56px;
+    padding-bottom: 0;
   }
 
   .hero-story .arch__left h1.header,
@@ -6442,7 +6442,7 @@ span.contacts-story__meta-value {
   }
 
   .hero-story .arch__left .content {
-    padding-bottom: 52px;
+    padding-bottom: 0;
   }
 
   .hero-story__footer > p {

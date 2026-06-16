@@ -228,16 +228,6 @@ const headerSlides: HeaderSlide[] = [
 const logoUrl =
   'https://static.insales-cdn.com/files/1/5753/124204665/original/%D0%9D%D0%BE%D0%B2%D1%8B%D0%B9_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82__4___1_.webp'
 
-const heroStoryVideoUrl = headerDesktopVideoUrl
-
-const heroStoryMobileVideoUrl = headerMobileVideoUrl
-
-const benefitsDesktopVideoUrl =
-  'https://static.insales-cdn.com/files/1/5169/124187697/original/14571370_1920_1080_60fps.mp4'
-
-const benefitsMobileVideoUrl =
-  'https://static.insales-cdn.com/files/1/1865/124331849/original/0_Field_Wheat_720x1280.mp4'
-
 const heroStorySlides: HeroStorySlide[] = [
   {
     id: 'intro',
@@ -575,35 +565,12 @@ const HAIR_TYPES_STAR_CLIP =
 const HAIR_TYPES_RECT_CLIP =
   'polygon(0% 0%, 12.5% 0%, 25% 0%, 37.5% 0%, 50% 0%, 62.5% 0%, 75% 0%, 87.5% 0%, 100% 0%, 100% 12.5%, 100% 25%, 100% 37.5%, 100% 50%, 100% 62.5%, 100% 75%, 100% 87.5%, 100% 100%, 87.5% 100%, 75% 100%, 62.5% 100%, 50% 100%, 37.5% 100%, 25% 100%, 12.5% 100%)'
 
-const hairGalleryImages = [
-  'https://images.pexels.com/photos/10324713/pexels-photo-10324713.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/10533885/pexels-photo-10533885.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/10253213/pexels-photo-10253213.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/10050979/pexels-photo-10050979.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/1128660/pexels-photo-1128660.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/9699293/pexels-photo-9699293.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/6405575/pexels-photo-6405575.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/10162526/pexels-photo-10162526.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/4394807/pexels-photo-4394807.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/4620843/pexels-photo-4620843.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/6621467/pexels-photo-6621467.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/7755653/pexels-photo-7755653.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-  'https://images.pexels.com/photos/3825572/pexels-photo-3825572.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-] as const
-
 const getHairGalleryColumns = (images: readonly string[]) =>
   [
     images.slice(0, 3),
     images.slice(3, 6),
     images.slice(6, 9),
   ] as const
-
-const comfortIntroDesktopVideoUrl = 'https://www.yudiz.com/codepen/studio-r/bg-video.mp4'
-const comfortIntroMobileVideoUrl = heroStoryMobileVideoUrl
-const comfortFeatureDesktopVideoUrl = 'https://www.yudiz.com/codepen/studio-r/bg-video.mp4'
-const comfortFeatureMobileVideoUrl = heroStoryMobileVideoUrl
 
 const comfortLocalIntroDesktopVideoUrl = '/creatives/block-07-comfort/01-intro/desktop/desktop.mp4'
 const comfortLocalIntroMobileVideoUrl = '/creatives/block-07-comfort/01-intro/mobile/mobile.mp4'
@@ -931,8 +898,16 @@ const specificationMobilePages = [
   specificationItems.slice(16, 20),
 ]
 
-const specsDesktopVideoUrl = benefitsDesktopVideoUrl
-const specsMobileVideoUrl = benefitsMobileVideoUrl
+const specsDesktopVideoUrl = '/creatives/block-10-specs/desktop.mp4'
+const specsMobileVideoUrl = '/creatives/block-10-specs/mobile.mp4'
+
+const giftLocalIntroDesktopVideoUrl = '/creatives/block-11-gift/01-intro/desktop.mp4'
+const giftLocalIntroMobileVideoUrl = '/creatives/block-11-gift/01-intro/mobile.mp4'
+const getGiftLocalBackgroundDesktop = (folder: string) =>
+  `/creatives/block-11-gift/${folder}/background-desktop.webp`
+const getGiftLocalBackgroundMobile = (folder: string) =>
+  `/creatives/block-11-gift/${folder}/background-mobile.webp`
+const getGiftLocalVideoUrl = (folder: string) => `/creatives/block-11-gift/${folder}/video.mp4`
 
 const giftSlides: GiftSlide[] = [
   {
@@ -945,8 +920,8 @@ const giftSlides: GiftSlide[] = [
     detail:
       'Cosmolex Super Air можно купить себе или подарить девушке, жене, маме, сестре, подруге, коллеге. Он подходит на день рождения, 8 Марта, 14 февраля, Новый год, годовщину или просто как приятный знак внимания без повода.',
     intro: true,
-    videoDesktop: comfortIntroDesktopVideoUrl,
-    videoMobile: comfortIntroMobileVideoUrl,
+    videoDesktop: giftLocalIntroDesktopVideoUrl,
+    videoMobile: giftLocalIntroMobileVideoUrl,
   },
   {
     id: 'girlfriend-wife',
@@ -957,10 +932,10 @@ const giftSlides: GiftSlide[] = [
       'Красивый фен-стайлер выглядит как продуманный подарок, но остаётся не декоративной покупкой, а техникой на каждый день.',
     detail:
       'Такой подарок не требует угадывать размер, любимый аромат или стиль одежды: им просто удобно пользоваться дома постоянно.',
-    backgroundDesktop: hairGalleryImages[0],
-    backgroundMobile: hairGalleryImages[1],
-    videoDesktop: heroStoryVideoUrl,
-    videoMobile: heroStoryMobileVideoUrl,
+    backgroundDesktop: getGiftLocalBackgroundDesktop('02-girlfriend-wife'),
+    backgroundMobile: getGiftLocalBackgroundMobile('02-girlfriend-wife'),
+    videoDesktop: getGiftLocalVideoUrl('02-girlfriend-wife'),
+    videoMobile: getGiftLocalVideoUrl('02-girlfriend-wife'),
   },
   {
     id: 'mother-sister',
@@ -971,10 +946,10 @@ const giftSlides: GiftSlide[] = [
       'Это понятный и практичный вариант, когда хочется выбрать что-то современное, полезное и действительно нужное в обычной жизни.',
     detail:
       'Cosmolex Super Air помогает быстрее сушить волосы, делать аккуратную укладку и не держать под рукой сразу несколько приборов.',
-    backgroundDesktop: hairGalleryImages[2],
-    backgroundMobile: hairGalleryImages[3],
-    videoDesktop: comfortFeatureDesktopVideoUrl,
-    videoMobile: comfortFeatureMobileVideoUrl,
+    backgroundDesktop: getGiftLocalBackgroundDesktop('03-mother-sister'),
+    backgroundMobile: getGiftLocalBackgroundMobile('03-mother-sister'),
+    videoDesktop: getGiftLocalVideoUrl('03-mother-sister'),
+    videoMobile: getGiftLocalVideoUrl('03-mother-sister'),
   },
   {
     id: 'march-8',
@@ -985,10 +960,10 @@ const giftSlides: GiftSlide[] = [
       'Праздничный beauty-tech сценарий, который выглядит уместно и ощущается полезным не только в день вручения, но и после него.',
     detail:
       'Фен-стайлер с насадками даёт ощущение красивого, современного и при этом практичного подарка без случайности.',
-    backgroundDesktop: hairGalleryImages[4],
-    backgroundMobile: hairGalleryImages[5],
-    videoDesktop: benefitsDesktopVideoUrl,
-    videoMobile: benefitsMobileVideoUrl,
+    backgroundDesktop: getGiftLocalBackgroundDesktop('04-march-8'),
+    backgroundMobile: getGiftLocalBackgroundMobile('04-march-8'),
+    videoDesktop: getGiftLocalVideoUrl('04-march-8'),
+    videoMobile: getGiftLocalVideoUrl('04-march-8'),
   },
   {
     id: 'feb-14',
@@ -999,10 +974,10 @@ const giftSlides: GiftSlide[] = [
       'Когда хочется выбрать знак внимания с ощущением заботы, а не просто ещё один формальный сувенир.',
     detail:
       'Cosmolex Super Air вписывается в сценарий подарка, который каждый день напоминает о внимании и делает утренний ритуал приятнее.',
-    backgroundDesktop: hairGalleryImages[6],
-    backgroundMobile: hairGalleryImages[7],
-    videoDesktop: heroStoryVideoUrl,
-    videoMobile: heroStoryMobileVideoUrl,
+    backgroundDesktop: getGiftLocalBackgroundDesktop('05-feb-14'),
+    backgroundMobile: getGiftLocalBackgroundMobile('05-feb-14'),
+    videoDesktop: getGiftLocalVideoUrl('05-feb-14'),
+    videoMobile: getGiftLocalVideoUrl('05-feb-14'),
   },
   {
     id: 'new-year',
@@ -1013,10 +988,10 @@ const giftSlides: GiftSlide[] = [
       'Подходит для большого зимнего подарка, который выглядит солидно, красиво упаковывается и не теряет смысл после праздников.',
     detail:
       'Это удобный вариант, если хочется подарить технику, которая сразу пригодится дома и не окажется "слишком сложной" в использовании.',
-    backgroundDesktop: hairGalleryImages[8],
-    backgroundMobile: hairGalleryImages[9],
-    videoDesktop: comfortFeatureDesktopVideoUrl,
-    videoMobile: comfortFeatureMobileVideoUrl,
+    backgroundDesktop: getGiftLocalBackgroundDesktop('06-new-year'),
+    backgroundMobile: getGiftLocalBackgroundMobile('06-new-year'),
+    videoDesktop: getGiftLocalVideoUrl('06-new-year'),
+    videoMobile: getGiftLocalVideoUrl('06-new-year'),
   },
   {
     id: 'birthday',
@@ -1029,10 +1004,10 @@ const giftSlides: GiftSlide[] = [
       'Cosmolex Super Air подходит как подарок без повода и как вещь, которой будут пользоваться регулярно, а не вспоминать про неё раз в сезон.',
     note:
       'Это не просто техника. Это маленький ежедневный ритуал, который помогает быстрее собраться и почувствовать себя ухоженно.',
-    backgroundDesktop: hairGalleryImages[10],
-    backgroundMobile: hairGalleryImages[11],
-    videoDesktop: benefitsDesktopVideoUrl,
-    videoMobile: benefitsMobileVideoUrl,
+    backgroundDesktop: getGiftLocalBackgroundDesktop('07-birthday'),
+    backgroundMobile: getGiftLocalBackgroundMobile('07-birthday'),
+    videoDesktop: getGiftLocalVideoUrl('07-birthday'),
+    videoMobile: getGiftLocalVideoUrl('07-birthday'),
   },
 ]
 
@@ -1110,8 +1085,8 @@ const faqPagesMobile = [
   faqItems.slice(8, 9),
 ]
 
-const faqDesktopVideoUrl = specsDesktopVideoUrl
-const faqMobileVideoUrl = specsMobileVideoUrl
+const faqDesktopVideoUrl = '/creatives/block-12-faq/desktop.mp4'
+const faqMobileVideoUrl = '/creatives/block-12-faq/mobile.mp4'
 
 const finalCtaContent = {
   navLabel: 'Заказать',
@@ -1124,6 +1099,13 @@ const finalCtaContent = {
   promoCode: 'COSMOLEX10%',
 } as const
 
+const getFinalCtaLocalBackgroundDesktop = (folder: string) =>
+  `/creatives/block-13-final-cta/${folder}/background-desktop.webp`
+const getFinalCtaLocalBackgroundMobile = (folder: string) =>
+  `/creatives/block-13-final-cta/${folder}/background-mobile.webp`
+const getFinalCtaLocalVideoUrl = (folder: string) =>
+  `/creatives/block-13-final-cta/${folder}/video.mp4`
+
 const finalCtaCards: FinalCtaCard[] = [
   {
     id: headerSlides[0].id,
@@ -1133,10 +1115,10 @@ const finalCtaCards: FinalCtaCard[] = [
     description: headerSlides[0].description,
     buyUrl: headerSlides[0].buyUrl,
     accent: headerSlides[0].accent,
-    backgroundDesktop: hairGalleryImages[0],
-    backgroundMobile: hairGalleryImages[1],
-    videoDesktop: heroStoryVideoUrl,
-    videoMobile: heroStoryMobileVideoUrl,
+    backgroundDesktop: getFinalCtaLocalBackgroundDesktop('01-black'),
+    backgroundMobile: getFinalCtaLocalBackgroundMobile('01-black'),
+    videoDesktop: getFinalCtaLocalVideoUrl('01-black'),
+    videoMobile: getFinalCtaLocalVideoUrl('01-black'),
   },
   {
     id: headerSlides[1].id,
@@ -1146,10 +1128,10 @@ const finalCtaCards: FinalCtaCard[] = [
     description: headerSlides[1].description,
     buyUrl: headerSlides[1].buyUrl,
     accent: headerSlides[1].accent,
-    backgroundDesktop: hairGalleryImages[2],
-    backgroundMobile: hairGalleryImages[3],
-    videoDesktop: comfortIntroDesktopVideoUrl,
-    videoMobile: heroStoryMobileVideoUrl,
+    backgroundDesktop: getFinalCtaLocalBackgroundDesktop('02-pink'),
+    backgroundMobile: getFinalCtaLocalBackgroundMobile('02-pink'),
+    videoDesktop: getFinalCtaLocalVideoUrl('02-pink'),
+    videoMobile: getFinalCtaLocalVideoUrl('02-pink'),
   },
   {
     id: headerSlides[2].id,
@@ -1159,10 +1141,10 @@ const finalCtaCards: FinalCtaCard[] = [
     description: headerSlides[2].description,
     buyUrl: headerSlides[2].buyUrl,
     accent: headerSlides[2].accent,
-    backgroundDesktop: hairGalleryImages[4],
-    backgroundMobile: hairGalleryImages[5],
-    videoDesktop: comfortFeatureDesktopVideoUrl,
-    videoMobile: heroStoryMobileVideoUrl,
+    backgroundDesktop: getFinalCtaLocalBackgroundDesktop('03-violet'),
+    backgroundMobile: getFinalCtaLocalBackgroundMobile('03-violet'),
+    videoDesktop: getFinalCtaLocalVideoUrl('03-violet'),
+    videoMobile: getFinalCtaLocalVideoUrl('03-violet'),
   },
   {
     id: headerSlides[3].id,
@@ -1172,15 +1154,15 @@ const finalCtaCards: FinalCtaCard[] = [
     description: headerSlides[3].description,
     buyUrl: headerSlides[3].buyUrl,
     accent: headerSlides[3].accent,
-    backgroundDesktop: hairGalleryImages[6],
-    backgroundMobile: hairGalleryImages[7],
-    videoDesktop: benefitsDesktopVideoUrl,
-    videoMobile: benefitsMobileVideoUrl,
+    backgroundDesktop: getFinalCtaLocalBackgroundDesktop('04-tiffany'),
+    backgroundMobile: getFinalCtaLocalBackgroundMobile('04-tiffany'),
+    videoDesktop: getFinalCtaLocalVideoUrl('04-tiffany'),
+    videoMobile: getFinalCtaLocalVideoUrl('04-tiffany'),
   },
 ]
 
-const contactsDesktopVideoUrl = comfortIntroDesktopVideoUrl
-const contactsMobileVideoUrl = comfortIntroMobileVideoUrl
+const contactsDesktopVideoUrl = '/creatives/block-14-contacts/desktop.mp4'
+const contactsMobileVideoUrl = '/creatives/block-14-contacts/mobile.mp4'
 
 const contactsBlockContent = {
   navLabel: 'Контакты',

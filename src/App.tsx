@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import './App.css'
 
@@ -1376,19 +1376,22 @@ function App() {
 
     return Math.abs(index - activeSurfaceOrderIndex) <= radius
   }
-  const heroNear = isSurfaceNear('hero-story')
-  const painNear = isSurfaceNear('pain')
-  const benefitsNear = isSurfaceNear('benefits')
-  const attachmentsNear = isSurfaceNear('attachments')
-  const hairTypesNear = isSurfaceNear('hair-types')
-  const comfortNear = isSurfaceNear('comfort')
-  const comparisonNear = isSurfaceNear('comparison')
-  const packageNear = isSurfaceNear('package')
-  const specsNear = isSurfaceNear('specs')
-  const giftNear = isSurfaceNear('gift')
-  const faqNear = isSurfaceNear('faq')
-  const finalCtaNear = isSurfaceNear('final-cta')
-  const contactsNear = isSurfaceNear('contacts')
+  // On mobile (iOS memory pressure) keep only the active block's heavy media in the DOM.
+  // On desktop keep neighbours (+-1) mounted for smoother transitions.
+  const mediaRadius = isMobileViewport ? 0 : 1
+  const heroNear = isSurfaceNear('hero-story', mediaRadius)
+  const painNear = isSurfaceNear('pain', mediaRadius)
+  const benefitsNear = isSurfaceNear('benefits', mediaRadius)
+  const attachmentsNear = isSurfaceNear('attachments', mediaRadius)
+  const hairTypesNear = isSurfaceNear('hair-types', mediaRadius)
+  const comfortNear = isSurfaceNear('comfort', mediaRadius)
+  const comparisonNear = isSurfaceNear('comparison', mediaRadius)
+  const packageNear = isSurfaceNear('package', mediaRadius)
+  const specsNear = isSurfaceNear('specs', mediaRadius)
+  const giftNear = isSurfaceNear('gift', mediaRadius)
+  const faqNear = isSurfaceNear('faq', mediaRadius)
+  const finalCtaNear = isSurfaceNear('final-cta', mediaRadius)
+  const contactsNear = isSurfaceNear('contacts', mediaRadius)
   const [showScrollHint, setShowScrollHint] = useState(false)
   const specsPages = isMobileViewport ? specificationMobilePages : specificationPages
   const faqPages = isMobileViewport ? faqPagesMobile : faqPagesDesktop
@@ -6600,7 +6603,7 @@ function App() {
     }
   }, [isMobileViewport, hairTypesNear, hairTypesSlideIndex])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (
       activeSurface !== 'hair-types' ||
       hairTypesSlideIndex !== 0 ||

@@ -1711,6 +1711,45 @@ function App() {
     let touchStartY = 0
     const ease = 'sine.inOut'
 
+    const computeLayoutMetrics = () => {
+      const width = window.innerWidth
+      const height = window.innerHeight
+      const isMobile = width < 768
+      const previewCount = headerSlides.length - 1
+
+      if (isMobile) {
+        const sideInset = width < 425 ? 10 : 16
+        gap = width < 425 ? 8 : 10
+        numberSize = 34
+
+        const widthBasedCardWidth = Math.max(
+          72,
+          Math.min(
+            104,
+            Math.floor((width - sideInset * 2 - gap * (previewCount - 1)) / previewCount),
+          ),
+        )
+
+        // Reserve room for the card caption + pagination that sit below the cards,
+        // then cap the card height so the whole bottom stack always fits short screens.
+        const bottomReserve = width < 425 ? 128 : 118
+        const maxCardHeightByViewport = Math.round((height - bottomReserve) * 0.46)
+        const cardHeightCap = Math.max(96, Math.min(maxCardHeightByViewport, 156))
+
+        cardHeight = Math.min(Math.round(widthBasedCardWidth * 1.5), cardHeightCap)
+        cardWidth = Math.min(widthBasedCardWidth, Math.round(cardHeight / 1.5))
+        offsetTop = height - cardHeight - bottomReserve
+        offsetLeft = width - sideInset - (cardWidth * previewCount + gap * (previewCount - 1))
+      } else {
+        cardWidth = 200
+        cardHeight = 300
+        gap = 40
+        numberSize = 50
+        offsetTop = height - 430
+        offsetLeft = width - 830
+      }
+    }
+
     const byId = <T extends Element>(id: string) => root.querySelector<T>(`#${id}`)
     const qs = <T extends Element>(selector: string) => root.querySelector<T>(selector)
 
@@ -1761,27 +1800,8 @@ function App() {
       const width = window.innerWidth
       const height = window.innerHeight
       const isMobile = width < 768
-      const previewCount = headerSlides.length - 1
 
-      if (isMobile) {
-        const sideInset = width < 425 ? 10 : 16
-        gap = width < 425 ? 8 : 10
-        numberSize = 34
-        cardWidth = Math.max(
-          72,
-          Math.min(104, Math.floor((width - sideInset * 2 - gap * (previewCount - 1)) / previewCount)),
-        )
-        cardHeight = Math.round(cardWidth * 1.5)
-        offsetTop = height - cardHeight - (width < 425 ? 128 : 118)
-        offsetLeft = width - sideInset - (cardWidth * previewCount + gap * (previewCount - 1))
-      } else {
-        cardWidth = 200
-        cardHeight = 300
-        gap = 40
-        numberSize = 50
-        offsetTop = height - 430
-        offsetLeft = width - 830
-      }
+      computeLayoutMetrics()
 
       const pagination = byId<HTMLElement>('pagination')
       const nav = qs<HTMLElement>('.landing-topbar__frame')
@@ -1871,7 +1891,6 @@ function App() {
       const detailsInactive = detailsEven ? '#details-odd' : '#details-even'
       const { innerHeight: height, innerWidth: width } = window
       const isMobile = width < 768
-      const previewCount = headerSlides.length - 1
       const pagination = byId<HTMLElement>('pagination')
       const nav = qs<HTMLElement>('.landing-topbar__frame')
       const cover = qs<HTMLElement>('.cover')
@@ -1879,25 +1898,7 @@ function App() {
       const indicator = qs<HTMLElement>('.indicator')
       const scrollHint = document.querySelector<HTMLElement>('.scroll-hint')
 
-      if (isMobile) {
-        const sideInset = width < 425 ? 10 : 16
-        gap = width < 425 ? 8 : 10
-        numberSize = 34
-        cardWidth = Math.max(
-          72,
-          Math.min(104, Math.floor((width - sideInset * 2 - gap * (previewCount - 1)) / previewCount)),
-        )
-        cardHeight = Math.round(cardWidth * 1.5)
-        offsetTop = height - cardHeight - (width < 425 ? 128 : 118)
-        offsetLeft = width - sideInset - (cardWidth * previewCount + gap * (previewCount - 1))
-      } else {
-        cardWidth = 200
-        cardHeight = 300
-        gap = 40
-        numberSize = 50
-        offsetTop = height - 430
-        offsetLeft = width - 830
-      }
+      computeLayoutMetrics()
 
       setDetailContent('#details-even', active)
       setDetailContent('#details-odd', active)

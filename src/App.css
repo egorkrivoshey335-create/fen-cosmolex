@@ -1880,7 +1880,7 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
 
 .hero-story__footer,
 .pain-story__footer {
-  position: fixed;
+  position: absolute;
   left: 50%;
   bottom: 18px;
   z-index: 90;

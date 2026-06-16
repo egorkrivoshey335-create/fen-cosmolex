@@ -6530,7 +6530,7 @@ function App() {
     return () => {
       tweens.forEach((tween) => tween.kill())
     }
-  }, [isMobileViewport, hairTypesSlideIndex])
+  }, [isMobileViewport])
 
   useEffect(() => {
     if (
@@ -9358,12 +9358,6 @@ function App() {
         <div className="hair-types-story__media-layer" aria-hidden="true">
           {hairProfileSlides.map((slide, index) => {
             const galleryColumns = getHairGalleryColumns(slide.galleryImages)
-            // Mount images only for the active slide and the two neighbours.
-            // Decoded webp images are far heavier in RAM than their ~300KB on
-            // disk, so keeping every slide mounted crashes iOS Safari. Mounting
-            // the neighbours means the next slide is already decoded before it
-            // becomes visible, so there is no blank flash on switch.
-            const shouldRenderImages = Math.abs(index - hairTypesSlideIndex) <= 1
 
             return (
               <div
@@ -9393,21 +9387,19 @@ function App() {
                         }}
                         className="hair-types-story__gallery-track"
                       >
-                        {shouldRenderImages
-                          ? [...column, ...column].map((imageSrc, imageIndex) => (
-                              <div
-                                key={`${slide.id}-image-${columnIndex}-${imageIndex}`}
-                                className="hair-types-story__gallery-image"
-                              >
-                                <img
-                                  src={imageSrc}
-                                  alt={slide.title}
-                                  loading={index === 0 && imageIndex < 3 ? 'eager' : 'lazy'}
-                                  decoding="async"
-                                />
-                              </div>
-                            ))
-                          : null}
+                        {[...column, ...column].map((imageSrc, imageIndex) => (
+                          <div
+                            key={`${slide.id}-image-${columnIndex}-${imageIndex}`}
+                            className="hair-types-story__gallery-image"
+                          >
+                            <img
+                              src={imageSrc}
+                              alt={slide.title}
+                              loading={index === 0 && imageIndex < 3 ? 'eager' : 'lazy'}
+                              decoding="async"
+                            />
+                          </div>
+                        ))}
                       </div>
                     </div>
                   ))}

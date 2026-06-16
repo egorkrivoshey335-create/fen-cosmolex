@@ -6787,6 +6787,11 @@ span.contacts-story__meta-value {
  */
 @media (width <= 767px) {
   .details,
+  .hero-story .arch__left,
+  .pain-story__content,
+  .benefits-story__card-contents,
+  .attachments-story__layout,
+  .hair-types-story__copy-shell,
   .comfort-story__layout,
   .comparison-story__copy-shell,
   .comparison-story__timeline,

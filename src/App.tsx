@@ -1729,14 +1729,16 @@ function App() {
             Math.floor((width - sideInset * 2 - gap * (previewCount - 1)) / previewCount),
           ),
         )
+        const widthBasedCardHeight = Math.round(widthBasedCardWidth * 1.5)
 
-        // Reserve room for the card caption + pagination that sit below the cards,
-        // then cap the card height so the whole bottom stack always fits short screens.
-        const bottomReserve = width < 425 ? 128 : 118
-        const maxCardHeightByViewport = Math.round((height - bottomReserve) * 0.46)
-        const cardHeightCap = Math.max(96, Math.min(maxCardHeightByViewport, 156))
+        // Reserve room for the card caption + pagination that sit below the cards.
+        const bottomReserve = width < 425 ? 108 : 100
 
-        cardHeight = Math.min(Math.round(widthBasedCardWidth * 1.5), cardHeightCap)
+        // Scale card height continuously with the available viewport height so the cards
+        // react to any height change (even on regular phones), then clamp between a
+        // readable minimum and the width-based maximum.
+        const heightBasedCardHeight = Math.round((height - bottomReserve) * 0.205)
+        cardHeight = Math.max(88, Math.min(widthBasedCardHeight, heightBasedCardHeight))
         cardWidth = Math.min(widthBasedCardWidth, Math.round(cardHeight / 1.5))
         offsetTop = height - cardHeight - bottomReserve
         offsetLeft = width - sideInset - (cardWidth * previewCount + gap * (previewCount - 1))

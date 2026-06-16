@@ -6777,3 +6777,28 @@ span.contacts-story__meta-value {
     transition: none;
   }
 }
+
+/*
+ * Height-responsive content scaling (mobile only).
+ * --content-scale is computed in JS from the visible viewport height
+ * (1 at >=800px tall, shrinking with a 0.7 floor on shorter screens).
+ * Uses `zoom` instead of `transform: scale()` so it never conflicts with
+ * the GSAP transform animations applied to these same containers.
+ */
+@media (width <= 767px) {
+  .details,
+  .comfort-story__layout,
+  .comparison-story__copy-shell,
+  .comparison-story__timeline,
+  .package-story__copy-stage,
+  .package-story__timeline-shell,
+  .specs-story__copy-shell,
+  .specs-story__specs-shell,
+  .gift-story__layout,
+  .faq-story__copy-shell,
+  .faq-story__faqs-shell,
+  .final-cta-story__layout,
+  .contacts-story__layout {
+    zoom: var(--content-scale, 1);
+  }
+}

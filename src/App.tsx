@@ -1627,6 +1627,19 @@ function App() {
       const visual = window.visualViewport?.height
       const height = Math.round(visual ?? window.innerHeight)
       document.documentElement.style.setProperty('--stage-height', `${height}px`)
+
+      // Mobile only: shrink slide content on shorter screens so nothing overflows.
+      // Reference "full" height is 800px (scale = 1); shorter screens scale down
+      // proportionally with a floor so content stays readable.
+      const isMobile = window.innerWidth < 768
+      const referenceHeight = 800
+      const scale = isMobile
+        ? Math.max(0.7, Math.min(1, height / referenceHeight))
+        : 1
+      document.documentElement.style.setProperty(
+        '--content-scale',
+        scale.toFixed(3),
+      )
     }
 
     const handleResize = () => {

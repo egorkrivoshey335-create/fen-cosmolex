@@ -357,7 +357,7 @@ nav {
 }
 
 .menu-open .landing-topbar__menu {
-  max-height: min(760px, calc(100dvh - 132px));
+  max-height: min(760px, calc(100dvh - 132px - var(--app-safe-top) - var(--app-safe-bottom)));
   padding: 18px 14px 18px 18px;
   opacity: 1;
   transform: translateY(0) scale(1);
@@ -678,7 +678,7 @@ nav {
 
 @media (max-width: 767px) {
   .header-root {
-    min-height: 100svh;
+    min-height: var(--app-height);
   }
 
   nav {
@@ -1269,8 +1269,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: absolute;
   inset: 0;
   z-index: 30;
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--app-height);
+  min-height: var(--app-height);
   color: #fff;
   font-family: 'Outfit', var(--font-sans);
   background-color: #101010;
@@ -1296,8 +1296,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: absolute;
   inset: 0;
   z-index: 40;
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--app-height);
+  min-height: var(--app-height);
   color: #fff;
   font-family: 'Outfit', var(--font-sans);
   background: #040404;
@@ -1323,8 +1323,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: absolute;
   inset: 0;
   z-index: 50;
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--app-height);
+  min-height: var(--app-height);
   color: #fff;
   font-family: 'Outfit', var(--font-sans);
   background:
@@ -1352,8 +1352,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: absolute;
   inset: 0;
   z-index: 60;
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--app-height);
+  min-height: var(--app-height);
   color: #fff;
   font-family: 'Outfit', var(--font-sans);
   background: #090909;
@@ -1379,8 +1379,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: absolute;
   inset: 0;
   z-index: 70;
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--app-height);
+  min-height: var(--app-height);
   color: #fff;
   font-family: 'Outfit', var(--font-sans);
   background: #060606;
@@ -1405,8 +1405,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: absolute;
   inset: 0;
   z-index: 80;
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--app-height);
+  min-height: var(--app-height);
   color: #fff;
   font-family: 'Outfit', var(--font-sans);
   background: #060606;
@@ -1431,8 +1431,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: absolute;
   inset: 0;
   z-index: 90;
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--app-height);
+  min-height: var(--app-height);
   color: #fff;
   font-family: 'Outfit', var(--font-sans);
   background: #050505;
@@ -1457,8 +1457,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: absolute;
   inset: 0;
   z-index: 100;
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--app-height);
+  min-height: var(--app-height);
   color: #fff;
   font-family: 'Outfit', var(--font-sans);
   background: #040404;
@@ -1483,8 +1483,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: absolute;
   inset: 0;
   z-index: 110;
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--app-height);
+  min-height: var(--app-height);
   color: #fff;
   font-family: 'Outfit', var(--font-sans);
   background: #040404;
@@ -1509,8 +1509,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: absolute;
   inset: 0;
   z-index: 120;
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--app-height);
+  min-height: var(--app-height);
   color: #fff;
   font-family: 'Outfit', var(--font-sans);
   background: #040404;
@@ -1535,8 +1535,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: absolute;
   inset: 0;
   z-index: 130;
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--app-height);
+  min-height: var(--app-height);
   color: #fff;
   font-family: 'Outfit', var(--font-sans);
   background: #040404;
@@ -1561,8 +1561,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: absolute;
   inset: 0;
   z-index: 140;
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--app-height);
+  min-height: var(--app-height);
   color: #fff;
   font-family: 'Outfit', var(--font-sans);
   background:
@@ -1589,8 +1589,8 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: absolute;
   inset: 0;
   z-index: 150;
-  height: 100vh;
-  min-height: 100vh;
+  height: var(--app-height);
+  min-height: var(--app-height);
   color: #fff;
   font-family: 'Outfit', var(--font-sans);
   background:
@@ -1611,23 +1611,6 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   visibility: visible;
   pointer-events: auto;
   transform: translateY(0);
-}
-
-.hero-story,
-.pain-story,
-.benefits-story,
-.attachments-story,
-.hair-types-story,
-.comfort-story,
-.comparison-story,
-.package-story,
-.specs-story,
-.gift-story,
-.faq-story,
-.final-cta-story,
-.contacts-story {
-  height: var(--app-height);
-  min-height: var(--app-height);
 }
 
 .package-story.is-active .package-story__copy-shell,
@@ -1782,10 +1765,10 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
 
 .hero-story__topbar {
   position: fixed;
-  top: calc(18px + var(--app-safe-top));
+  top: 18px;
   left: 50%;
   z-index: 90;
-  width: min(calc(100% - 32px - var(--app-safe-left) - var(--app-safe-right)), 1100px);
+  width: min(calc(100% - 32px), 1100px);
   transform: translateX(-50%);
   opacity: 0;
   pointer-events: none;
@@ -1921,6 +1904,20 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   transition: opacity 0.28s ease;
 }
 
+.hero-story__footer,
+.pain-story__footer,
+.attachments-story__footer,
+.hair-types-story__footer,
+.comfort-story__footer,
+.comparison-story__footer,
+.package-story__footer,
+.specs-story__footer,
+.gift-story__footer,
+.faq-story__footer,
+.final-cta-story__footer {
+  margin-bottom: var(--app-safe-bottom);
+}
+
 .hero-story.is-active .hero-story__footer,
 .benefits-story.is-active .hero-story__footer,
 .attachments-story.is-active .hero-story__footer,
@@ -1959,7 +1956,7 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   position: relative;
   flex: 0 0 100vw;
   width: 100vw;
-  height: 100vh;
+  height: var(--app-height);
   padding: 104px 2rem 104px;
   display: flex;
   align-items: center;
@@ -3796,7 +3793,7 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   width: min(100%, 1500px);
   height: 100%;
   margin-inline: auto;
-  padding: calc(104px + var(--app-safe-top)) 24px calc(88px + var(--app-safe-bottom));
+  padding: 104px 24px 88px;
 }
 
 .final-cta-story__intro {
@@ -4340,7 +4337,7 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   width: min(100%, 1500px);
   height: 100%;
   margin-inline: auto;
-  padding: calc(104px + var(--app-safe-top)) 24px calc(88px + var(--app-safe-bottom));
+  padding: 104px 24px 88px;
 }
 
 .contacts-story__hero {
@@ -4757,7 +4754,7 @@ span.contacts-story__meta-value {
     grid-template-columns: 1fr;
     gap: 18px;
     align-items: end;
-    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
+    padding: 96px 16px 84px;
   }
 
   .contacts-story__hero {
@@ -4874,7 +4871,7 @@ span.contacts-story__meta-value {
 
 @media (max-width: 767px) {
   .contacts-story__layout {
-    padding: calc(92px + var(--app-safe-top)) 16px calc(80px + var(--app-safe-bottom));
+    padding: 92px 16px 80px;
   }
 
   .contacts-story__card {
@@ -5171,7 +5168,7 @@ span.contacts-story__meta-value {
 
   .benefits-story__stage {
     width: 100vw;
-    height: 100vh;
+    height: var(--app-height);
     overflow: hidden;
   }
 
@@ -5246,10 +5243,6 @@ span.contacts-story__meta-value {
 }
 
 @media (max-width: 900px) {
-  .contacts-story__layout {
-    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
-  }
-
   .hero-story .arch {
     gap: 30px;
   }
@@ -5278,8 +5271,8 @@ span.contacts-story__meta-value {
 
 @media (max-width: 768px) {
   .scroll-hint {
-    top: calc(84px + var(--app-safe-top));
-    left: calc(12px + var(--app-safe-left));
+    top: 84px;
+    left: 12px;
     width: 42px;
     height: 42px;
     opacity: 0.9;
@@ -5292,18 +5285,14 @@ span.contacts-story__meta-value {
   .attachments-story__footer,
   .hair-types-story__footer,
   .comfort-story__footer,
-  .comparison-story__footer,
-  .package-story__footer,
-  .specs-story__footer,
   .gift-story__footer,
   .faq-story__footer,
-  .final-cta-story__footer,
-  .contacts-story__footer {
-    width: calc(100% - 20px - var(--app-safe-left) - var(--app-safe-right));
+  .final-cta-story__footer {
+    width: calc(100% - 20px);
   }
 
   .hero-story__topbar {
-    top: calc(10px + var(--app-safe-top));
+    top: 10px;
   }
 
   .hero-story__container {
@@ -6377,7 +6366,7 @@ span.contacts-story__meta-value {
 
   .benefits-story__card-contents {
     width: calc(100vw - 16px);
-    height: calc(var(--app-height) - 18px);
+    height: calc(100vh - 18px);
     border-radius: 18px;
     box-shadow:
       rgba(0, 0, 0, 0.28) 0 22px 56px,
@@ -6439,74 +6428,6 @@ span.contacts-story__meta-value {
     font-size: 11px;
   }
 
-  .hero-story__container {
-    padding: calc(92px + var(--app-safe-top)) 1.25rem calc(84px + var(--app-safe-bottom));
-  }
-
-  .hero-story .arch__left .content {
-    padding-bottom: calc(118px + var(--app-safe-bottom));
-  }
-
-  .pain-story__slide {
-    padding: calc(92px + var(--app-safe-top)) 1.25rem calc(88px + var(--app-safe-bottom));
-  }
-
-  .attachments-story__viewport {
-    padding: calc(92px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
-  }
-
-  .hair-types-story__copy {
-    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
-  }
-
-  .comfort-story__panel {
-    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
-  }
-
-  .gift-story__panel {
-    padding: calc(165px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
-  }
-
-  .faq-story__layout {
-    padding: calc(92px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
-  }
-
-  .final-cta-story__layout {
-    padding: calc(92px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
-  }
-
-  .comparison-story__panel {
-    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
-  }
-
-  .package-story__layout {
-    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
-  }
-
-  .specs-story__layout {
-    padding: calc(96px + var(--app-safe-top)) 16px calc(84px + var(--app-safe-bottom));
-  }
-
-  .contacts-story__layout {
-    padding: calc(92px + var(--app-safe-top)) 16px calc(80px + var(--app-safe-bottom));
-  }
-
-  .hero-story__footer,
-  .pain-story__footer,
-  .benefits-story__footer,
-  .attachments-story__footer,
-  .hair-types-story__footer,
-  .comfort-story__footer,
-  .comparison-story__footer,
-  .package-story__footer,
-  .specs-story__footer,
-  .gift-story__footer,
-  .faq-story__footer,
-  .final-cta-story__footer,
-  .contacts-story__footer {
-    bottom: calc(10px + var(--app-safe-bottom));
-  }
-
   .hero-story__media-slide::after {
     background:
       linear-gradient(180deg, rgba(8, 8, 8, 0.16) 0%, rgba(8, 8, 8, 0.38) 38%, rgba(8, 8, 8, 0.82) 100%),
@@ -6516,7 +6437,7 @@ span.contacts-story__meta-value {
 
 @media (max-width: 560px) {
   .hero-story__container {
-    padding: calc(88px + var(--app-safe-top)) 10px calc(82px + var(--app-safe-bottom));
+    padding: 88px 10px 82px;
   }
 
   .hero-story .arch__left {
@@ -6535,7 +6456,7 @@ span.contacts-story__meta-value {
   }
 
   .hero-story .arch__left .content {
-    padding-bottom: calc(108px + var(--app-safe-bottom));
+    padding-bottom: 108px;
   }
 
   .hero-story__footer > p {
@@ -6543,7 +6464,7 @@ span.contacts-story__meta-value {
   }
 
   .pain-story__slide {
-    padding: calc(88px + var(--app-safe-top)) 10px calc(84px + var(--app-safe-bottom));
+    padding: 88px 10px 84px;
   }
 
   .pain-story__content {
@@ -6570,7 +6491,7 @@ span.contacts-story__meta-value {
   }
 
   .attachments-story__viewport {
-    padding: calc(88px + var(--app-safe-top)) 10px calc(82px + var(--app-safe-bottom));
+    padding: 88px 10px 82px;
   }
 
   .attachments-story__layout {
@@ -6620,7 +6541,7 @@ span.contacts-story__meta-value {
   }
 
   .hair-types-story__copy {
-    padding: calc(90px + var(--app-safe-top)) 0 calc(82px + var(--app-safe-bottom));
+    padding: 90px 0 82px;
   }
 
   .hair-types-story__gallery-grid {
@@ -6666,7 +6587,7 @@ span.contacts-story__meta-value {
   }
 
   .comparison-story__panel {
-    padding: calc(88px + var(--app-safe-top)) 10px calc(82px + var(--app-safe-bottom));
+    padding: 88px 10px 82px;
   }
 
   .comparison-story__copy-shell {
@@ -6702,7 +6623,7 @@ span.contacts-story__meta-value {
   }
 
   .package-story__layout {
-    padding: calc(88px + var(--app-safe-top)) 10px calc(82px + var(--app-safe-bottom));
+    padding: 88px 10px 82px;
   }
 
   .package-story__copy-shell {
@@ -6741,13 +6662,9 @@ span.contacts-story__meta-value {
     padding: 0;
   }
 
-  .benefits-story__stage {
-    height: var(--app-height);
-  }
-
   .benefits-story__card-contents {
     width: calc(100vw - 12px);
-    height: calc(var(--app-height) - 14px);
+    height: calc(100vh - 14px);
     border-radius: 16px;
   }
 

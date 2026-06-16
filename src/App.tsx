@@ -1732,12 +1732,12 @@ function App() {
         const widthBasedCardHeight = Math.round(widthBasedCardWidth * 1.5)
 
         // Reserve room for the card caption + pagination that sit below the cards.
-        const bottomReserve = width < 425 ? 108 : 100
+        const bottomReserve = width < 425 ? 98 : 90
 
         // Scale card height continuously with the available viewport height so the cards
         // react to any height change (even on regular phones), then clamp between a
         // readable minimum and the width-based maximum.
-        const heightBasedCardHeight = Math.round((height - bottomReserve) * 0.205)
+        const heightBasedCardHeight = Math.round((height - bottomReserve) * 0.19)
         cardHeight = Math.max(88, Math.min(widthBasedCardHeight, heightBasedCardHeight))
         cardWidth = Math.min(widthBasedCardWidth, Math.round(cardHeight / 1.5))
         offsetTop = height - cardHeight - bottomReserve

@@ -1345,6 +1345,37 @@ function App() {
   const [isPromoCodeCopied, setIsPromoCodeCopied] = useState(false)
   const [activeSurface, setActiveSurface] = useState<ActiveSurface>('header')
   const [isMobileViewport, setIsMobileViewport] = useState(() => window.innerWidth < 768)
+
+  // Only the active block and its immediate neighbours keep their heavy media
+  // (videos) loaded. Far-away blocks drop their src so the browser frees the
+  // decoded buffers, otherwise ~470MB of video stays in memory at once and
+  // crashes iOS Safari / lags low-memory devices.
+  const surfaceOrder: ActiveSurface[] = [
+    'header',
+    'hero-story',
+    'pain',
+    'benefits',
+    'attachments',
+    'hair-types',
+    'comfort',
+    'comparison',
+    'package',
+    'specs',
+    'gift',
+    'faq',
+    'final-cta',
+    'contacts',
+  ]
+  const activeSurfaceOrderIndex = surfaceOrder.indexOf(activeSurface)
+  const isSurfaceNear = (surface: ActiveSurface, radius = 1) => {
+    const index = surfaceOrder.indexOf(surface)
+
+    if (index === -1 || activeSurfaceOrderIndex === -1) {
+      return true
+    }
+
+    return Math.abs(index - activeSurfaceOrderIndex) <= radius
+  }
   const [showScrollHint, setShowScrollHint] = useState(false)
   const specsPages = isMobileViewport ? specificationMobilePages : specificationPages
   const faqPages = isMobileViewport ? faqPagesMobile : faqPagesDesktop
@@ -8910,6 +8941,14 @@ function App() {
     applySurface()
   }
 
+  const heroNear = isSurfaceNear('hero-story')
+  const painNear = isSurfaceNear('pain')
+  const benefitsNear = isSurfaceNear('benefits')
+  const attachmentsNear = isSurfaceNear('attachments')
+  const comfortNear = isSurfaceNear('comfort')
+  const comparisonNear = isSurfaceNear('comparison')
+  const giftNear = isSurfaceNear('gift')
+
   return (
     <div className="landing-stage">
       <div ref={rootRef} className="header-root" id="header">
@@ -9043,7 +9082,7 @@ function App() {
               className={`hero-story__media-slide ${heroSlideIndex === index ? 'is-active' : ''}`}
             >
               <video
-                key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}`}
+                key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}-${heroNear}`}
                 ref={(node) => {
                   heroVideoRefs.current[index] = node
                 }}
@@ -9053,10 +9092,12 @@ function App() {
                 playsInline
                 preload="metadata"
               >
-                <source
+                {heroNear ? (
+                  <source
                     src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
-                  type="video/mp4"
-                />
+                    type="video/mp4"
+                  />
+                ) : null}
               </video>
             </div>
           ))}
@@ -9128,7 +9169,7 @@ function App() {
                   aria-hidden={painSlideIndex === index ? 'false' : 'true'}
                 >
                   <video
-                    key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}`}
+                    key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}-${painNear}`}
                     ref={(node) => {
                       painVideoRefs.current[index] = node
                     }}
@@ -9138,10 +9179,12 @@ function App() {
                     playsInline
                     preload="metadata"
                   >
-                    <source
-                      src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
-                      type="video/mp4"
-                    />
+                    {painNear ? (
+                      <source
+                        src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
+                        type="video/mp4"
+                      />
+                    ) : null}
                   </video>
                   <div className="pain-story__backdrop" />
 
@@ -9195,8 +9238,8 @@ function App() {
                   aria-hidden={benefitsSlideIndex === index ? 'false' : 'true'}
                 >
                   <article className="benefits-story__card-contents">
-                    <video
-                      key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}`}
+                      <video
+                      key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}-${benefitsNear}`}
                       ref={(node) => {
                         benefitsVideoRefs.current[index] = node
                       }}
@@ -9206,10 +9249,12 @@ function App() {
                       playsInline
                       preload="metadata"
                     >
-                      <source
-                        src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
-                        type="video/mp4"
-                      />
+                      {benefitsNear ? (
+                        <source
+                          src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
+                          type="video/mp4"
+                        />
+                      ) : null}
                     </video>
 
                     <div className="benefits-story__card-description">
@@ -9270,7 +9315,7 @@ function App() {
               }`}
             >
               <video
-                key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}`}
+                key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}-${attachmentsNear}`}
                 ref={(node) => {
                   attachmentsVideoRefs.current[index] = node
                 }}
@@ -9280,10 +9325,12 @@ function App() {
                 playsInline
                 preload="metadata"
               >
-                <source
-                  src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
-                  type="video/mp4"
-                />
+                {attachmentsNear ? (
+                  <source
+                    src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
+                    type="video/mp4"
+                  />
+                ) : null}
               </video>
             </div>
           ))}
@@ -9472,7 +9519,7 @@ function App() {
             >
               {slide.intro ? (
                 <video
-                  key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}`}
+                  key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}-${comfortNear}`}
                   ref={(node) => {
                     comfortVideoRefs.current[index] = node
                   }}
@@ -9482,10 +9529,12 @@ function App() {
                   playsInline
                   preload="metadata"
                 >
-                  <source
-                    src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
-                    type="video/mp4"
-                  />
+                  {comfortNear ? (
+                    <source
+                      src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
+                      type="video/mp4"
+                    />
+                  ) : null}
                 </video>
               ) : (
                 <div
@@ -9552,7 +9601,7 @@ function App() {
                       className="comfort-story__media-window"
                     >
                       <video
-                        key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}`}
+                        key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}-${comfortNear}`}
                         ref={(node) => {
                           comfortVideoRefs.current[index] = node
                         }}
@@ -9562,10 +9611,12 @@ function App() {
                         playsInline
                         preload="metadata"
                       >
-                        <source
-                          src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
-                          type="video/mp4"
-                        />
+                        {comfortNear ? (
+                          <source
+                            src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
+                            type="video/mp4"
+                          />
+                        ) : null}
                       </video>
                     </div>
                   </div>
@@ -9620,7 +9671,7 @@ function App() {
                 />
               ) : (
                 <video
-                  key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}`}
+                  key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}-${comparisonNear}`}
                   ref={(node) => {
                     comparisonVideoRefs.current[index] = node
                   }}
@@ -9630,10 +9681,12 @@ function App() {
                   playsInline
                   preload="metadata"
                 >
-                  <source
-                    src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
-                    type="video/mp4"
-                  />
+                  {comparisonNear ? (
+                    <source
+                      src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
+                      type="video/mp4"
+                    />
+                  ) : null}
                 </video>
               )}
             </div>
@@ -10008,7 +10061,7 @@ function App() {
             >
               {slide.intro ? (
                 <video
-                  key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}`}
+                  key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}-${giftNear}`}
                   ref={(node) => {
                     giftVideoRefs.current[index] = node
                   }}
@@ -10018,10 +10071,12 @@ function App() {
                   playsInline
                   preload="metadata"
                 >
-                  <source
-                    src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
-                    type="video/mp4"
-                  />
+                  {giftNear ? (
+                    <source
+                      src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
+                      type="video/mp4"
+                    />
+                  ) : null}
                 </video>
               ) : (
                 <div
@@ -10076,7 +10131,7 @@ function App() {
                         className="gift-story__media-window"
                       >
                         <video
-                          key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}`}
+                          key={`${slide.id}-${isMobileViewport ? 'mobile' : 'desktop'}-${giftNear}`}
                           ref={(node) => {
                             giftVideoRefs.current[index] = node
                           }}
@@ -10086,10 +10141,12 @@ function App() {
                           playsInline
                           preload="metadata"
                         >
-                          <source
-                            src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
-                            type="video/mp4"
-                          />
+                          {giftNear ? (
+                            <source
+                              src={isMobileViewport ? slide.videoMobile : slide.videoDesktop}
+                              type="video/mp4"
+                            />
+                          ) : null}
                         </video>
                       </div>
 

@@ -1640,11 +1640,11 @@ function App() {
       const heightScale = Math.min(1, height / referenceHeight)
       const widthScale = Math.min(1, width / referenceWidth)
 
-      // Large screens: scale content UP proportionally to width, starting at
-      // 2560px, capped at 1.5x. Backgrounds are not affected.
-      const largeReferenceWidth = 2560
+      // Large screens: scale content UP proportionally to viewport HEIGHT,
+      // starting at 900px tall, capped at 1.5x. Backgrounds are not affected.
+      const largeReferenceHeight = 900
       const maxScale = 1.5
-      const desktopScale = Math.min(maxScale, Math.max(1, width / largeReferenceWidth))
+      const desktopScale = Math.min(maxScale, Math.max(1, height / largeReferenceHeight))
 
       const scale = isMobile
         ? Math.max(0.7, Math.min(heightScale, widthScale))

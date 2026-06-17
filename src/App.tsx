@@ -1801,6 +1801,7 @@ function App() {
     let cardHeight = 300
     let gap = 40
     let numberSize = 50
+    let contentScale = 1
     let isAnimating = false
     let touchStartY = 0
     const ease = 'sine.inOut'
@@ -1812,6 +1813,7 @@ function App() {
       const previewCount = headerSlides.length - 1
 
       if (isMobile) {
+        contentScale = 1
         const sideInset = width < 425 ? 10 : 16
         gap = width < 425 ? 8 : 10
         numberSize = 34
@@ -1841,6 +1843,7 @@ function App() {
         // so the header cards grow together with the rest of the page content on
         // tall screens. Anchored bottom-right so they don't drift off-screen.
         const scale = Math.min(1.4, Math.max(1, height / 950))
+        contentScale = scale
         cardWidth = Math.round(200 * scale)
         cardHeight = Math.round(300 * scale)
         gap = Math.round(40 * scale)
@@ -1911,11 +1914,13 @@ function App() {
 
       if (pagination) {
         gsap.set(pagination, {
-          top: isMobile ? height - 92 : offsetTop + 330,
+          top: isMobile ? height - 92 : offsetTop + cardHeight + 30,
           left: isMobile ? 16 : offsetLeft,
           y: 0,
           opacity: 1,
           zIndex: 60,
+          scale: isMobile ? 1 : contentScale,
+          transformOrigin: 'left top',
         })
       }
 
@@ -2006,11 +2011,13 @@ function App() {
 
       if (pagination) {
         gsap.set(pagination, {
-          top: isMobile ? height - 92 : offsetTop + 330,
+          top: isMobile ? height - 92 : offsetTop + cardHeight + 30,
           left: isMobile ? 16 : offsetLeft,
           y: 200,
           opacity: 0,
           zIndex: 60,
+          scale: isMobile ? 1 : contentScale,
+          transformOrigin: 'left top',
         })
       }
 

@@ -1641,8 +1641,8 @@ function App() {
       const widthScale = Math.min(1, width / referenceWidth)
 
       // Large screens: scale content UP proportionally to viewport HEIGHT,
-      // starting at 950px tall, capped at 1.4x. Backgrounds are not affected.
-      const largeReferenceHeight = 950
+      // starting at 1000px tall, capped at 1.4x. Backgrounds are not affected.
+      const largeReferenceHeight = 1000
       const maxScale = 1.4
       const desktopScale = Math.min(maxScale, Math.max(1, height / largeReferenceHeight))
 
@@ -1839,10 +1839,10 @@ function App() {
         offsetTop = height - cardHeight - bottomReserve
         offsetLeft = width - sideInset - (cardWidth * previewCount + gap * (previewCount - 1))
       } else {
-        // Match the CSS --content-scale (height-based, starts at 950px, cap 1.4x)
+        // Match the CSS --content-scale (height-based, starts at 1000px, cap 1.4x)
         // so the header cards grow together with the rest of the page content on
         // tall screens. Anchored bottom-right so they don't drift off-screen.
-        const scale = Math.min(1.4, Math.max(1, height / 950))
+        const scale = Math.min(1.4, Math.max(1, height / 1000))
         contentScale = scale
         cardWidth = Math.round(200 * scale)
         cardHeight = Math.round(300 * scale)

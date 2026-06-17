@@ -6809,12 +6809,12 @@ span.contacts-story__meta-value {
 }
 
 /*
- * Tall desktop screens (height >= 951px): scale content UP via --content-scale
+ * Tall desktop screens (height >= 1001px): scale content UP via --content-scale
  * (height-based, capped 1.4x in JS). Same container list as mobile, plus the
  * topbar (logo + burger menu) and block 1 cards/pagination. Backgrounds are
  * never scaled.
  */
-@media (min-width: 768px) and (min-height: 951px) {
+@media (min-width: 768px) and (min-height: 1001px) {
   .details,
   .hero-story .arch__left,
   .pain-story__content,

@@ -6809,11 +6809,11 @@ span.contacts-story__meta-value {
 }
 
 /*
- * Large screens (>=1441px): scale content UP via --content-scale (capped 1.3x
+ * Large screens (>=2561px): scale content UP via --content-scale (capped 1.5x
  * in JS). Same container list as mobile, plus the topbar (logo + burger menu).
  * Backgrounds are never scaled.
  */
-@media (width >= 1441px) {
+@media (width >= 2561px) {
   .details,
   .hero-story .arch__left,
   .pain-story__content,

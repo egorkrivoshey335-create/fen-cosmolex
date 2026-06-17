@@ -1641,9 +1641,9 @@ function App() {
       const widthScale = Math.min(1, width / referenceWidth)
 
       // Large screens: scale content UP proportionally to width, starting at
-      // 1440px, capped at 1.3x. Backgrounds are not affected.
-      const largeReferenceWidth = 1440
-      const maxScale = 1.3
+      // 2560px, capped at 1.5x. Backgrounds are not affected.
+      const largeReferenceWidth = 2560
+      const maxScale = 1.5
       const desktopScale = Math.min(maxScale, Math.max(1, width / largeReferenceWidth))
 
       const scale = isMobile

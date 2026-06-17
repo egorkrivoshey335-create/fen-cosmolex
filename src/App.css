@@ -6809,29 +6809,36 @@ span.contacts-story__meta-value {
 }
 
 /*
- * Tall desktop screens (height >= 901px): scale content UP via --content-scale
- * (height-based, capped 1.5x in JS). Same container list as mobile, plus the
- * topbar (logo + burger menu). Backgrounds are never scaled.
+ * Tall desktop screens (height >= 951px): scale content UP via --content-scale
+ * (height-based, capped 1.4x in JS). Same container list as mobile, plus the
+ * topbar (logo + burger menu) and block 1 cards/pagination. Backgrounds are
+ * never scaled.
  */
-@media (min-width: 768px) and (min-height: 901px) {
+@media (min-width: 768px) and (min-height: 951px) {
   .details,
+  .header-root #demo,
+  .header-root .pagination,
   .hero-story .arch__left,
   .pain-story__content,
   .benefits-story__card-description,
   .attachments-story__layout,
   .hair-types-story__copy-shell,
   .comfort-story__layout,
+  .comfort-story__intro-copy,
   .comparison-story__copy-shell,
   .comparison-story__timeline,
+  .comparison-story__intro-copy,
   .package-story__copy-stage,
   .package-story__timeline-shell,
   .specs-story__copy-shell,
   .specs-story__specs-shell,
   .gift-story__layout,
+  .gift-story__intro-copy,
   .faq-story__copy-shell,
   .faq-story__faqs-shell,
   .final-cta-story__layout,
   .contacts-story__layout,
+  .hero-story__footer,
   .landing-topbar__shell,
   .landing-topbar__menu {
     zoom: var(--content-scale, 1);

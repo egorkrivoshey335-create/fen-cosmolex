@@ -4385,6 +4385,11 @@ function App() {
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const comparisonIndicator = comparison.querySelector<HTMLElement>('.hero-story__indicator')
+
+    if (comparisonIndicator) {
+      gsap.set(comparisonIndicator, { x: -window.innerWidth })
+    }
+
     let isLocked = false
     let touchStartY = 0
 

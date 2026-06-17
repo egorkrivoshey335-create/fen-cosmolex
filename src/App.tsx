@@ -4559,6 +4559,11 @@ function App() {
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const packageIndicator = packageSection.querySelector<HTMLElement>('.hero-story__indicator')
+
+    if (packageIndicator) {
+      gsap.set(packageIndicator, { x: -window.innerWidth })
+    }
+
     let isLocked = false
     let touchStartY = 0
 
@@ -4682,6 +4687,11 @@ function App() {
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const specsIndicator = specsSection.querySelector<HTMLElement>('.hero-story__indicator')
+
+    if (specsIndicator) {
+      gsap.set(specsIndicator, { x: -window.innerWidth })
+    }
+
     let isLocked = false
     let touchStartY = 0
 
@@ -4806,6 +4816,11 @@ function App() {
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const giftIndicator = giftSection.querySelector<HTMLElement>('.hero-story__indicator')
+
+    if (giftIndicator) {
+      gsap.set(giftIndicator, { x: -window.innerWidth })
+    }
+
     let isLocked = false
     let touchStartY = 0
 
@@ -4975,6 +4990,11 @@ function App() {
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const faqIndicator = faqSection.querySelector<HTMLElement>('.hero-story__indicator')
+
+    if (faqIndicator) {
+      gsap.set(faqIndicator, { x: -window.innerWidth })
+    }
+
     let isLocked = false
     let touchStartY = 0
 
@@ -5099,6 +5119,11 @@ function App() {
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const finalCtaIndicator = finalCtaSection.querySelector<HTMLElement>('.hero-story__indicator')
+
+    if (finalCtaIndicator) {
+      gsap.set(finalCtaIndicator, { x: -window.innerWidth })
+    }
+
     let isLocked = false
     let touchStartY = 0
 
@@ -5234,6 +5259,11 @@ function App() {
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const contactsIndicator = contactsSection.querySelector<HTMLElement>('.hero-story__indicator')
+
+    if (contactsIndicator) {
+      gsap.set(contactsIndicator, { x: -window.innerWidth })
+    }
+
     let isLocked = false
     let touchStartY = 0
 

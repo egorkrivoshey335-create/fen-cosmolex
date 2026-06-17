@@ -1919,6 +1919,72 @@ body[data-surface='contacts'] .final-cta-story .hero-story__footer {
   opacity: 1;
 }
 
+/* Footer bar: centers the "Купить" button + the footer pill as one group. */
+.story-footer-bar {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  z-index: 90;
+  width: min(calc(100% - 32px), 1100px);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+/* The pill inside the bar drops its own absolute positioning. */
+.story-footer-bar > .hero-story__footer,
+.story-footer-bar > .pain-story__footer {
+  position: static;
+  left: auto;
+  bottom: auto;
+  transform: none;
+  width: auto;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* "Купить" button: same look as block 1's .discover, matches footer height. */
+.story-buy-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  padding: 0 28px;
+  border: 1px solid rgba(241, 195, 95, 0.54);
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, rgba(241, 195, 95, 0.18) 0%, rgba(236, 173, 41, 0.08) 100%),
+    rgba(10, 10, 10, 0.62);
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  color: #fff0ca;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.28s ease,
+    transform 0.34s ease,
+    box-shadow 0.34s ease,
+    filter 0.34s ease;
+}
+
+/* Show the button + enable interaction only when its block is active,
+   mirroring the footer's own active-state visibility. */
+.is-active .story-footer-bar > .hero-story__footer,
+.is-active .story-footer-bar > .pain-story__footer,
+.is-active .story-footer-bar > .story-buy-button {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .pain-story__footer {
   background: rgba(255, 255, 255, 0.62);
   color: rgba(18, 18, 18, 0.7);
@@ -4606,6 +4672,7 @@ span.contacts-story__meta-value {
 }
 
 .details > .cta > .discover,
+.story-buy-button,
 .final-cta-story__buy-button,
 .final-cta-story__gift-button,
 .contacts-story__primary,
@@ -4631,6 +4698,7 @@ span.contacts-story__meta-value {
 }
 
 .details > .cta > .discover::before,
+.story-buy-button::before,
 .final-cta-story__buy-button::before,
 .final-cta-story__gift-button::before,
 .contacts-story__primary::before,
@@ -4657,6 +4725,7 @@ span.contacts-story__meta-value {
 }
 
 .details > .cta > .discover::after,
+.story-buy-button::after,
 .final-cta-story__buy-button::after,
 .final-cta-story__gift-button::after,
 .contacts-story__primary::after,
@@ -4673,6 +4742,8 @@ span.contacts-story__meta-value {
 
 .details > .cta > .discover:hover,
 .details > .cta > .discover:focus-visible,
+.story-buy-button:hover,
+.story-buy-button:focus-visible,
 .final-cta-story__buy-button:hover,
 .final-cta-story__buy-button:focus-visible,
 .final-cta-story__gift-button:hover,
@@ -4690,6 +4761,8 @@ span.contacts-story__meta-value {
 
 .details > .cta > .discover:hover::after,
 .details > .cta > .discover:focus-visible::after,
+.story-buy-button:hover::after,
+.story-buy-button:focus-visible::after,
 .final-cta-story__buy-button:hover::after,
 .final-cta-story__buy-button:focus-visible::after,
 .final-cta-story__gift-button:hover::after,
@@ -6808,7 +6881,8 @@ span.contacts-story__meta-value {
   .final-cta-story__layout,
   .final-cta-story__popup,
   .contacts-story__layout,
-  .hero-story__footer,
+  .final-cta-story__footer,
+  .story-footer-bar,
   .landing-topbar__shell,
   .landing-topbar__menu {
     zoom: var(--content-scale, 1);
@@ -6845,7 +6919,8 @@ span.contacts-story__meta-value {
   .final-cta-story__layout,
   .final-cta-story__popup,
   .contacts-story__layout,
-  .hero-story__footer,
+  .final-cta-story__footer,
+  .story-footer-bar,
   .landing-topbar__shell,
   .landing-topbar__menu {
     zoom: var(--content-scale, 1);

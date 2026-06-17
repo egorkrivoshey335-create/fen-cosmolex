@@ -8535,6 +8535,17 @@ function App() {
       setIsPromoCodeCopied(false)
     }
   }
+  const renderBuyButton = () => (
+    <a
+      className="story-buy-button"
+      href={headerSlides[0].buyUrl}
+      target="_blank"
+      rel="noreferrer"
+    >
+      Купить
+    </a>
+  )
+
   const renderTopbarNavigation = (ariaLabel: string) => (
     <div className="landing-topbar__frame">
       <div className="landing-topbar__shell">
@@ -9238,12 +9249,15 @@ function App() {
             </div>
           </div>
 
-          <div className="hero-story__footer">
-            <span>
-              {String(heroSlideIndex + 1).padStart(2, '0')} /{' '}
-              {String(heroStorySlides.length).padStart(2, '0')}
-            </span>
-            <p>{heroStorySlides[heroSlideIndex].eyebrow.replace(/^\d+\s\/\s/, '')}</p>
+          <div className="story-footer-bar">
+            {renderBuyButton()}
+            <div className="hero-story__footer">
+              <span>
+                {String(heroSlideIndex + 1).padStart(2, '0')} /{' '}
+                {String(heroStorySlides.length).padStart(2, '0')}
+              </span>
+              <p>{heroStorySlides[heroSlideIndex].eyebrow.replace(/^\d+\s\/\s/, '')}</p>
+            </div>
           </div>
         </div>
       </section>
@@ -9304,11 +9318,14 @@ function App() {
           </div>
         </div>
 
-        <div className="pain-story__footer">
-          <span>
-            {String(painSlideIndex + 1).padStart(2, '0')} / {String(painSlides.length).padStart(2, '0')}
-          </span>
-          <p>{painSlides[painSlideIndex].eyebrow.replace(/^\d+\s\/\s/, '')}</p>
+        <div className="story-footer-bar">
+          {renderBuyButton()}
+          <div className="pain-story__footer">
+            <span>
+              {String(painSlideIndex + 1).padStart(2, '0')} / {String(painSlides.length).padStart(2, '0')}
+            </span>
+            <p>{painSlides[painSlideIndex].eyebrow.replace(/^\d+\s\/\s/, '')}</p>
+          </div>
         </div>
       </section>
 
@@ -9388,12 +9405,15 @@ function App() {
           </div>
         </div>
 
-        <div className="hero-story__footer benefits-story__footer">
-          <span>
-            {String(benefitsSlideIndex + 1).padStart(2, '0')} /{' '}
-            {String(benefitsSlides.length).padStart(2, '0')}
-          </span>
-          <p>{benefitsSlides[benefitsSlideIndex].eyebrow.replace(/^\d+\s\/\s/, '')}</p>
+        <div className="story-footer-bar">
+          {renderBuyButton()}
+          <div className="hero-story__footer benefits-story__footer">
+            <span>
+              {String(benefitsSlideIndex + 1).padStart(2, '0')} /{' '}
+              {String(benefitsSlides.length).padStart(2, '0')}
+            </span>
+            <p>{benefitsSlides[benefitsSlideIndex].eyebrow.replace(/^\d+\s\/\s/, '')}</p>
+          </div>
         </div>
       </section>
 
@@ -9484,12 +9504,15 @@ function App() {
           </div>
         </div>
 
-        <div className="hero-story__footer attachments-story__footer">
-          <span>
-            {String(attachmentsSlideIndex + 1).padStart(2, '0')} /{' '}
-            {String(attachmentSlides.length).padStart(2, '0')}
-          </span>
-          <p>{attachmentSlides[attachmentsSlideIndex].navLabel}</p>
+        <div className="story-footer-bar">
+          {renderBuyButton()}
+          <div className="hero-story__footer attachments-story__footer">
+            <span>
+              {String(attachmentsSlideIndex + 1).padStart(2, '0')} /{' '}
+              {String(attachmentSlides.length).padStart(2, '0')}
+            </span>
+            <p>{attachmentSlides[attachmentsSlideIndex].navLabel}</p>
+          </div>
         </div>
       </section>
 
@@ -9593,12 +9616,15 @@ function App() {
           })}
         </div>
 
-        <div className="hero-story__footer hair-types-story__footer">
-          <span>
-            {String(hairTypesSlideIndex + 1).padStart(2, '0')} /{' '}
-            {String(hairProfileSlides.length).padStart(2, '0')}
-          </span>
-          <p>{hairProfileSlides[hairTypesSlideIndex].eyebrow.replace(/^\d+\s\/\s/, '')}</p>
+        <div className="story-footer-bar">
+          {renderBuyButton()}
+          <div className="hero-story__footer hair-types-story__footer">
+            <span>
+              {String(hairTypesSlideIndex + 1).padStart(2, '0')} /{' '}
+              {String(hairProfileSlides.length).padStart(2, '0')}
+            </span>
+            <p>{hairProfileSlides[hairTypesSlideIndex].eyebrow.replace(/^\d+\s\/\s/, '')}</p>
+          </div>
         </div>
       </section>
 
@@ -9736,12 +9762,15 @@ function App() {
           })}
         </div>
 
-        <div className="hero-story__footer comfort-story__footer">
-          <span>
-            {String(comfortSlideIndex + 1).padStart(2, '0')} /{' '}
-            {String(comfortSlides.length).padStart(2, '0')}
-          </span>
-          <p>{comfortSlides[comfortSlideIndex].navLabel}</p>
+        <div className="story-footer-bar">
+          {renderBuyButton()}
+          <div className="hero-story__footer comfort-story__footer">
+            <span>
+              {String(comfortSlideIndex + 1).padStart(2, '0')} /{' '}
+              {String(comfortSlides.length).padStart(2, '0')}
+            </span>
+            <p>{comfortSlides[comfortSlideIndex].navLabel}</p>
+          </div>
         </div>
       </section>
 
@@ -9909,12 +9938,15 @@ function App() {
           })}
         </div>
 
-        <div className="hero-story__footer comparison-story__footer">
-          <span>
-            {String(comparisonSlideIndex + 1).padStart(2, '0')} /{' '}
-            {String(comparisonSlides.length).padStart(2, '0')}
-          </span>
-          <p>{comparisonSlides[comparisonSlideIndex].navLabel}</p>
+        <div className="story-footer-bar">
+          {renderBuyButton()}
+          <div className="hero-story__footer comparison-story__footer">
+            <span>
+              {String(comparisonSlideIndex + 1).padStart(2, '0')} /{' '}
+              {String(comparisonSlides.length).padStart(2, '0')}
+            </span>
+            <p>{comparisonSlides[comparisonSlideIndex].navLabel}</p>
+          </div>
         </div>
       </section>
 
@@ -10029,9 +10061,12 @@ function App() {
           </div>
         </div>
 
-        <div className="hero-story__footer package-story__footer">
-          <span>01 / 01</span>
-          <p>{packageBlockContent.navLabel}</p>
+        <div className="story-footer-bar">
+          {renderBuyButton()}
+          <div className="hero-story__footer package-story__footer">
+            <span>01 / 01</span>
+            <p>{packageBlockContent.navLabel}</p>
+          </div>
         </div>
       </section>
 
@@ -10142,9 +10177,12 @@ function App() {
           </div>
         </div>
 
-        <div className="hero-story__footer specs-story__footer">
-          <span>01 / 01</span>
-          <p>{specsBlockContent.navLabel}</p>
+        <div className="story-footer-bar">
+          {renderBuyButton()}
+          <div className="hero-story__footer specs-story__footer">
+            <span>01 / 01</span>
+            <p>{specsBlockContent.navLabel}</p>
+          </div>
         </div>
       </section>
 
@@ -10284,12 +10322,15 @@ function App() {
           })}
         </div>
 
-        <div className="hero-story__footer gift-story__footer">
-          <span>
-            {String(giftSlideIndex + 1).padStart(2, '0')} /{' '}
-            {String(giftSlides.length).padStart(2, '0')}
-          </span>
-          <p>{giftSlides[giftSlideIndex].navLabel}</p>
+        <div className="story-footer-bar">
+          {renderBuyButton()}
+          <div className="hero-story__footer gift-story__footer">
+            <span>
+              {String(giftSlideIndex + 1).padStart(2, '0')} /{' '}
+              {String(giftSlides.length).padStart(2, '0')}
+            </span>
+            <p>{giftSlides[giftSlideIndex].navLabel}</p>
+          </div>
         </div>
       </section>
 
@@ -10400,9 +10441,12 @@ function App() {
           </div>
         </div>
 
-        <div className="hero-story__footer faq-story__footer">
-          <span>01 / 01</span>
-          <p>{faqBlockContent.navLabel}</p>
+        <div className="story-footer-bar">
+          {renderBuyButton()}
+          <div className="hero-story__footer faq-story__footer">
+            <span>01 / 01</span>
+            <p>{faqBlockContent.navLabel}</p>
+          </div>
         </div>
       </section>
 
@@ -10777,9 +10821,12 @@ function App() {
           </div>
         </div>
 
-        <div className="hero-story__footer contacts-story__footer">
-          <span>01 / 01</span>
-          <p>{contactsBlockContent.navLabel}</p>
+        <div className="story-footer-bar">
+          {renderBuyButton()}
+          <div className="hero-story__footer contacts-story__footer">
+            <span>01 / 01</span>
+            <p>{contactsBlockContent.navLabel}</p>
+          </div>
         </div>
       </section>
 

@@ -1837,12 +1837,17 @@ function App() {
         offsetTop = height - cardHeight - bottomReserve
         offsetLeft = width - sideInset - (cardWidth * previewCount + gap * (previewCount - 1))
       } else {
-        cardWidth = 200
-        cardHeight = 300
-        gap = 40
-        numberSize = 50
-        offsetTop = height - 430
-        offsetLeft = width - 830
+        // Match the CSS --content-scale (height-based, starts at 950px, cap 1.4x)
+        // so the header cards grow together with the rest of the page content on
+        // tall screens. Anchored bottom-right so they don't drift off-screen.
+        const scale = Math.min(1.4, Math.max(1, height / 950))
+        cardWidth = Math.round(200 * scale)
+        cardHeight = Math.round(300 * scale)
+        gap = Math.round(40 * scale)
+        numberSize = Math.round(50 * scale)
+        const previewWidth = cardWidth * previewCount + gap * (previewCount - 1)
+        offsetTop = height - cardHeight - 130
+        offsetLeft = width - previewWidth - 150
       }
     }
 

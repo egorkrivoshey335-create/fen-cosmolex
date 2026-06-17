@@ -1633,15 +1633,22 @@ function App() {
       // screens scale down proportionally with a floor so content stays readable.
       // Final scale is the min of the height- and width-based factors so content
       // fits both dimensions.
-      const isMobile = window.innerWidth < 768
+      const width = window.innerWidth
+      const isMobile = width < 768
       const referenceHeight = 800
       const referenceWidth = 390
-      const width = window.innerWidth
       const heightScale = Math.min(1, height / referenceHeight)
       const widthScale = Math.min(1, width / referenceWidth)
+
+      // Large screens: scale content UP proportionally to width, starting at
+      // 1440px, capped at 1.3x. Backgrounds are not affected.
+      const largeReferenceWidth = 1440
+      const maxScale = 1.3
+      const desktopScale = Math.min(maxScale, Math.max(1, width / largeReferenceWidth))
+
       const scale = isMobile
         ? Math.max(0.7, Math.min(heightScale, widthScale))
-        : 1
+        : desktopScale
       document.documentElement.style.setProperty(
         '--content-scale',
         scale.toFixed(3),

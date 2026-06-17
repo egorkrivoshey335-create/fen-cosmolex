@@ -6789,7 +6789,7 @@ span.contacts-story__meta-value {
   .details,
   .hero-story .arch__left,
   .pain-story__content,
-  .benefits-story__card-contents,
+  .benefits-story__card-description,
   .attachments-story__layout,
   .hair-types-story__copy-shell,
   .comfort-story__layout,
@@ -6803,6 +6803,7 @@ span.contacts-story__meta-value {
   .faq-story__copy-shell,
   .faq-story__faqs-shell,
   .final-cta-story__layout,
+  .final-cta-story__popup,
   .contacts-story__layout {
     zoom: var(--content-scale, 1);
   }
@@ -6821,6 +6822,7 @@ span.contacts-story__meta-value {
   .benefits-story__card-description,
   .attachments-story__layout,
   .hair-types-story__copy-shell,
+  .hair-types-story__media-layer,
   .comfort-story__layout,
   .comfort-story__intro-copy,
   .comparison-story__copy-shell,
@@ -6835,6 +6837,7 @@ span.contacts-story__meta-value {
   .faq-story__copy-shell,
   .faq-story__faqs-shell,
   .final-cta-story__layout,
+  .final-cta-story__popup,
   .contacts-story__layout,
   .hero-story__footer,
   .landing-topbar__shell,
